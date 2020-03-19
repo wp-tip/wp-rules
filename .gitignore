@@ -1,2 +1,3 @@
 /vendor/*
 /Tests/env/local/
+.idea

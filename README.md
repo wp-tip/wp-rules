@@ -1,5 +1,5 @@
-# Package Template
-Repository template for our packages
+# WP Rules
+Wordpress business workflow rules plugin.
 
 # Usage
 When creating a new repository for a package or a plugin, select this repository as the template. It will initialize the new repository with all the structure & files contained in the template.
