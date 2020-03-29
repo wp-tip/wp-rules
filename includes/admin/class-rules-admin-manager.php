@@ -2,6 +2,7 @@
 namespace Rules\Admin;
 
 use Rules\Admin\Rules\Rules_Manager;
+use Rules\Admin\Triggers\Rules_Trigger_Manager;
 use Rules\Common\Traits\Rules_Component;
 
 defined( 'ABSPATH' ) || exit;
@@ -27,6 +28,8 @@ class Rules_Admin_Manager {
 		$rules_manager->setup();
 
 		//load triggers manager
+		$triggers_manager = new Rules_Trigger_Manager();
+		$triggers_manager->setup();
 
 		//load conditions manager
 

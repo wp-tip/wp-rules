@@ -11,5 +11,6 @@ interface Rules_Field {
 	public function format_attributes();
 	public function get_data();
 	public function validate();
+	public function sanitize();
 
 }

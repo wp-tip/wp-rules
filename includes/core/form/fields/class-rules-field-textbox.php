@@ -13,4 +13,15 @@ class Rules_Field_Textbox extends Rules_Field {
 	{
 
 	}
+
+	public function sanitize($post_array = null)
+	{
+		if(is_null($post_array)){
+			$post_array = $_POST;
+		}
+		if(isset($post_array[$this->get_name()])){
+			return sanitize_text_field( $post_array[$this->get_name()] );
+		}
+		return null;
+	}
 }

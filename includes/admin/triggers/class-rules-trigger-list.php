@@ -11,7 +11,11 @@ class Rules_Trigger_List implements \Countable, \Iterator {
 	private $triggers  = [];
 	private $cur_index = 0;
 
-	public function init( array $triggers = [] ) {
+	public function init( $triggers = [] ) {
+		$this->add_triggers( $triggers );
+	}
+
+	public function add_triggers ( $triggers = [] ) {
 		$this->triggers = $triggers;
 	}
 
@@ -40,7 +44,7 @@ class Rules_Trigger_List implements \Countable, \Iterator {
 	 * @inheritDoc
 	 */
 	public function valid() {
-		return $this->triggers[ $this->cur_index ] instanceof Trigger_Interface;
+		return $this->cur_index < $this->count();
 	}
 
 	/**

@@ -166,4 +166,5 @@ abstract class Rules_Field implements Field_Interface {
 	}
 
 	abstract public function validate();
+	abstract public function sanitize();
 }

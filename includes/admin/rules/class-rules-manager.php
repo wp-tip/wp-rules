@@ -34,7 +34,7 @@ class Rules_Manager {
 			'add_new_item'          => __( 'Add New Rule',             'wp-rules' ),
 			'new_item'              => __( 'New Rule',                 'wp-rules' ),
 			'edit_item'             => __( 'Edit Rule',                'wp-rules' ),
-			'all_items'             => __( 'All Rule',                 'wp-rules' ),
+			'all_items'             => __( 'All Rules',                 'wp-rules' ),
 			'search_items'          => __( 'Search Rules',             'wp-rules' ),
 			'not_found'             => __( 'No Rules found.',          'wp-rules' ),
 			'not_found_in_trash'    => __( 'No Rules found in Trash.', 'wp-rules' ),
@@ -51,7 +51,7 @@ class Rules_Manager {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'wp-rule' ),
+			'slug'              => 'wp-rule',
 			'capability_type'    => 'post',
 			'has_archive'        => false,
 			'hierarchical'       => false,
@@ -59,32 +59,15 @@ class Rules_Manager {
 			'menu_icon'          => 'dashicons-networking',
 			'supports'           => array( 'title' ),
 			'meta_boxes'         => [
-				'first_meta_box' => [
-					'name' => 'First Meta Box',
+				'rules_triggers' => [
+					'name' => 'Rule Trigger',
 					'fields' => [
 						[
-							'label' => 'Test Label',
-							'name' => 'test_textbox',
-							'type' => 'textbox',
-							'attributes' => [
-								'class' => 'test-textbox-classname'
-							],
-							'validation_rules' => 'required'
-						],
-						[
-							'label' => 'Test Label 2',
-							'name' => 'test_select',
+							'label' => 'Reacts on event',
+							'name' => 'rules_rule_trigger',
 							'type' => 'select',
-							'options' => [
-								'option_1' => 'test option 1',
-								'option_2' => 'test option 2',
-								'option_3' => 'test option 3'
-							],
-							'attributes' => [
-								'class' => 'test-select-classname'
-							],
-							'validation_rules' => 'required'
-						],
+							'options' => rules_get_triggers_named_ids()
+						]
 					]
 				]
 			]
@@ -98,7 +81,6 @@ class Rules_Manager {
 				die($e->getMessage());
 			}
 		}
-
 
 	}
 

@@ -19,3 +19,7 @@ function rules_admin_menu() {
 function rules_add_meta_boxes() {
 	do_action('rules_add_meta_boxes');
 }
+
+function rules_save_post( $post_ID, $post, $update ) {
+	do_action('rules_save_post', $post_ID, $post, $update);
+}

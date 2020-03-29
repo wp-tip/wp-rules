@@ -25,7 +25,7 @@ class Rules_Post_Type {
 	private $supports           = ['title'];
 
 	private $meta_boxes         = [];
-	private $fields      = [];
+	private $field_list         = [];
 
 	public function init( $args ) {
 		if(!empty($args) && !$this->initialized){
@@ -39,6 +39,7 @@ class Rules_Post_Type {
 		$this->normalize();
 		$this->create();
 		$this->setup_hooks();
+		$this->initialized = true;
 	}
 
 	private function validate_post_type() {
@@ -60,11 +61,12 @@ class Rules_Post_Type {
 	}
 
 	private function normalize() {
-
+		//Todo: check and fill required fields if not found!
 	}
 
 	private function setup_hooks(){
 		add_action( 'rules_add_meta_boxes', [$this, 'create_meta_boxes'] );
+		add_action( 'rules_save_post', [$this, 'save_fields']);
 	}
 
 	public function create() {
@@ -96,11 +98,33 @@ class Rules_Post_Type {
 	}
 
 	public function create_meta_box_fields( $post, $meta_box ) {
-		$fields = $meta_box['args']['fields'];
+		$fields = $this->fill_field_values( $post->ID, $meta_box['args']['fields'] );
 		if(!empty($fields)){
-			$field_list = initiate_field_list( $fields );
-			admin_render_fields($field_list);
+			$this->field_list = initiate_field_list( $fields );
+			admin_render_fields($this->field_list);
 		}
+	}
+
+	public function save_fields( $post_ID ){
+		if(!empty($this->meta_boxes)){
+			foreach ($this->meta_boxes as $meta_box_id => $meta_box) {
+				if(!empty($meta_box['fields'])) {
+					$fields = initiate_field_list( $meta_box['fields'] );
+					foreach ($fields as $field) {
+						$field_name  = $field->get_name();
+						$field_value = $field->sanitize( $_POST );
+						update_post_meta($post_ID, $field_name, $field_value);
+					}
+				}
+			}
+		}
+	}
+
+	private function fill_field_values( $post_id, $fields ) {
+		foreach ($fields as $field_key => $field) {
+			$fields[$field_key]['value'] = get_post_meta($post_id, $field['name'], true);
+		}
+		return $fields;
 	}
 
 }

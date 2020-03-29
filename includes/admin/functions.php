@@ -25,3 +25,11 @@ function initiate_field_list($fields) {
 	$field_list_object->init( $fields );
 	return $field_list_object;
 }
+
+function rules_get_triggers_named_ids() {
+	return apply_filters('rules_triggers_named_ids', []);
+}
+
+function rules_get_triggers() {
+	return apply_filters('rules_triggers_list', []);
+}
