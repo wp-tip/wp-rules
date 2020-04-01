@@ -11,17 +11,22 @@ class Rules_Manager {
 
 	use Rules_Component;
 
-	public function __construct()
+	private $triggers_manager;
+
+	public function __construct($triggers_manager)
 	{
 		$args = [
 			'id' => 'rules_manager',
 			'name' => 'Rules Manager'
 		];
 		$this->init( $args );
+
+		$this->triggers_manager = $triggers_manager;
 	}
 
 	public function setup() {
 		add_action('rules_' . $this->get_id() . '_register_post_types', [$this, 'create_rule_post_type']);
+		add_filter("rules_post_type_rules_meta_box_rules_triggers_fields", [$this, 'add_trigger_admin_fields'], 10, 2);
 	}
 
 	public function create_rule_post_type() {
@@ -58,19 +63,7 @@ class Rules_Manager {
 			'menu_position'      => PHP_INT_MAX,
 			'menu_icon'          => 'dashicons-networking',
 			'supports'           => array( 'title' ),
-			'meta_boxes'         => [
-				'rules_triggers' => [
-					'name' => 'Rule Trigger',
-					'fields' => [
-						[
-							'label' => 'Reacts on event',
-							'name' => 'rules_rule_trigger',
-							'type' => 'select',
-							'options' => rules_get_triggers_named_ids()
-						]
-					]
-				]
-			]
+			'meta_boxes'         => $this->meta_boxes()
 		];
 
 		$post_type = new Rules_Post_Type();
@@ -82,6 +75,34 @@ class Rules_Manager {
 			}
 		}
 
+	}
+
+	private function meta_boxes() {
+		$meta_boxes = [
+			'rules_triggers' => [
+				'name' => 'Rule Trigger',
+				'fields' => [
+					[
+						'label' => 'Reacts on event',
+						'name' => 'rules_rule_trigger',
+						'type' => 'select',
+						'options' => rules_get_triggers_named_ids()
+					],
+				]
+			]
+		];
+		return $meta_boxes;
+	}
+
+	public function add_trigger_admin_fields($fields, $post_id) {
+		$active_trigger = get_post_meta($post_id, 'rules_rule_trigger', true);
+		if(!empty($active_trigger)){
+			$trigger = $this->triggers_manager->get_trigger( $active_trigger );
+			$trigger_fields = $trigger->admin_fields();
+			$fields = array_merge($fields, $trigger_fields);
+		}
+
+		return $fields;
 	}
 
 }

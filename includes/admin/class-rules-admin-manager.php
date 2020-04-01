@@ -23,13 +23,13 @@ class Rules_Admin_Manager {
 	public function setup() {
 		//load menu manager
 
-		//load rules manager
-		$rules_manager = new Rules_Manager();
-		$rules_manager->setup();
-
 		//load triggers manager
 		$triggers_manager = new Rules_Trigger_Manager();
 		$triggers_manager->setup();
+
+		//load rules manager
+		$rules_manager = new Rules_Manager( $triggers_manager );
+		$rules_manager->setup();
 
 		//load conditions manager
 

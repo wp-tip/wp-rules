@@ -25,7 +25,6 @@ class Rules_Post_Type {
 	private $supports           = ['title'];
 
 	private $meta_boxes         = [];
-	private $field_list         = [];
 
 	public function init( $args ) {
 		if(!empty($args) && !$this->initialized){
@@ -34,12 +33,14 @@ class Rules_Post_Type {
 					$this->$arg_key = $arg_value;
 				}
 			}
+
+			$this->validate_post_type();
+			$this->normalize();
+			$this->create();
+			$this->setup_hooks();
+
+			$this->initialized = true;
 		}
-		$this->validate_post_type();
-		$this->normalize();
-		$this->create();
-		$this->setup_hooks();
-		$this->initialized = true;
 	}
 
 	private function validate_post_type() {
@@ -67,6 +68,7 @@ class Rules_Post_Type {
 	private function setup_hooks(){
 		add_action( 'rules_add_meta_boxes', [$this, 'create_meta_boxes'] );
 		add_action( 'rules_save_post', [$this, 'save_fields']);
+		add_filter( "rules_post_type_{$this->name}_fields", [$this, 'fill_field_values'], 1, 3);
 	}
 
 	public function create() {
@@ -90,6 +92,7 @@ class Rules_Post_Type {
 	}
 
 	public function create_meta_boxes() {
+		$this->meta_boxes = apply_filters("rules_post_type_{$this->name}_meta_boxes", $this->meta_boxes);
 		if(!empty($this->meta_boxes)){
 			foreach ($this->meta_boxes as $meta_box_id => $meta_box) {
 				add_meta_box( $meta_box_id, $meta_box['name'], [$this, 'create_meta_box_fields'], 'rules', 'advanced', 'default', ['fields' => $meta_box['fields']] );
@@ -98,18 +101,25 @@ class Rules_Post_Type {
 	}
 
 	public function create_meta_box_fields( $post, $meta_box ) {
-		$fields = $this->fill_field_values( $post->ID, $meta_box['args']['fields'] );
+		$fields = $this->filter_meta_box_fields($meta_box['id'], $post->ID);
 		if(!empty($fields)){
-			$this->field_list = initiate_field_list( $fields );
-			admin_render_fields($this->field_list);
+			$field_list = initiate_field_list( $fields );
+			admin_render_fields($field_list);
 		}
 	}
 
+	private function filter_meta_box_fields ( $meta_box_id, $post_ID ) {
+		$fields = apply_filters("rules_post_type_{$this->name}_meta_box_{$meta_box_id}_fields", $this->meta_boxes[$meta_box_id]['fields'], $post_ID);
+		$fields = apply_filters("rules_post_type_{$this->name}_fields", $fields, $post_ID, $this->meta_boxes[$meta_box_id]);
+		return $fields;
+	}
+
 	public function save_fields( $post_ID ){
-		if(!empty($this->meta_boxes)){
+		if(!empty( $this->meta_boxes ) ) {
 			foreach ($this->meta_boxes as $meta_box_id => $meta_box) {
-				if(!empty($meta_box['fields'])) {
-					$fields = initiate_field_list( $meta_box['fields'] );
+				$fields = $this->filter_meta_box_fields($meta_box_id, $post_ID);
+				if (!empty($fields)) {
+					$fields = initiate_field_list( $fields );
 					foreach ($fields as $field) {
 						$field_name  = $field->get_name();
 						$field_value = $field->sanitize( $_POST );
@@ -120,11 +130,12 @@ class Rules_Post_Type {
 		}
 	}
 
-	private function fill_field_values( $post_id, $fields ) {
+	public function fill_field_values( $fields, $post_id, $meta_box ) {
 		foreach ($fields as $field_key => $field) {
-			$fields[$field_key]['value'] = get_post_meta($post_id, $field['name'], true);
+			$field_name = $field['name'];
+			$field_value = get_post_meta($post_id, $field_name, true);
+			$fields[$field_key]['value'] = $field_value;
 		}
 		return $fields;
 	}
-
 }
