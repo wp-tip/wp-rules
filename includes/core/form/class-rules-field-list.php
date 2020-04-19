@@ -24,16 +24,8 @@ class Rules_Field_List implements Field_List_Interface {
 	}
 
 	private function field_type_factory( $type ) {
-		$object = null;
-		switch ($type) {
-			case 'textbox':
-				$object = new Rules_Field_Textbox();
-				break;
-			case 'select':
-				$object = new Rules_Field_Select();
-				break;
-		}
-		return $object;
+		$class_path = 'Rules\Core\Form\Fields\Rules_Field_' . ucwords($type, "_");
+		return new $class_path;
 	}
 
 	/**

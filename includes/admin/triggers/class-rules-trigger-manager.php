@@ -30,7 +30,16 @@ class Rules_Trigger_Manager {
 
 	public function get_triggers( $triggers = [] ) {
 		$triggers[] = 'trigger_cron';
-		$triggers[] = 'trigger_test';
+		$triggers[] = 'trigger_posttype_create';
+		$triggers[] = 'trigger_posttype_update';
+		$triggers[] = 'trigger_posttype_delete';
+		$triggers[] = 'trigger_posttype_view';
+		$triggers[] = 'trigger_user_create';
+		$triggers[] = 'trigger_user_update';
+		$triggers[] = 'trigger_user_delete';
+		$triggers[] = 'trigger_term_create';
+		$triggers[] = 'trigger_term_update';
+		$triggers[] = 'trigger_term_delete';
 
 		$list = new Rules_Trigger_List();
 		$list->init( $triggers );

@@ -33,3 +33,25 @@ function rules_get_triggers_named_ids() {
 function rules_get_triggers() {
 	return apply_filters('rules_triggers_list', []);
 }
+
+function rules_get_post_types( $args = [] ) {
+	$args['public'] = true;
+	return apply_filters('rules_post_types', get_post_types($args));
+}
+
+function rules_get_users_roles( $args = [] ) {
+	$roles = get_editable_roles();
+	$list = [];
+	if(!empty($roles)) {
+		foreach ($roles as $role_key => $role) {
+			$list[$role_key] = $role['name'];
+		}
+	}
+	return apply_filters('rules_users_roles', $list);
+}
+
+function rules_get_taxonomies( $args = [] ) {
+	$args['public'] = true;
+	$list = get_taxonomies($args);
+	return apply_filters('rules_taxonomies', $list);
+}

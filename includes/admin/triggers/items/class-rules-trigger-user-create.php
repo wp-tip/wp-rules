@@ -3,19 +3,13 @@ namespace Rules\Admin\Triggers\Items;
 
 use Rules\Admin\Triggers\Abstracts\Rules_Trigger;
 
-class Rules_Trigger_Test extends Rules_Trigger{
+class Rules_Trigger_User_Create extends Rules_Trigger{
 
 	public function __construct() {
-		$id = 'trigger_test';
-		$name = __('Test', 'wp-rules');
-		$args = [
-			'ajax_steps' => 1
-		];
+		$id = 'trigger_user_create';
+		$name = __('User create', 'wp-rules');
+		$args = [];
 		$this->init($id, $name, $args);
-	}
-
-	public function ajax_step1() {
-
 	}
 
 	public function prepare()
@@ -31,9 +25,9 @@ class Rules_Trigger_Test extends Rules_Trigger{
 	public function admin_fields()
 	{
 		return [[
-			'label' => 'Test',
-			'name' => 'rules_rule_test',
-			'type' => 'textbox'
+			'label' => 'User Role',
+			'name' => 'rules_trigger_role',
+			'type' => 'roles'
 		]];
 	}
 }
