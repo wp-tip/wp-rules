@@ -46,10 +46,17 @@ if ( ! class_exists( 'WPRules' ) ) {
 		}
 
 		public static function init() {
+			// Nothing to do if autosave.
+			if ( defined( 'DOING_AUTOSAVE' ) ) {
+				return;
+			}
+
 			static $instance = null;
 
 			if ( null === $instance ) {
 				$instance = new self();
+
+				$instance->load_textdomain();
 
 				//Check requirements.
 				$requirements_checker = new \WP_Rules\Core\Plugin\RequirementsChecker(
@@ -60,10 +67,29 @@ if ( ! class_exists( 'WPRules' ) ) {
 				);
 
 				if ( $requirements_checker->process() ) {
+					//load container
+					$container = new WP_Rules\Dependencies\League\Container\Container();
+
 					//Load main service providers and subscribers
+					$loader = new \WP_Rules\Core\Plugin\Loader( $container );
+					$loader->load();
+
+					//Share the container instance using filter.
+					add_filter( 'rules_container', [ $loader, 'get_container' ] );
 
 				}
 			}
+		}
+
+		private function load_textdomain() {
+			// Load translations from the languages directory.
+			$locale = get_locale();
+
+			// This filter is documented in /wp-includes/l10n.php.
+			$locale = apply_filters( 'plugin_locale', $locale, 'rocket' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
+			load_textdomain( 'wp-rules', WP_LANG_DIR . '/plugins/wp-rules-' . $locale . '.mo' );
+
+			load_plugin_textdomain( 'wp-rules', false, dirname( plugin_basename( __FILE__ ) ) . '/Languages/' );
 		}
 
 	}
