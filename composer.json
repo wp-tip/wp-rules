@@ -39,7 +39,11 @@
 		"WP_Rules\\": "src/"
 	  }
 	},
-	"autoload-dev": {},
+	"autoload-dev": {
+	  "psr-4": {
+		"WP_Rules\\Tests\\": "Tests/"
+	  }
+	},
   	"extra": {
 	  "mozart": {
 		"dep_namespace": "WP_Rules\\Dependencies\\",
