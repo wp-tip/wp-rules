@@ -13,11 +13,15 @@ class Render implements RenderInterface {
 		$this->filesystem   = $filesystem;
 	}
 
-	public function render( string $template, array $data ): string {
+	public function render( string $template, array $data = [] ): string {
 		$template_full_path = $this->template_dir . $template . ".php";
 
 		if ( ! $this->filesystem->is_readable( $template_full_path ) ) {
 			return "";
+		}
+
+		if ( ! empty( $data ) ) {
+			extract( $data );
 		}
 
 		ob_start();
