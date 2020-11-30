@@ -24,6 +24,10 @@ defined( 'WP_RULES_URL' )      || define( 'WP_RULES_URL'     , $plugin_url );
 defined( 'WP_RULES_MIN_PHP' )  || define( 'WP_RULES_MIN_PHP' , '7.2' );
 defined( 'WP_RULES_MIN_WP' )   || define( 'WP_RULES_MIN_WP'  , '5.2' );
 
+defined( 'WP_RULES_VIEWS_PATH' )     || define( 'WP_RULES_VIEWS_PATH'  , WP_RULES_PATH . "Views" . DIRECTORY_SEPARATOR );
+defined( 'WP_RULES_SRC_PATH' )       || define( 'WP_RULES_SRC_PATH'  , WP_RULES_PATH . "src" . DIRECTORY_SEPARATOR );
+defined( 'WP_RULES_FUNCTIONS_PATH' ) || define( 'WP_RULES_FUNCTIONS_PATH'  , WP_RULES_SRC_PATH . "Functions" . DIRECTORY_SEPARATOR );
+
 // Composer autoload.
 if ( file_exists( WP_RULES_PATH . 'vendor/autoload.php' ) ) {
 	require WP_RULES_PATH . 'vendor/autoload.php';
@@ -67,10 +71,13 @@ if ( ! class_exists( 'WPRules' ) ) {
 				);
 
 				if ( $requirements_checker->process() ) {
-					//load container
+					//load container.
 					$container = new WP_Rules\Dependencies\League\Container\Container();
 
-					//Load main service providers and subscribers
+					//load functions.
+					require_once WP_RULES_FUNCTIONS_PATH . "Functions.php";
+
+					//Load main service providers and subscribers.
 					$loader = new \WP_Rules\Core\Plugin\Loader( $container );
 					$loader->load();
 

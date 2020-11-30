@@ -22,6 +22,8 @@ class Loader {
 		$this->event_manager = new Event_Manager();
 		$this->container->share( 'event_manager', $this->event_manager );
 
+		$this->container->add( 'template_dir', WP_RULES_VIEWS_PATH );
+
 		foreach ( $this->get_service_providers() as $service_provider ) {
 			$this->container->addServiceProvider( $service_provider );
 		}
