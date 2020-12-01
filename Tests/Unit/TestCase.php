@@ -67,7 +67,7 @@ abstract class TestCase extends PHPUnitTestCase {
 		$obj      = new ReflectionObject( $this );
 		$filename = $obj->getFileName();
 
-		$this->config = $this->getTestData( dirname( $filename ), basename( $filename, '.php' ) );
+		$this->test_data = $this->getTestData( dirname( $filename ), basename( $filename, '.php' ) );
 	}
 
 	protected function getTestData( $dir, $filename ) {
