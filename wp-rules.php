@@ -18,15 +18,15 @@ $plugin_file_path = __FILE__;
 $plugin_dir       = plugin_dir_path( $plugin_file_path );
 $plugin_url       = plugin_dir_url( $plugin_file_path );
 
-defined( 'WP_RULES_VERSION' )  || define( 'WP_RULES_VERSION' , '0.1' );
-defined( 'WP_RULES_PATH' )     || define( 'WP_RULES_PATH'    , $plugin_dir );
-defined( 'WP_RULES_URL' )      || define( 'WP_RULES_URL'     , $plugin_url );
-defined( 'WP_RULES_MIN_PHP' )  || define( 'WP_RULES_MIN_PHP' , '7.2' );
-defined( 'WP_RULES_MIN_WP' )   || define( 'WP_RULES_MIN_WP'  , '5.2' );
+defined( 'WP_RULES_VERSION' ) || define( 'WP_RULES_VERSION', '0.1' );
+defined( 'WP_RULES_PATH' ) || define( 'WP_RULES_PATH', $plugin_dir );
+defined( 'WP_RULES_URL' ) || define( 'WP_RULES_URL', $plugin_url );
+defined( 'WP_RULES_MIN_PHP' ) || define( 'WP_RULES_MIN_PHP', '7.2' );
+defined( 'WP_RULES_MIN_WP' ) || define( 'WP_RULES_MIN_WP', '5.2' );
 
-defined( 'WP_RULES_VIEWS_PATH' )     || define( 'WP_RULES_VIEWS_PATH'  , WP_RULES_PATH . "Views" . DIRECTORY_SEPARATOR );
-defined( 'WP_RULES_SRC_PATH' )       || define( 'WP_RULES_SRC_PATH'  , WP_RULES_PATH . "src" . DIRECTORY_SEPARATOR );
-defined( 'WP_RULES_FUNCTIONS_PATH' ) || define( 'WP_RULES_FUNCTIONS_PATH'  , WP_RULES_SRC_PATH . "Functions" . DIRECTORY_SEPARATOR );
+defined( 'WP_RULES_VIEWS_PATH' ) || define( 'WP_RULES_VIEWS_PATH', WP_RULES_PATH . 'Views' . DIRECTORY_SEPARATOR );
+defined( 'WP_RULES_SRC_PATH' ) || define( 'WP_RULES_SRC_PATH', WP_RULES_PATH . 'src' . DIRECTORY_SEPARATOR );
+defined( 'WP_RULES_FUNCTIONS_PATH' ) || define( 'WP_RULES_FUNCTIONS_PATH', WP_RULES_SRC_PATH . 'Functions' . DIRECTORY_SEPARATOR );
 
 // Composer autoload.
 if ( file_exists( WP_RULES_PATH . 'vendor/autoload.php' ) ) {
@@ -62,26 +62,26 @@ if ( ! class_exists( 'WPRules' ) ) {
 
 				$instance->load_textdomain();
 
-				//Check requirements.
+				// Check requirements.
 				$requirements_checker = new \WP_Rules\Core\Plugin\RequirementsChecker(
 					[
 						'php_version' => WP_RULES_MIN_PHP,
-						'wp_version'  => WP_RULES_MIN_WP
+						'wp_version'  => WP_RULES_MIN_WP,
 					]
 				);
 
 				if ( $requirements_checker->process() ) {
-					//load container.
+					// load container.
 					$container = new WP_Rules\Dependencies\League\Container\Container();
 
-					//load functions.
-					require_once WP_RULES_FUNCTIONS_PATH . "Functions.php";
+					// load functions.
+					require_once WP_RULES_FUNCTIONS_PATH . 'Functions.php';
 
-					//Load main service providers and subscribers.
+					// Load main service providers and subscribers.
 					$loader = new \WP_Rules\Core\Plugin\Loader( $container );
 					$loader->load();
 
-					//Share the container instance using filter.
+					// Share the container instance using filter.
 					add_filter( 'rules_container', [ $loader, 'get_container' ] );
 
 				}

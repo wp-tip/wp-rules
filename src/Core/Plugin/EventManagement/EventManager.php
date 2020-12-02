@@ -7,8 +7,8 @@ namespace WP_Rules\Core\Plugin\EventManagement;
  *
  * @author Carl Alexander <contact@carlalexander.ca>
  */
-class EventManager
-{
+class EventManager {
+
 	/**
 	 * Adds a callback to a specific hook of the WordPress plugin API.
 	 *
@@ -19,9 +19,8 @@ class EventManager
 	 * @param int      $priority
 	 * @param int      $accepted_args
 	 */
-	public function add_callback($hook_name, $callback, $priority = 10, $accepted_args = 1)
-	{
-		add_filter($hook_name, $callback, $priority, $accepted_args);
+	public function add_callback( $hook_name, $callback, $priority = 10, $accepted_args = 1 ) {
+		add_filter( $hook_name, $callback, $priority, $accepted_args );
 	}
 
 	/**
@@ -32,10 +31,9 @@ class EventManager
 	 *
 	 * @param SubscriberInterface $subscriber
 	 */
-	public function add_subscriber(SubscriberInterface $subscriber)
-	{
-		foreach ($subscriber->get_subscribed_events() as $hook_name => $parameters) {
-			$this->add_subscriber_callback($subscriber, $hook_name, $parameters);
+	public function add_subscriber( SubscriberInterface $subscriber ) {
+		foreach ( $subscriber->get_subscribed_events() as $hook_name => $parameters ) {
+			$this->add_subscriber_callback( $subscriber, $hook_name, $parameters );
 		}
 	}
 
@@ -47,8 +45,7 @@ class EventManager
 	 *
 	 * @return string|bool
 	 */
-	public function get_current_hook()
-	{
+	public function get_current_hook() {
 		return current_filter();
 	}
 
@@ -65,9 +62,8 @@ class EventManager
 	 *
 	 * @return bool|int
 	 */
-	public function has_callback($hook_name, $callback = false)
-	{
-		return has_filter($hook_name, $callback);
+	public function has_callback( $hook_name, $callback = false ) {
+		return has_filter( $hook_name, $callback );
 	}
 
 	/**
@@ -82,9 +78,8 @@ class EventManager
 	 *
 	 * @return bool
 	 */
-	public function remove_callback($hook_name, $callback, $priority = 10)
-	{
-		return remove_filter($hook_name, $callback, $priority);
+	public function remove_callback( $hook_name, $callback, $priority = 10 ) {
+		return remove_filter( $hook_name, $callback, $priority );
 	}
 
 	/**
@@ -95,10 +90,9 @@ class EventManager
 	 *
 	 * @param SubscriberInterface $subscriber
 	 */
-	public function remove_subscriber(SubscriberInterface $subscriber)
-	{
-		foreach ($subscriber->get_subscribed_events() as $hook_name => $parameters) {
-			$this->remove_subscriber_callback($subscriber, $hook_name, $parameters);
+	public function remove_subscriber( SubscriberInterface $subscriber ) {
+		foreach ( $subscriber->get_subscribed_events() as $hook_name => $parameters ) {
+			$this->remove_subscriber_callback( $subscriber, $hook_name, $parameters );
 		}
 	}
 
@@ -110,16 +104,15 @@ class EventManager
 	 * @param string              $hook_name
 	 * @param mixed               $parameters
 	 */
-	private function add_subscriber_callback(SubscriberInterface $subscriber, $hook_name, $parameters)
-	{
-		if (is_string($parameters)) {
-			$this->add_callback($hook_name, array($subscriber, $parameters));
-		} elseif ( is_array($parameters) && isset( $parameters[0] ) && is_array( $parameters[0] ) ) {
+	private function add_subscriber_callback( SubscriberInterface $subscriber, $hook_name, $parameters ) {
+		if ( is_string( $parameters ) ) {
+			$this->add_callback( $hook_name, [ $subscriber, $parameters ] );
+		} elseif ( is_array( $parameters ) && isset( $parameters[0] ) && is_array( $parameters[0] ) ) {
 			foreach ( $parameters[0] as $parameter ) {
 				$this->add_subscriber_callback( $subscriber, $hook_name, $parameter );
 			}
-		} elseif (is_array($parameters) && isset($parameters[0])) {
-			$this->add_callback($hook_name, array($subscriber, $parameters[0]), isset($parameters[1]) ? $parameters[1] : 10, isset($parameters[2]) ? $parameters[2] : 1);
+		} elseif ( is_array( $parameters ) && isset( $parameters[0] ) ) {
+			$this->add_callback( $hook_name, [ $subscriber, $parameters[0] ], isset( $parameters[1] ) ? $parameters[1] : 10, isset( $parameters[2] ) ? $parameters[2] : 1 );
 		}
 	}
 
@@ -131,16 +124,15 @@ class EventManager
 	 * @param string              $hook_name
 	 * @param mixed               $parameters
 	 */
-	private function remove_subscriber_callback(SubscriberInterface $subscriber, $hook_name, $parameters)
-	{
-		if (is_string($parameters)) {
-			$this->remove_callback($hook_name, array($subscriber, $parameters));
-		} elseif ( is_array($parameters) && isset( $parameters[0] ) && is_array( $parameters[0] ) ) {
+	private function remove_subscriber_callback( SubscriberInterface $subscriber, $hook_name, $parameters ) {
+		if ( is_string( $parameters ) ) {
+			$this->remove_callback( $hook_name, [ $subscriber, $parameters ] );
+		} elseif ( is_array( $parameters ) && isset( $parameters[0] ) && is_array( $parameters[0] ) ) {
 			foreach ( $parameters[0] as $parameter ) {
 				$this->remove_subscriber_callback( $subscriber, $hook_name, $parameter );
 			}
-		} elseif (is_array($parameters) && isset($parameters[0])) {
-			$this->remove_callback($hook_name, array($subscriber, $parameters[0]), isset($parameters[1]) ? $parameters[1] : 10);
+		} elseif ( is_array( $parameters ) && isset( $parameters[0] ) ) {
+			$this->remove_callback( $hook_name, [ $subscriber, $parameters[0] ], isset( $parameters[1] ) ? $parameters[1] : 10 );
 		}
 	}
 }

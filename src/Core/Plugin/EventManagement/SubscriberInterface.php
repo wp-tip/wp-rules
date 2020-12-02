@@ -10,8 +10,8 @@ namespace WP_Rules\Core\Plugin\EventManagement;
  *
  * @author Carl Alexander <contact@carlalexander.ca>
  */
-interface SubscriberInterface
-{
+interface SubscriberInterface {
+
 	/**
 	 * Returns an array of events that this subscriber wants to listen to.
 	 *

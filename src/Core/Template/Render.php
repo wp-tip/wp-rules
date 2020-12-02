@@ -14,10 +14,10 @@ class Render implements RenderInterface {
 	}
 
 	public function render( string $template, array $data = [] ): string {
-		$template_full_path = $this->template_dir . $template . ".php";
+		$template_full_path = $this->template_dir . $template . '.php';
 
 		if ( ! $this->filesystem->is_readable( $template_full_path ) ) {
-			return "";
+			return '';
 		}
 
 		if ( ! empty( $data ) ) {
