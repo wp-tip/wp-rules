@@ -1,5 +1,7 @@
 <?php
 
+namespace WP_Rules\Core\Plugin\EventManagement;
+
 /**
  * A Subscriber knows what specific WordPress events it wants to listen to.
  *

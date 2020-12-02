@@ -1,7 +1,7 @@
 <?php
 namespace WP_Rules\Core\Plugin;
 
-use WP_Rocket\Event_Management\Event_Manager;
+use WP_Rules\Core\Plugin\EventManagement\EventManager;
 use WP_Rules\Dependencies\League\Container\Container;
 
 class Loader {
@@ -19,7 +19,7 @@ class Loader {
 	}
 
 	public function load() {
-		$this->event_manager = new Event_Manager();
+		$this->event_manager = new EventManager();
 		$this->container->share( 'event_manager', $this->event_manager );
 
 		$this->container->add( 'template_dir', WP_RULES_VIEWS_PATH );

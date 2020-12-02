@@ -93,7 +93,7 @@ if ( ! class_exists( 'WPRules' ) ) {
 			$locale = get_locale();
 
 			// This filter is documented in /wp-includes/l10n.php.
-			$locale = apply_filters( 'plugin_locale', $locale, 'rocket' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
+			$locale = apply_filters( 'plugin_locale', $locale, 'rules' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 			load_textdomain( 'wp-rules', WP_LANG_DIR . '/plugins/wp-rules-' . $locale . '.mo' );
 
 			load_plugin_textdomain( 'wp-rules', false, dirname( plugin_basename( __FILE__ ) ) . '/Languages/' );

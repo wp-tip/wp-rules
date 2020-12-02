@@ -1,5 +1,7 @@
 <?php
 
+namespace WP_Rules\Core\Plugin\EventManagement;
+
 /**
  * The WordPress event manager manages events using the WordPress plugin API.
  *

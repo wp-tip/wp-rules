@@ -30,9 +30,8 @@
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
 		"league/container": "^3.3",
 		"phpcompatibility/phpcompatibility-wp": "^2.0",
-		"phpunit/phpunit": "^5.7 || ^7",
-		"wp-coding-standards/wpcs": "^2",
-		"wp-media/phpunit": "dev-master"
+		"phpunit/phpunit": "^7",
+		"wp-coding-standards/wpcs": "^2"
 	},
 	"autoload": {
 	  "psr-4": {
@@ -56,8 +55,8 @@
 	  }
 	},
 	"scripts": {
-		"test-unit": "\"vendor/bin/wpmedia-phpunit\" unit path=Tests/Unit",
-		"test-integration": "\"vendor/bin/wpmedia-phpunit\" integration path=Tests/Integration/",
+		"test-unit": "\"vendor/bin/phpunit\" --configuration Tests/Unit/phpunit.xml.dist",
+		"test-integration": "\"vendor/bin/phpunit\" --configuration Tests/Integration/phpunit.xml.dist",
 		"run-tests": [
 			"@test-unit",
 			"@test-integration"
