@@ -1,5 +1,7 @@
 <?php
 
+namespace WP_Rules\Core\Plugin\EventManagement;
+
 /**
  * A Subscriber knows what specific WordPress events it wants to listen to.
  *
@@ -8,8 +10,8 @@
  *
  * @author Carl Alexander <contact@carlalexander.ca>
  */
-interface SubscriberInterface
-{
+interface SubscriberInterface {
+
 	/**
 	 * Returns an array of events that this subscriber wants to listen to.
 	 *
