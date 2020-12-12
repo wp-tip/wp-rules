@@ -2,7 +2,9 @@
 namespace WP_Rules\Core\Plugin;
 
 use WP_Rules\Core\Plugin\EventManagement\EventManager;
+use WP_Rules\Core\Plugin\EventManagement\SubscriberInterface;
 use WP_Rules\Dependencies\League\Container\Container;
+use WP_Rules\Dependencies\League\Container\ServiceProvider\ServiceProviderInterface;
 
 class Loader {
 
@@ -12,6 +14,13 @@ class Loader {
 	 * @var Container
 	 */
 	private $container;
+
+	/**
+	 * EventManager instance.
+	 *
+	 * @var EventManager
+	 */
+	private $event_manager;
 
 	/**
 	 * Loader constructor.
@@ -35,17 +44,17 @@ class Loader {
 	 * Load subscribers and service provider.
 	 */
 	public function load() {
-		$event_manager = new EventManager();
-		$this->container->share( 'event_manager', $event_manager );
+		$this->event_manager = new EventManager();
+		$this->container->share( 'event_manager', $this->event_manager );
 
 		$this->container->add( 'template_dir', WP_RULES_VIEWS_PATH );
 
 		foreach ( $this->get_service_providers() as $service_provider ) {
-			$this->container->addServiceProvider( $service_provider );
-		}
+			$service_provider_instance = new $service_provider();
+			$this->container->addServiceProvider( $service_provider_instance );
 
-		foreach ( $this->get_subscribers() as $subscriber ) {
-			$event_manager->add_subscriber( $this->container->get( $subscriber ) );
+			// Load each service provider's subscribers if found.
+			$this->load_subscribers( $service_provider_instance );
 		}
 	}
 
@@ -55,16 +64,28 @@ class Loader {
 	 * @return array Service providers.
 	 */
 	private function get_service_providers() {
-		return [];
+		return [
+			'WP_Rules\Core\Admin\ServiceProvider',
+		];
 	}
 
 	/**
-	 * Get list of event subscribers.
+	 * Load list of event subscribers from service provider.
 	 *
-	 * @return array Subscribers.
+	 * @param ServiceProviderInterface $service_provider_instance Instance of service provider.
+	 *
+	 * @return void
 	 */
-	private function get_subscribers() {
-		return [];
+	private function load_subscribers( ServiceProviderInterface $service_provider_instance ) {
+		if ( ! empty( $service_provider_instance->provides ) ) {
+			foreach ( $service_provider_instance->provides as $subscriber ) {
+				$subscriber_object = $this->container->get( $subscriber );
+
+				if ( $subscriber_object instanceof SubscriberInterface ) {
+					$this->event_manager->add_subscriber( $this->container->get( $subscriber ) );
+				}
+			}
+		}
 	}
 
 }
