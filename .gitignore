@@ -1,3 +1,4 @@
 /vendor/*
 /Tests/env/local/
 .idea
+composer.lock
