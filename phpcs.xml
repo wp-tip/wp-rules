@@ -12,6 +12,7 @@
 	<exclude-pattern>/src/Dependencies/*</exclude-pattern>
 	<exclude-pattern>/Tests/*</exclude-pattern>
 	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/Views/*</exclude-pattern>
 
 	<!-- ** HOW TO SCAN ** -->
 
