@@ -21,7 +21,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		'core_admin_rule_posttype',
 		'core_admin_rule_metabox',
 		'core_admin_rule_subscriber',
-		'core_template_render_field',
 		'core_admin_trigger_subscriber',
 	];
 
@@ -36,11 +35,6 @@ class ServiceProvider extends AbstractServiceProvider {
 				->addArgument( $container->get( 'core_admin_rule_posttype' ) )
 				->addArgument( $container->get( 'core_admin_rule_metabox' ) );
 
-		$filesystem = new WP_Filesystem_Direct( new StdClass() );
-		$container->add( 'core_template_render_field', '\WP_Rules\Core\Template\RenderField' )
-				->addArgument( $container->get( 'template_dir' ) )
-				->addArgument( $filesystem );
-		$container->share( 'core_admin_trigger_subscriber', '\WP_Rules\Core\Admin\Trigger\Subscriber' )
-				->addArgument( $container->get( 'core_template_render_field' ) );
+		$container->share( 'core_admin_trigger_subscriber', '\WP_Rules\Core\Admin\Trigger\Subscriber' );
 	}
 }

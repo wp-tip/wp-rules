@@ -22,10 +22,9 @@ class Subscriber implements SubscriberInterface {
 	/**
 	 * Subscriber constructor.
 	 *
-	 * @param RenderField $render_field RenderField class instance.
 	 */
-	public function __construct( RenderField $render_field ) {
-		$this->render_field = $render_field;
+	public function __construct() {
+		$this->render_field = rules_render_fields();
 	}
 
 	/**
@@ -36,6 +35,7 @@ class Subscriber implements SubscriberInterface {
 	public static function get_subscribed_events(): array {
 		return [
 			'rules_metabox_trigger_fields' => 'add_trigger_fields',
+			'save_post_rules' => [ 'save_trigger', 10, 3 ]
 		];
 	}
 
@@ -52,7 +52,21 @@ class Subscriber implements SubscriberInterface {
 			$selected_trigger = get_post_meta( $post->ID, 'rule_trigger', true );
 		}
 
-		echo esc_html( $this->render_field->select( 'rule_trigger', __( 'Reacts on event', 'rules' ), $triggers_list, $selected_trigger ) );
+		echo $this->render_field->select( 'rule_trigger', __( 'Reacts on event', 'rules' ), $triggers_list, $selected_trigger );
+	}
+
+	public function save_trigger( $post_ID ) {
+		$fields_to_save = [
+			'rule_trigger',
+			'rule_trigger_options'
+		];
+
+		foreach ( $fields_to_save as $field ) {
+			if ( isset( $_POST[ $field ] ) ) {
+				$field_value = sanitize_meta( $field, $_POST[ $field ], 'post' );
+				update_post_meta($post_ID, $field, $field_value);
+			}
+		}
 	}
 
 }
