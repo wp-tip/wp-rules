@@ -35,7 +35,9 @@ class Subscriber implements SubscriberInterface {
 	public static function get_subscribed_events(): array {
 		return [
 			'rules_metabox_trigger_fields' => 'add_trigger_fields',
-			'save_post_rules' => [ 'save_trigger', 10, 3 ]
+			'save_post_rules' => [ 'save_trigger', 10, 3 ],
+			'admin_enqueue_scripts' => 'enqueue_trigger_script',
+			'wp_ajax_refresh_trigger_options' => 'refresh_trigger_options'
 		];
 	}
 
@@ -45,7 +47,9 @@ class Subscriber implements SubscriberInterface {
 	 * @param WP_Post $post Current post object.
 	 */
 	public function add_trigger_fields( $post ) {
-		$triggers_list = apply_filters( 'rules_triggers_list', [] );
+		$triggers_list = apply_filters( 'rules_triggers_list', [
+			0 => __( 'Please select trigger', 'rules' )
+		] );
 
 		$selected_trigger = null;
 		if ( isset( $post->ID ) ) {
@@ -53,6 +57,14 @@ class Subscriber implements SubscriberInterface {
 		}
 
 		echo $this->render_field->select( 'rule_trigger', __( 'Reacts on event', 'rules' ), $triggers_list, $selected_trigger );
+
+		if ( ! empty( $selected_trigger ) ) {
+			return;
+		}
+
+		echo $this->render_field->container( '', [
+			'id' => 'rule_trigger_options_container'
+		] );
 	}
 
 	public function save_trigger( $post_ID ) {
@@ -67,6 +79,23 @@ class Subscriber implements SubscriberInterface {
 				update_post_meta($post_ID, $field, $field_value);
 			}
 		}
+	}
+
+	public function enqueue_trigger_script( $hook ) {
+		if ( ! in_array( $hook, [ 'post-new.php', 'post.php' ] ) ) {
+			return;
+		}
+		wp_enqueue_script( 'rules_trigger', WP_RULES_URL . 'assets/js/trigger.js', array(), '1.0' );
+	}
+
+	public function refresh_trigger_options() {
+		$trigger = sanitize_key( $_POST['trigger'] );
+		$post_id = sanitize_key( $_POST['post_id'] );
+
+		do_action( 'rules_trigger_options_ajax', $trigger, $post_id );
+		do_action( "rules_trigger_{$trigger}_options_ajax", $post_id );
+
+		die();
 	}
 
 }

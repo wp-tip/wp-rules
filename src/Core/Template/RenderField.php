@@ -56,13 +56,13 @@ class RenderField extends Render {
 	 * @param string $name Name attribute for select.
 	 * @param string $label Label for select.
 	 * @param array  $options Select available options.
-	 * @param string $selected_key Key of selected option.
+	 * @param string $value Key of selected option.
 	 * @param array  $attributes Additional attributes for select.
 	 *
 	 * @return string
 	 */
-	public function select( string $name, string $label, array $options = [], string $selected_key = '', array $attributes = [] ) {
-		$data = compact( 'name', 'label', 'options', 'selected_key', 'attributes' );
+	public function select( string $name, string $label, array $options = [], string $value = '', array $attributes = [] ) {
+		$data = compact( 'name', 'label', 'options', 'value', 'attributes' );
 		return $this->render_field( 'select', $data );
 	}
 
@@ -72,15 +72,28 @@ class RenderField extends Render {
 	 * @param string $name Name attribute for select.
 	 * @param string $label Label for select.
 	 * @param array  $options Select available options.
-	 * @param string $selected_key Key of selected option.
+	 * @param string $value Key of selected option.
 	 * @param array  $attributes Additional attributes for select.
 	 *
 	 * @return string
 	 */
-	public function select2( string $name, string $label, array $options = [], string $selected_key = '', array $attributes = [] ) {
+	public function select2( string $name, string $label, array $options = [], string $value = '', array $attributes = [] ) {
 		$attributes['class'] = 'select2';
-		$data                = compact( 'name', 'label', 'options', 'selected_key', 'attributes' );
+		$data                = compact( 'name', 'label', 'options', 'value', 'attributes' );
 		return $this->render_field( 'select', $data );
+	}
+
+	/**
+	 * Render container field.
+	 *
+	 * @param string $contents HTML contents.
+	 * @param array  $attributes Additional attributes for textbox.
+	 *
+	 * @return string
+	 */
+	public function container( string $contents, array $attributes = [] ) {
+		$data = compact( 'contents', 'attributes' );
+		return $this->render_field( 'container', $data );
 	}
 
 }
