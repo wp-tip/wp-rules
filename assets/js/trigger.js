@@ -12,7 +12,8 @@ jQuery(document).ready(function () {
 				data: {
 					action: 'refresh_trigger_options',
 					trigger: selected_trigger,
-					post_id: jQuery( '#post_ID' ).val()
+					post_id: jQuery( '#post_ID' ).val(),
+					nonce: jQuery( '#rule_trigger_nonce' ).val()
 				},
 				type: 'POST',
 				success: function( response ) {

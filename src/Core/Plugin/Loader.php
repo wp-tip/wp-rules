@@ -51,8 +51,8 @@ class Loader {
 
 		$filesystem = new WP_Filesystem_Direct( new StdClass() );
 		$this->container->add( 'core_template_render_field', '\WP_Rules\Core\Template\RenderField' )
-		          ->addArgument( WP_RULES_VIEWS_PATH )
-		          ->addArgument( $filesystem );
+						->addArgument( WP_RULES_VIEWS_PATH )
+						->addArgument( $filesystem );
 
 		foreach ( $this->get_service_providers() as $service_provider ) {
 			$service_provider_instance = new $service_provider();

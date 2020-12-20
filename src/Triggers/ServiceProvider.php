@@ -19,7 +19,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	 */
 	public $provides = [
 		'trigger_admin_init',
-		'trigger_init'
+		'trigger_init',
 	];
 
 	/**
