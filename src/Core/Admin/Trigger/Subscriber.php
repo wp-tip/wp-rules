@@ -69,7 +69,11 @@ class Subscriber implements SubscriberInterface {
 	 * @param int $post_ID Current Post ID.
 	 */
 	public function save_trigger( $post_ID ) {
-		if ( isset( $_POST ) && ! empty( $_POST ) && ! wp_verify_nonce( sanitize_key( $_POST['rule_trigger_nonce'] ?? null ), 'rule_trigger_nonce' ) ) {
+		if ( ! isset( $_POST ) || empty( $_POST ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( sanitize_key( $_POST['rule_trigger_nonce'] ?? null ), 'rule_trigger_nonce' ) ) {
 			esc_html_e( 'Play fair!', 'rules' );
 			exit();
 		}
