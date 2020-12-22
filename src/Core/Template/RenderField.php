@@ -53,7 +53,7 @@ class RenderField extends Render {
 	 */
 	public function text( string $name, string $label, string $value = null, array $attributes = [], bool $echo = true ) {
 		$data = compact( 'name', 'label', 'value', 'attributes' );
-		return $this->render_field( 'text', $data );
+		return $this->render_field( 'text', $data, $echo );
 	}
 
 	/**
@@ -68,7 +68,7 @@ class RenderField extends Render {
 	 */
 	public function hidden( string $name, string $value = null, array $attributes = [], bool $echo = true ) {
 		$data = compact( 'name', 'value', 'attributes' );
-		return $this->render_field( 'hidden', $data );
+		return $this->render_field( 'hidden', $data, $echo );
 	}
 
 	/**
@@ -85,7 +85,7 @@ class RenderField extends Render {
 	 */
 	public function select( string $name, string $label, array $options = [], string $value = '', array $attributes = [], bool $echo = true ) {
 		$data = compact( 'name', 'label', 'options', 'value', 'attributes' );
-		return $this->render_field( 'select', $data );
+		return $this->render_field( 'select', $data, $echo );
 	}
 
 	/**
@@ -103,7 +103,7 @@ class RenderField extends Render {
 	public function select2( string $name, string $label, array $options = [], string $value = '', array $attributes = [], bool $echo = true ) {
 		$attributes['class'] = 'select2';
 		$data                = compact( 'name', 'label', 'options', 'value', 'attributes' );
-		return $this->render_field( 'select', $data );
+		return $this->render_field( 'select', $data, $echo );
 	}
 
 	/**
@@ -117,7 +117,22 @@ class RenderField extends Render {
 	 */
 	public function container( string $contents, array $attributes = [], bool $echo = true ) {
 		$data = compact( 'contents', 'attributes' );
-		return $this->render_field( 'container', $data );
+		return $this->render_field( 'container', $data, $echo );
+	}
+
+	/**
+	 * Render button field.
+	 *
+	 * @param string      $name Name attribute for button.
+	 * @param string|null $value Visible text on button.
+	 * @param array       $attributes Additional attributes for textbox.
+	 * @param bool        $echo Echo the content if true OR return it if false.
+	 *
+	 * @return string
+	 */
+	public function button( string $name, string $value = null, array $attributes = [], bool $echo = true ) {
+		$data = compact( 'name', 'value', 'attributes' );
+		return $this->render_field( 'button', $data, $echo );
 	}
 
 }

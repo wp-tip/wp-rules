@@ -46,14 +46,14 @@ class Subscriber implements SubscriberInterface {
 	 * @param WP_Post $post Current post object.
 	 */
 	public function add_trigger_fields( $post ) {
-		$triggers_list = apply_filters( 'rules_triggers_list', [ 0 => __( 'Please select trigger', 'rules' ) ] );
-
 		$selected_trigger = null;
 		if ( isset( $post->ID ) ) {
 			$selected_trigger = get_post_meta( $post->ID, 'rule_trigger', true );
 		}
 
+		$triggers_list = apply_filters( 'rules_triggers_list', [ 0 => __( 'Please select trigger', 'rules' ) ] );
 		$this->render_field->select( 'rule_trigger', __( 'Reacts on event', 'rules' ), $triggers_list, $selected_trigger, [], true );
+
 		$this->render_field->hidden( 'rule_trigger_nonce', wp_create_nonce( 'rule_trigger_nonce' ), [ 'id' => 'rule_trigger_nonce' ], true );
 
 		if ( ! empty( $selected_trigger ) ) {
@@ -100,7 +100,7 @@ class Subscriber implements SubscriberInterface {
 		if ( ! in_array( $hook, [ 'post-new.php', 'post.php' ], true ) ) {
 			return;
 		}
-		wp_enqueue_script( 'rules_trigger', WP_RULES_URL . 'assets/js/trigger.js', [], '1.0', true );
+		wp_enqueue_script( 'rules_trigger', WP_RULES_URL . 'assets/js/trigger.js', [ 'jquery' ], '1.0', true );
 	}
 
 	/**
