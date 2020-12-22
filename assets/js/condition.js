@@ -8,7 +8,7 @@ jQuery(document).ready(function () {
 				url: ajaxurl,
 				data: {
 					action: 'rules_condition_new',
-					conditions_count: jQuery( '#rule_conditions_container .rule_condition' ).length,
+					conditions_count: jQuery( '#rule_conditions_container .rule-condition' ).length,
 					rule_condition_nonce: jQuery( '#rule_condition_nonce' ).val()
 				},
 				type: 'POST',
@@ -18,12 +18,12 @@ jQuery(document).ready(function () {
 			});
 		} );
 
-		jQuery(document).on( 'click', '.rule_condition_remove', function( e ){
+		jQuery(document).on( 'click', '.rule-condition-remove', function( e ){
 			e.preventDefault();
 
 			var this_button = jQuery(this);
 			if ( confirm( 'Are you sure?' ) ) {
-				this_button.parent( '.rules-field-container' ).remove();
+				this_button.parents( '.rule-condition-container' ).remove();
 			}
 		});
 

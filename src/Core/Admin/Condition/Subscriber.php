@@ -85,16 +85,16 @@ class Subscriber implements SubscriberInterface {
 		die();
 	}
 
-	private function print_condition( $conditions_count, $selected_condition = null ) {
+	private function print_condition( $conditions_count, $selected_condition = '' ) {
 		$conditions_list = apply_filters( 'rules_conditions_list', [ 0 => __( 'Please select condition', 'rules' ) ] );
 
 		$output = "";
 		$output .= $this->render_field->select( "rule_conditions[{$conditions_count}]", __( 'Choose condition'.$conditions_count, 'rules' ), $conditions_list, $selected_condition, [], false );
 		$condition_options_html = apply_filters( 'rules_condition_options_html', '', $selected_condition );
 		$output .= $this->render_field->container( $condition_options_html, [ 'class' => 'rule_condition_options_container' ], false );
-		$output .= $this->render_field->button( 'rule_condition_remove', __( 'remove Condition', 'rules' ), [ 'class' => 'button rule_condition_remove' ], false );
+		$output .= $this->render_field->button( 'rule_condition_remove', __( 'remove Condition', 'rules' ), [ 'class' => 'button rule-condition-remove' ], false );
 
-		$this->render_field->container( $output, [ 'class' => 'rule_condition' ], true );
+		$this->render_field->container( $output, [ 'class' => 'rule-condition', 'container_class' => 'rule-condition-container' ], true );
 	}
 
 	/**
