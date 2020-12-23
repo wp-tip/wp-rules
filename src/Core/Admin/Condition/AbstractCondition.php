@@ -64,7 +64,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 		return [
 			'rules_conditions_list'          => 'register_condition',
 			//'rules_condition_options_html' => [ 'add_admin_options', 10, 2 ],
-			'rules_condition_options_ajax'   => [ 'add_admin_options_ajax', 10, 2 ],
+			'rules_condition_options_ajax'   => [ 'add_admin_options_ajax', 10, 3 ],
 		];
 	}
 
@@ -73,9 +73,9 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 *
 	 * @param array $conditions_list Current list of conditions.
 	 *
-	 * @return array List of triggers after adding current one.
+	 * @return array List of conditions after adding current one.
 	 */
-	public function register_trigger( array $conditions_list ) {
+	public function register_condition( array $conditions_list ) {
 		$conditions_list[ $this->id ] = $this->name;
 		return $conditions_list;
 	}
@@ -86,7 +86,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 * @param int  $post_id Current rule post_ID.
 	 * @param bool $with_container Enclose options fields into container div.
 	 */
-	private function print_condition_options_for_rule( $admin_fields_values, $with_container = true ) {
+	private function print_condition_options_for_rule( $number, $admin_fields_values, $with_container = true ) {
 		$options_html = '';
 
 		$admin_fields = $this->admin_fields();
@@ -101,7 +101,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 
 		foreach ( $admin_fields as $admin_field ) {
 			$admin_field['value'] = $admin_fields_values[ $admin_field['name'] ] ?? null;
-			$admin_field['name']  = "rule_trigger_options[{$admin_field['name']}]";
+			$admin_field['name']  = "rule_condition_options[{$number}][{$admin_field['name']}]";
 			$options_html        .= $this->render_field->render_field( $admin_field['type'], $admin_field, ! $with_container );
 		}
 
@@ -124,7 +124,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 			return;
 		}
 
-		$this->print_condition_options_for_rule( $post->ID );
+		//$this->print_condition_options_for_rule( ,[], $post->ID );
 	}
 
 	/**
@@ -133,13 +133,26 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 * @param string $condition Condition ID.
 	 * @param int    $post_id Current rule post ID.
 	 */
-	public function add_admin_options_ajax( $trigger, $post_id ) {
-		if ( $trigger !== $this->id ) {
+	public function add_admin_options_ajax( $condition, $post_id, $number = 0 ) {
+		if ( $condition !== $this->id ) {
 			return;
 		}
 
-		$admin_fields_values = [];//@Todo: get admin fields for this trigger if found.
-		$this->print_condition_options_for_rule( $admin_fields_values, false );
+		$admin_fields_values = $this->get_rule_condition_options( $post_id, $condition );
+		$this->print_condition_options_for_rule( $number, $admin_fields_values, false );
+	}
+
+	private function get_rule_condition_options( $post_id, $condition ) {
+		$saved_conditions = get_post_meta( $post_id, 'conditions', true );
+		if ( empty( $saved_conditions ) ) {
+			return [];
+		}
+
+		if ( ! isset( $saved_conditions[ $condition ] ) ) {
+			return [];
+		}
+
+		return $saved_conditions[ $condition ];
 	}
 
 }

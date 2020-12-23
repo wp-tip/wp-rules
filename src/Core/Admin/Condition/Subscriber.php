@@ -34,7 +34,7 @@ class Subscriber implements SubscriberInterface {
 	public static function get_subscribed_events(): array {
 		return [
 			'rules_metabox_condition_fields'    => 'add_condition_fields',
-			//'save_post_rules'                 => [ 'save_conditions', 10, 3 ],
+			'save_post_rules'                 => [ 'save_conditions', 10, 3 ],
 			'admin_enqueue_scripts'           => 'enqueue_condition_script',
 			'wp_ajax_rules_condition_new' => 'rules_condition_new',
 			'wp_ajax_refresh_condition_options' => 'refresh_condition_options',
@@ -89,12 +89,12 @@ class Subscriber implements SubscriberInterface {
 		$conditions_list = apply_filters( 'rules_conditions_list', [ 0 => __( 'Please select condition', 'rules' ) ] );
 
 		$output = "";
-		$output .= $this->render_field->select( "rule_conditions[{$conditions_count}]", __( 'Choose condition'.$conditions_count, 'rules' ), $conditions_list, $selected_condition, [], false );
+		$output .= $this->render_field->select( "rule_conditions[{$conditions_count}]", __( 'Choose condition'.$conditions_count, 'rules' ), $conditions_list, $selected_condition, [ 'class' => 'rule-condition-list' ], false );
 		$condition_options_html = apply_filters( 'rules_condition_options_html', '', $selected_condition );
-		$output .= $this->render_field->container( $condition_options_html, [ 'class' => 'rule_condition_options_container' ], false );
+		$output .= $this->render_field->container( $condition_options_html, [ 'class' => 'rule-condition-options-container' ], false );
 		$output .= $this->render_field->button( 'rule_condition_remove', __( 'remove Condition', 'rules' ), [ 'class' => 'button rule-condition-remove' ], false );
 
-		$this->render_field->container( $output, [ 'class' => 'rule-condition', 'container_class' => 'rule-condition-container' ], true );
+		$this->render_field->container( $output, [ 'class' => 'rule-condition', 'container_class' => 'rule-condition-container', 'data-number' => $conditions_count ], true );
 	}
 
 	/**
@@ -108,15 +108,48 @@ class Subscriber implements SubscriberInterface {
 
 		$condition = sanitize_key( $_POST['condition'] ?? null );
 		$post_id = sanitize_key( $_POST['post_id'] ?? null );
+		$number = sanitize_key( $_POST['number'] ?? 0 );
 
 		if ( is_null( $condition ) || is_null( $post_id ) ) {
 			return;
 		}
 
-		do_action( 'rules_condition_options_ajax', $condition, $post_id );
-		do_action( "rules_condition_{$condition}_options_ajax", $post_id );
+		do_action( 'rules_condition_options_ajax', $condition, $post_id, $number );
+		do_action( "rules_condition_{$condition}_options_ajax", $post_id, $number );
 
 		die();
+	}
+
+	/**
+	 * Save condition field and trigger options array field.
+	 *
+	 * @param int $post_ID Current Post ID.
+	 */
+	public function save_condition( $post_ID ) {
+		if ( ! isset( $_POST ) || empty( $_POST ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( sanitize_key( $_POST['rule_condition_nonce'] ?? null ), 'rule_condition_nonce' ) ) {
+			esc_html_e( 'Play fair!', 'rules' );
+			exit();
+		}
+
+		//Prepare rule_conditions meta array
+		$post_rule_conditions = $_POST['rule_conditions'] ?? [];
+		$post_rule_condition_options = $_POST['rule_condition_options'] ?? [];
+
+		if ( empty( $post_rule_conditions ) ) {
+			delete_post_meta( $post_ID, 'rule_conditions' );
+			return;
+		}
+
+		$rule_conditions = [];
+
+		foreach ( $post_rule_conditions as $condition_key => $condition ) {
+
+		}
+
 	}
 
 }

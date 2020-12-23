@@ -27,5 +27,29 @@ jQuery(document).ready(function () {
 			}
 		});
 
+		jQuery( document ).on( 'change', '.rule-condition .rule-condition-list', function( e ){
+			var this_condition_list = jQuery(this);
+			var this_rule_condition = this_condition_list.parents( '.rule-condition' );
+			var selected_condition = this_condition_list.find( 'option:selected' ).val();
+
+			this_rule_condition.find('.rule-condition-options-container').html( '....' );
+
+			//Send the ajax request.
+			jQuery.ajax({
+				url: ajaxurl,
+				data: {
+					action: 'refresh_condition_options',
+					condition: selected_condition,
+					post_id: jQuery( '#post_ID' ).val(),
+					number: this_rule_condition.data( 'number' ),
+					nonce: jQuery( '#rule_condition_nonce' ).val()
+				},
+				type: 'POST',
+				success: function( response ) {
+					this_rule_condition.find('.rule-condition-options-container').html( response );
+				}
+			});
+		});
+
 	}
 });

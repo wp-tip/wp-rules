@@ -72,6 +72,7 @@ class Loader {
 		return [
 			'WP_Rules\Core\Admin\ServiceProvider',
 			'WP_Rules\Triggers\ServiceProvider',
+			'WP_Rules\Conditions\ServiceProvider',
 		];
 	}
 

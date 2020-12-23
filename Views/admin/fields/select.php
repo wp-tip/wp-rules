@@ -9,7 +9,7 @@ if ( ! empty( $data['attributes'] ) ) {
 <div class="rules-field rules-field-select" id="<?php esc_attr_e( $data['name'] ); ?>_field">
 	<label>
 		<?php echo $data['label']; ?>
-		<select name="<?php esc_attr_e( $data['name'] ); ?>" <?php esc_attr_e( $attributes_html ); ?> >
+		<select name="<?php esc_attr_e( $data['name'] ); ?>" <?php echo $attributes_html; ?> >
 			<?php
 			if ( ! empty( $data['options'] ) ) {
 				foreach ( $data['options'] as $option_key => $option_value ) {
