@@ -62,7 +62,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 */
 	public static function get_subscribed_events() {
 		return [
-			'rules_conditions_list'          => 'register_condition',
+			'rules_conditions_list'        => 'register_condition',
 			'rules_condition_options_html' => [ 'get_condition_options_html', 10, 5 ],
 		];
 	}
@@ -79,8 +79,19 @@ abstract class AbstractCondition implements SubscriberInterface {
 		return $conditions_list;
 	}
 
-	public function get_condition_options_html( $html, $number, $condition_ID, $options, $with_container = false ) {
-		if ( $condition_ID !== $this->id ) {
+	/**
+	 * Get/Print specific condition options fields HTML.
+	 *
+	 * @param string $html Filter fields HTML.
+	 * @param int    $number Current number of this condition to be used in field names.
+	 * @param string $condition_id ID of this condition.
+	 * @param array  $options Array of options' values saved on DB.
+	 * @param bool   $with_container Return HTML enclosed inside container or not.
+	 *
+	 * @return string HTML of condition fields.
+	 */
+	public function get_condition_options_html( $html, $number, $condition_id, $options, $with_container = false ) {
+		if ( $condition_id !== $this->id ) {
 			if ( $with_container ) {
 				return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
 			}
@@ -98,7 +109,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 		foreach ( $admin_fields as $admin_field ) {
 			$admin_field['value'] = $options[ $admin_field['name'] ] ?? null;
 			$admin_field['name']  = "rule_condition_options[{$number}][{$admin_field['name']}]";
-			$html        .= $this->render_field->render_field( $admin_field['type'], $admin_field, false );
+			$html                .= $this->render_field->render_field( $admin_field['type'], $admin_field, false );
 		}
 
 		if ( $with_container ) {

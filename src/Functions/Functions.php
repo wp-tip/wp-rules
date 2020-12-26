@@ -15,3 +15,22 @@ function rules_render_fields() {
 
 	return $render_fields_object;
 }
+
+/**
+ * Recursive sanitization for an array.
+ *
+ * @param array $array Array to be sanitized.
+ *
+ * @return array Sanitized array.
+ */
+function rules_recursive_sanitize_key( array $array ) {
+	foreach ( $array as $key => &$value ) {
+		if ( is_array( $value ) ) {
+			$value = rules_recursive_sanitize_key( $value );
+		} else {
+			$value = sanitize_key( $value );
+		}
+	}
+
+	return $array;
+}

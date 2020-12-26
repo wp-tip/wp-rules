@@ -16,7 +16,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	 * @var string[]
 	 */
 	public $provides = [
-		'condition_role'
+		'condition_role',
 	];
 
 	/**

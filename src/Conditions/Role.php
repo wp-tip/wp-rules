@@ -16,8 +16,8 @@ class Role extends AbstractCondition {
 	 * @return void
 	 */
 	protected function init() {
-		$this->id        = 'role';
-		$this->name      = __( 'Current logged-in user role', 'rules' );
+		$this->id   = 'role';
+		$this->name = __( 'Current logged-in user role', 'rules' );
 	}
 
 	/**
@@ -28,10 +28,10 @@ class Role extends AbstractCondition {
 	protected function admin_fields() {
 		return [
 			[
-				'type' => 'text',
+				'type'  => 'text',
 				'label' => 'text 1',
-				'name' => 'role_text'
-			]
+				'name'  => 'role_text',
+			],
 		];
 	}
 
