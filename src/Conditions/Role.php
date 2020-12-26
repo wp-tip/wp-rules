@@ -30,10 +30,10 @@ class Role extends AbstractCondition {
 
 		return [
 			[
-				'type'  => 'select',
-				'label' => __( 'Current logged-in user role', 'rules' ),
-				'name'  => 'loggedin_role',
-				'options' => $wp_roles->get_names()
+				'type'    => 'select',
+				'label'   => __( 'Current logged-in user role', 'rules' ),
+				'name'    => 'loggedin_role',
+				'options' => $wp_roles->get_names(),
 			],
 		];
 	}
