@@ -193,8 +193,8 @@ class Subscriber implements SubscriberInterface {
 		}
 
 		// Prepare rule_conditions meta array.
-		$post_rule_conditions        = rules_recursive_sanitize_key( wp_unslash( $_POST['rule_conditions'] ?? [] ) );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$post_rule_condition_options = rules_recursive_sanitize_key( wp_unslash( $_POST['rule_condition_options'] ?? [] ) );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$post_rule_conditions        = rules_recursive_sanitize_text( wp_unslash( $_POST['rule_conditions'] ?? [] ) );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$post_rule_condition_options = rules_recursive_sanitize_text( wp_unslash( $_POST['rule_condition_options'] ?? [] ) );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( empty( $post_rule_conditions ) ) {
 			delete_post_meta( $post_ID, 'rule_conditions' );

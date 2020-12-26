@@ -23,12 +23,12 @@ function rules_render_fields() {
  *
  * @return array Sanitized array.
  */
-function rules_recursive_sanitize_key( array $array ) {
+function rules_recursive_sanitize_text( array $array ) {
 	foreach ( $array as $key => &$value ) {
 		if ( is_array( $value ) ) {
-			$value = rules_recursive_sanitize_key( $value );
+			$value = rules_recursive_sanitize_text( $value );
 		} else {
-			$value = sanitize_key( $value );
+			$value = sanitize_text_field( $value );
 		}
 	}
 
