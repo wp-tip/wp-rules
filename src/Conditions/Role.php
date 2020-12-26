@@ -26,11 +26,14 @@ class Role extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
+		global $wp_roles;
+
 		return [
 			[
-				'type'  => 'text',
-				'label' => 'text 1',
-				'name'  => 'role_text',
+				'type'  => 'select',
+				'label' => __( 'Current logged-in user role', 'rules' ),
+				'name'  => 'loggedin_role',
+				'options' => $wp_roles->get_names()
 			],
 		];
 	}
