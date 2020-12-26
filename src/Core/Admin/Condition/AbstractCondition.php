@@ -63,8 +63,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 	public static function get_subscribed_events() {
 		return [
 			'rules_conditions_list'          => 'register_condition',
-			//'rules_condition_options_html' => [ 'add_admin_options', 10, 2 ],
-			'rules_condition_options_ajax'   => [ 'add_admin_options_ajax', 10, 3 ],
+			'rules_condition_options_html' => [ 'get_condition_options_html', 10, 5 ],
 		];
 	}
 
@@ -80,79 +79,33 @@ abstract class AbstractCondition implements SubscriberInterface {
 		return $conditions_list;
 	}
 
-	/**
-	 * Print condition options fields.
-	 *
-	 * @param int  $post_id Current rule post_ID.
-	 * @param bool $with_container Enclose options fields into container div.
-	 */
-	private function print_condition_options_for_rule( $number, $admin_fields_values, $with_container = true ) {
-		$options_html = '';
+	public function get_condition_options_html( $html, $number, $condition_ID, $options, $with_container = false ) {
+		if ( $condition_ID !== $this->id ) {
+			if ( $with_container ) {
+				return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
+			}
+			return $html;
+		}
 
 		$admin_fields = $this->admin_fields();
 		if ( empty( $admin_fields ) ) {
-			if ( ! $with_container ) {
-				return;
+			if ( $with_container ) {
+				return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
 			}
-
-			$this->render_field->container( '', [ 'id' => 'rule_condition_options_container' ] );
-			return;
+			return $html;
 		}
 
 		foreach ( $admin_fields as $admin_field ) {
-			$admin_field['value'] = $admin_fields_values[ $admin_field['name'] ] ?? null;
+			$admin_field['value'] = $options[ $admin_field['name'] ] ?? null;
 			$admin_field['name']  = "rule_condition_options[{$number}][{$admin_field['name']}]";
-			$options_html        .= $this->render_field->render_field( $admin_field['type'], $admin_field, ! $with_container );
+			$html        .= $this->render_field->render_field( $admin_field['type'], $admin_field, false );
 		}
 
-		if ( ! $with_container ) {
-			return;
+		if ( $with_container ) {
+			return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
 		}
 
-		$this->render_field->container( $options_html, [ 'id' => 'rule_condition_options_container' ], true );
-	}
-
-	/**
-	 * Add admin options fields when page loaded.
-	 *
-	 * @param WP_Post $post Current rule.
-	 */
-	public function add_admin_options( $post ) {
-		$current_trigger = get_post_meta( $post->ID, 'rule_trigger', true );
-
-		if ( $current_trigger !== $this->id ) {
-			return;
-		}
-
-		//$this->print_condition_options_for_rule( ,[], $post->ID );
-	}
-
-	/**
-	 * Add admin options fields with ajax.
-	 *
-	 * @param string $condition Condition ID.
-	 * @param int    $post_id Current rule post ID.
-	 */
-	public function add_admin_options_ajax( $condition, $post_id, $number = 0 ) {
-		if ( $condition !== $this->id ) {
-			return;
-		}
-
-		$admin_fields_values = $this->get_rule_condition_options( $post_id, $condition );
-		$this->print_condition_options_for_rule( $number, $admin_fields_values, false );
-	}
-
-	private function get_rule_condition_options( $post_id, $condition ) {
-		$saved_conditions = get_post_meta( $post_id, 'conditions', true );
-		if ( empty( $saved_conditions ) ) {
-			return [];
-		}
-
-		if ( ! isset( $saved_conditions[ $condition ] ) ) {
-			return [];
-		}
-
-		return $saved_conditions[ $condition ];
+		return $html;
 	}
 
 }

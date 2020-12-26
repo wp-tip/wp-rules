@@ -50,14 +50,19 @@ class Subscriber implements SubscriberInterface {
 		$this->render_field->hidden( 'rule_condition_nonce', wp_create_nonce( 'rule_condition_nonce' ), [ 'id' => 'rule_condition_nonce' ], true );
 		$this->render_field->button( 'rule_condition_add', __( 'Add New Condition', 'rules' ), [ 'class' => 'button button-primary', 'id' => 'rule_condition_add_button' ], true );
 
+		$conditions_html = "";
 		$current_conditions = get_post_meta( $post->ID, 'rule_conditions', true );
 		if ( ! empty( $current_conditions ) ) {
-			return;
+			foreach ( $current_conditions as $condition_key_num => $condition_array ) {
+				foreach ( $condition_array as $condition_ID => $options ) {
+					$conditions_html .= $this->get_condition_html( $condition_key_num, $condition_ID, $options, false );
+				}
+			}
 		}
 
 		//Load saved conditions fields.
 
-		$this->render_field->container( '', [ 'id' => 'rule_conditions_container' ], true );
+		$this->render_field->container( $conditions_html, [ 'id' => 'rule_conditions_container' ], true );
 	}
 
 	/**
@@ -80,21 +85,20 @@ class Subscriber implements SubscriberInterface {
 
 		$conditions_count = intval( $_POST['conditions_count'] ?? 0 );
 
-		$this->print_condition( $conditions_count );
+		$this->get_condition_html( $conditions_count );
 
 		die();
 	}
 
-	private function print_condition( $conditions_count, $selected_condition = '' ) {
+	private function get_condition_html( $conditions_count, $selected_condition = '', $options = [], $echo = true ) {
 		$conditions_list = apply_filters( 'rules_conditions_list', [ 0 => __( 'Please select condition', 'rules' ) ] );
 
 		$output = "";
 		$output .= $this->render_field->select( "rule_conditions[{$conditions_count}]", __( 'Choose condition'.$conditions_count, 'rules' ), $conditions_list, $selected_condition, [ 'class' => 'rule-condition-list' ], false );
-		$condition_options_html = apply_filters( 'rules_condition_options_html', '', $selected_condition );
-		$output .= $this->render_field->container( $condition_options_html, [ 'class' => 'rule-condition-options-container' ], false );
+		$output .= apply_filters( 'rules_condition_options_html', '', $conditions_count, $selected_condition, $options, true );
 		$output .= $this->render_field->button( 'rule_condition_remove', __( 'remove Condition', 'rules' ), [ 'class' => 'button rule-condition-remove' ], false );
 
-		$this->render_field->container( $output, [ 'class' => 'rule-condition', 'container_class' => 'rule-condition-container', 'data-number' => $conditions_count ], true );
+		return $this->render_field->container( $output, [ 'class' => 'rule-condition', 'container_class' => 'rule-condition-container', 'data-number' => $conditions_count ], $echo );
 	}
 
 	/**
@@ -114,10 +118,25 @@ class Subscriber implements SubscriberInterface {
 			return;
 		}
 
-		do_action( 'rules_condition_options_ajax', $condition, $post_id, $number );
-		do_action( "rules_condition_{$condition}_options_ajax", $post_id, $number );
+		$options = $this->get_rule_condition_options( $post_id, $condition, $number );
+
+		echo apply_filters( 'rules_condition_options_html', '', $number, $condition, $options, false );
 
 		die();
+	}
+
+	private function get_rule_condition_options( $post_id, $condition, $number ) {
+		$saved_conditions = get_post_meta( $post_id, 'rule_conditions', true );
+
+		if ( empty( $saved_conditions ) ) {
+			return [];
+		}
+
+		if ( ! isset( $saved_conditions[ $number ][ $condition ] ) ) {
+			return [];
+		}
+
+		return $saved_conditions[ $number ][ $condition ];
 	}
 
 	/**
@@ -125,7 +144,7 @@ class Subscriber implements SubscriberInterface {
 	 *
 	 * @param int $post_ID Current Post ID.
 	 */
-	public function save_condition( $post_ID ) {
+	public function save_conditions( $post_ID ) {
 		if ( ! isset( $_POST ) || empty( $_POST ) ) {
 			return;
 		}
@@ -147,8 +166,12 @@ class Subscriber implements SubscriberInterface {
 		$rule_conditions = [];
 
 		foreach ( $post_rule_conditions as $condition_key => $condition ) {
-
+			$rule_conditions[] = [
+				$condition => $post_rule_condition_options[$condition_key]
+			];
 		}
+
+		update_post_meta( $post_ID, 'rule_conditions', $rule_conditions );
 
 	}
 
