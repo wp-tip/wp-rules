@@ -73,6 +73,7 @@ class Loader {
 			'WP_Rules\Core\Admin\ServiceProvider',
 			'WP_Rules\Triggers\ServiceProvider',
 			'WP_Rules\Conditions\ServiceProvider',
+			'WP_Rules\Actions\ServiceProvider',
 		];
 	}
 

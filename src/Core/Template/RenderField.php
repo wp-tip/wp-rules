@@ -72,6 +72,22 @@ class RenderField extends Render {
 	}
 
 	/**
+	 * Render textarea field.
+	 *
+	 * @param string      $name Name attribute for textarea.
+	 * @param string      $label Label for textarea.
+	 * @param string|null $value Value for textarea.
+	 * @param array       $attributes Additional attributes for textarea.
+	 * @param bool        $echo Echo the content if true OR return it if false.
+	 *
+	 * @return string
+	 */
+	public function textarea( string $name, string $label, string $value = null, array $attributes = [], bool $echo = true ) {
+		$data = compact( 'name', 'label', 'value', 'attributes' );
+		return $this->render_field( 'textarea', $data, $echo );
+	}
+
+	/**
 	 * Render select field.
 	 *
 	 * @param string $name Name attribute for select.
