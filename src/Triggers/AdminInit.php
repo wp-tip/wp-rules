@@ -13,12 +13,16 @@ class AdminInit extends AbstractTrigger {
 	/**
 	 * Initialize trigger details like id, name, wp_action.
 	 *
-	 * @return void
+	 * @return array
 	 */
 	protected function init() {
-		$this->id        = 'admin_init';
-		$this->wp_action = $this->id;
-		$this->name      = __( 'Admin initialize', 'rules' );
+		return [
+			'id' => 'admin_init',
+			'wp_action' => 'admin_init',
+			'name' => __( 'Admin initialize', 'rules' ),
+			'wp_action_priority' => 10,
+			'wp_action_args_number' => 0
+		];
 	}
 
 	/**

@@ -31,7 +31,11 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 *
 	 * @var string
 	 */
-	protected $wp_action = '';
+	protected static $wp_action = '';
+
+	protected static $wp_action_priority = 10;
+
+	protected static $wp_action_args_number = 0;
 
 	/**
 	 * RenderField class instance.
@@ -45,13 +49,13 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 */
 	public function __construct() {
 		$this->render_field = rules_render_fields();
-		$this->init();
+		$this->fill_attributes( (array) $this->init() );
 	}
 
 	/**
 	 * Initialize trigger details like id, name, wp_action.
 	 *
-	 * @return void
+	 * @return array
 	 */
 	abstract protected function init();
 
@@ -67,11 +71,11 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 *
 	 * @return array Array of events and attached callbacks.
 	 */
-	public static function get_subscribed_events() {
-		return [
+	public static function get_subscribed_events() {		return [
 			'rules_triggers_list'          => 'register_trigger',
 			'rules_metabox_trigger_fields' => 'add_admin_options',
 			'rules_trigger_options_ajax'   => [ 'add_admin_options_ajax', 10, 2 ],
+			self::$wp_action => [ 'trigger_fired', self::$wp_action_priority, self::$wp_action_args_number ]
 		];
 	}
 
@@ -129,7 +133,7 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	public function add_admin_options( $post ) {
 		$current_trigger = get_post_meta( $post->ID, 'rule_trigger', true );
 
-		if ( $current_trigger !== $this->id ) {
+		if ( ! $this->is_allowed( $current_trigger ) ) {
 			return;
 		}
 
@@ -143,10 +147,44 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 * @param int    $post_id Current rule post ID.
 	 */
 	public function add_admin_options_ajax( $trigger, $post_id ) {
-		if ( $trigger !== $this->id ) {
+		if ( ! $this->is_allowed( $trigger ) ) {
 			return;
 		}
+
 		$this->print_trigger_options_for_rule( $post_id, false );
+	}
+
+	private function is_allowed( $current_trigger = null ) {
+		if ( $current_trigger === $this->id ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public function trigger_fired( ...$args ) {
+		do_action( 'rules_trigger_fired', $args );
+		do_action( "rules_trigger_{$this->id}_fired", $args );
+	}
+
+	private function fill_attributes( array $params ) {
+		foreach ( $params as $param_key => $param ) {
+			switch ( $param_key ) {
+				case 'wp_action':
+					self::$wp_action = $param;
+					break;
+				case 'wp_action_priority':
+					self::$wp_action_priority = $param ?? 10;
+					break;
+				case 'wp_action_args_number':
+					self::$wp_action_args_number = $param ?? 0;
+					break;
+				default:
+					if ( isset( $this->$param_key ) ) {
+						$this->$param_key = $param;
+					}
+			}
+		}
 	}
 
 }

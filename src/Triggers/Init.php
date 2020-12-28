@@ -13,12 +13,16 @@ class Init extends AbstractTrigger {
 	/**
 	 * Initialize trigger details like id, name, wp_action.
 	 *
-	 * @return void
+	 * @return array
 	 */
 	protected function init() {
-		$this->id        = 'init';
-		$this->wp_action = $this->id;
-		$this->name      = __( 'WordPress initialize', 'rules' );
+		return [
+			'id' => 'init',
+			'wp_action' => 'init',
+			'name' => __( 'WordPress initialize', 'rules' ),
+			'wp_action_priority' => 10,
+			'wp_action_args_number' => 0
+		];
 	}
 
 	/**
