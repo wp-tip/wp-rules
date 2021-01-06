@@ -34,3 +34,27 @@ function rules_recursive_sanitize_text( array $array ) {
 
 	return $array;
 }
+
+function rules_get_filesystem() {
+	static $filesystem = null;
+
+	if ( is_null( $filesystem ) ) {
+		require_once rules_get_constant( 'ABSPATH' ) . 'wp-admin/includes/class-wp-filesystem-base.php';
+		require_once rules_get_constant( 'ABSPATH' ) . 'wp-admin/includes/class-wp-filesystem-direct.php';
+		$filesystem = new WP_Filesystem_Direct( new StdClass() );
+	}
+
+	return $filesystem;
+}
+
+function rules_has_constant( $constant_name ) {
+	return defined( $constant_name );
+}
+
+function rules_get_constant( $constant_name, $default = null ) {
+	if ( ! rules_has_constant( $constant_name ) ) {
+		return $default;
+	}
+
+	return constant( $constant_name );
+}
