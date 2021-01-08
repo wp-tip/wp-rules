@@ -34,8 +34,8 @@ class ServiceProvider extends AbstractServiceProvider {
 
 		$filesystem = rules_get_filesystem();
 		$this->container->add( 'core_template_render_field', '\WP_Rules\Core\Template\RenderField' )
-		                ->addArgument( rules_get_constant( 'WP_RULES_VIEWS_PATH' ) )
-		                ->addArgument( $filesystem );
+						->addArgument( rules_get_constant( 'WP_RULES_VIEWS_PATH' ) )
+						->addArgument( $filesystem );
 
 		$container->add( 'core_admin_rule_posttype', '\WP_Rules\Core\Admin\Rule\Posttype' );
 		$container->add( 'core_admin_rule_metabox', '\WP_Rules\Core\Admin\Rule\MetaBox' );

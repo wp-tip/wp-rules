@@ -2,6 +2,7 @@
 namespace WP_Rules\Core\Evaluator;
 
 use WP_Rules\Core\Plugin\EventManagement\SubscriberInterface;
+use WP_Meta_Query;
 
 /**
  * Class Subscriber
@@ -9,15 +10,18 @@ use WP_Rules\Core\Plugin\EventManagement\SubscriberInterface;
  * @package WP_Rules\Core\Evaluator
  */
 class Subscriber implements SubscriberInterface {
+
 	/**
+	 * Rule Instance.
+	 *
 	 * @var Rule
 	 */
-	private Rule $rule;
+	private $rule;
 
 	/**
 	 * Subscriber constructor.
 	 *
-	 * @param Rule $rule
+	 * @param Rule $rule Rule instance.
 	 */
 	public function __construct( Rule $rule ) {
 		$this->rule = $rule;
@@ -30,12 +34,18 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public static function get_subscribed_events(): array {
 		return [
-			'rules_trigger_fired' => [ 'evaluate_trigger', 10, 2 ]
+			'rules_trigger_fired' => [ 'evaluate_trigger', 10, 2 ],
 		];
 	}
 
+	/**
+	 * Evaluate trigger code.
+	 *
+	 * @param string $trigger_id Trigger ID to be evaluated.
+	 * @param array  $args Trigger hook arguments.
+	 */
 	public function evaluate_trigger( $trigger_id, $args ) {
-		//Get this trigger rules.
+		// Get this trigger rules.
 		global $wpdb;
 
 		$rules_results = $wpdb->get_results(

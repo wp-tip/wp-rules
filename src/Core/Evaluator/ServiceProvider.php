@@ -17,7 +17,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	 */
 	public $provides = [
 		'core_evaluator_rule',
-		'core_evaluator_subscriber'
+		'core_evaluator_subscriber',
 	];
 
 	/**
@@ -27,6 +27,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container = $this->getContainer();
 		$container->add( 'core_evaluator_rule', '\WP_Rules\Core\Evaluator\Rule' );
 		$container->share( 'core_evaluator_subscriber', '\WP_Rules\Core\Evaluator\Subscriber' )
-		          ->addArgument( $container->get( 'core_evaluator_rule' ) );
+				->addArgument( $container->get( 'core_evaluator_rule' ) );
 	}
 }
