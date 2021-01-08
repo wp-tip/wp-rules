@@ -38,13 +38,13 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 */
 	public function __construct() {
 		$this->render_field = rules_render_fields();
-		$this->init();
+		$this->fill_attributes( (array) $this->init() );
 	}
 
 	/**
 	 * Initialize condition details like id, name.
 	 *
-	 * @return void
+	 * @return array
 	 */
 	abstract protected function init();
 
@@ -56,6 +56,19 @@ abstract class AbstractCondition implements SubscriberInterface {
 	abstract protected function admin_fields();
 
 	/**
+	 * Fill attributes for current condition.
+	 *
+	 * @param array $params Current condition parameters.
+	 */
+	private function fill_attributes( array $params ) {
+		foreach ( $params as $param_key => $param ) {
+			if ( isset( $this->$param_key ) ) {
+				$this->$param_key = $param;
+			}
+		}
+	}
+
+	/**
 	 * Returns an array of events that this subscriber wants to listen to.
 	 *
 	 * @return array Array of events and attached callbacks.
@@ -64,7 +77,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 		return [
 			'rules_conditions_list'        => 'register_condition',
 			'rules_condition_options_html' => [ 'get_condition_options_html', 10, 5 ],
-			"rules_condition_validated" => [ 'validate_condition', 10, 4 ]
+			'rules_condition_validated'    => [ 'validate_condition', 10, 4 ],
 		];
 	}
 
@@ -120,6 +133,16 @@ abstract class AbstractCondition implements SubscriberInterface {
 		return $html;
 	}
 
+	/**
+	 * Validate the condition to pass or not.
+	 *
+	 * @param bool   $validated Initial value.
+	 * @param string $condition_id Condition ID.
+	 * @param array  $condition_options Condition Options array.
+	 * @param array  $trigger_hook_args Current rule trigger hook arguments.
+	 *
+	 * @return bool If it passes or not.
+	 */
 	public function validate_condition( $validated, $condition_id, $condition_options, $trigger_hook_args ) {
 		if ( $condition_id !== $this->id ) {
 			return $validated;
@@ -128,6 +151,14 @@ abstract class AbstractCondition implements SubscriberInterface {
 		return $this->evaluate( $condition_options, $trigger_hook_args );
 	}
 
+	/**
+	 * Evaluate current condition.
+	 *
+	 * @param array $condition_options Condition Options array.
+	 * @param array $trigger_hook_args Current rule trigger hook arguments.
+	 *
+	 * @return bool If it passes or not.
+	 */
 	abstract protected function evaluate( $condition_options, $trigger_hook_args );
 
 }

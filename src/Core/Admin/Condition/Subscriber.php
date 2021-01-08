@@ -34,7 +34,7 @@ class Subscriber implements SubscriberInterface {
 	public static function get_subscribed_events(): array {
 		return [
 			'rules_metabox_condition_fields'    => 'add_condition_fields',
-			'save_post_rules'                   => [ 'save_conditions', 10, 3 ],
+			'save_post_rules'                   => 'save_conditions',
 			'admin_enqueue_scripts'             => 'enqueue_condition_script',
 			'wp_ajax_rules_condition_new'       => 'rules_condition_add_new',
 			'wp_ajax_refresh_condition_options' => 'refresh_condition_options',
