@@ -38,4 +38,8 @@ class Role extends AbstractCondition {
 		];
 	}
 
+	protected function evaluate( $condition_options, $trigger_hook_args ) {
+		$user = wp_get_current_user();
+		return in_array( $condition_options['loggedin_role'], (array) $user->roles );
+	}
 }

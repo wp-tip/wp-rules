@@ -64,6 +64,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 		return [
 			'rules_conditions_list'        => 'register_condition',
 			'rules_condition_options_html' => [ 'get_condition_options_html', 10, 5 ],
+			"rules_condition_validated" => [ 'validate_condition', 10, 4 ]
 		];
 	}
 
@@ -118,5 +119,15 @@ abstract class AbstractCondition implements SubscriberInterface {
 
 		return $html;
 	}
+
+	public function validate_condition( $validated, $condition_id, $condition_options, $trigger_hook_args ) {
+		if ( $condition_id !== $this->id ) {
+			return $validated;
+		}
+
+		return $this->evaluate( $condition_options, $trigger_hook_args );
+	}
+
+	abstract protected function evaluate( $condition_options, $trigger_hook_args );
 
 }

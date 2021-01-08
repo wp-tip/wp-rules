@@ -2,7 +2,6 @@
 namespace WP_Rules\Core\Evaluator;
 
 use WP_Rules\Core\Plugin\EventManagement\SubscriberInterface;
-use WP_Meta_Query;
 
 /**
  * Class Subscriber
