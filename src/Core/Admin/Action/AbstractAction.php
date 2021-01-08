@@ -63,6 +63,7 @@ abstract class AbstractAction implements SubscriberInterface {
 		return [
 			'rules_actions_list'        => 'register_action',
 			'rules_action_options_html' => [ 'get_action_options_html', 10, 5 ],
+			'rules_action_fired' => [ 'fire_action', 10, 3 ]
 		];
 	}
 
@@ -117,5 +118,15 @@ abstract class AbstractAction implements SubscriberInterface {
 
 		return $html;
 	}
+
+	public function fire_action( $action_id, $action_options, $trigger_hook_args ) {
+		if ( $action_id !== $this->id ) {
+			return;
+		}
+
+		$this->evaluate( $action_options, $trigger_hook_args );
+	}
+
+	abstract protected function evaluate( $action_options, $trigger_hook_args );
 
 }

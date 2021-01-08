@@ -28,7 +28,7 @@ function rules_recursive_sanitize_text( array $array ) {
 		if ( is_array( $value ) ) {
 			$value = rules_recursive_sanitize_text( $value );
 		} else {
-			$value = sanitize_text_field( $value );
+			$value = sanitize_textarea_field( $value );
 		}
 	}
 
