@@ -17,11 +17,11 @@ class Init extends AbstractTrigger {
 	 */
 	protected function init() {
 		return [
-			'id' => 'init',
-			'wp_action' => 'init',
-			'name' => __( 'WordPress initialize', 'rules' ),
-			'wp_action_priority' => 10,
-			'wp_action_args_number' => 0
+			'id'                    => 'init',
+			'wp_action'             => 'init',
+			'name'                  => __( 'WordPress initialize', 'rules' ),
+			'wp_action_priority'    => 10,
+			'wp_action_args_number' => 0,
 		];
 	}
 

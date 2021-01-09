@@ -37,13 +37,13 @@ abstract class AbstractAction implements SubscriberInterface {
 	 */
 	public function __construct() {
 		$this->render_field = rules_render_fields();
-		$this->init();
+		$this->fill_attributes( (array) $this->init() );
 	}
 
 	/**
 	 * Initialize Action details like id, name.
 	 *
-	 * @return void
+	 * @return array
 	 */
 	abstract protected function init();
 
@@ -55,6 +55,19 @@ abstract class AbstractAction implements SubscriberInterface {
 	abstract protected function admin_fields();
 
 	/**
+	 * Fill attributes for current action.
+	 *
+	 * @param array $params Current action parameters.
+	 */
+	private function fill_attributes( array $params ) {
+		foreach ( $params as $param_key => $param ) {
+			if ( isset( $this->$param_key ) ) {
+				$this->$param_key = $param;
+			}
+		}
+	}
+
+	/**
 	 * Returns an array of events that this subscriber wants to listen to.
 	 *
 	 * @return array Array of events and attached callbacks.
@@ -63,6 +76,7 @@ abstract class AbstractAction implements SubscriberInterface {
 		return [
 			'rules_actions_list'        => 'register_action',
 			'rules_action_options_html' => [ 'get_action_options_html', 10, 5 ],
+			'rules_action_fired'        => [ 'fire_action', 10, 3 ],
 		];
 	}
 
@@ -117,5 +131,30 @@ abstract class AbstractAction implements SubscriberInterface {
 
 		return $html;
 	}
+
+	/**
+	 * Fire action when rule conditions pass.
+	 *
+	 * @param string $action_id Action ID.
+	 * @param array  $action_options Action options.
+	 * @param array  $trigger_hook_args Current rule trigger hook arguments.
+	 */
+	public function fire_action( $action_id, $action_options, $trigger_hook_args ) {
+		if ( $action_id !== $this->id ) {
+			return;
+		}
+
+		$this->evaluate( $action_options, $trigger_hook_args );
+	}
+
+	/**
+	 * Evaluate / Run action code.
+	 *
+	 * @param array $action_options Action options.
+	 * @param array $trigger_hook_args Current rule trigger hook arguments.
+	 *
+	 * @return void
+	 */
+	abstract protected function evaluate( $action_options, $trigger_hook_args );
 
 }

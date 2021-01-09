@@ -13,11 +13,13 @@ class Role extends AbstractCondition {
 	/**
 	 * Initialize condition details like id, name.
 	 *
-	 * @return void
+	 * @return array
 	 */
 	protected function init() {
-		$this->id   = 'role';
-		$this->name = __( 'Current logged-in user role', 'rules' );
+		return [
+			'id'   => 'role',
+			'name' => __( 'Current logged-in user role', 'rules' ),
+		];
 	}
 
 	/**
@@ -38,4 +40,16 @@ class Role extends AbstractCondition {
 		];
 	}
 
+	/**
+	 * Evaluate current condition.
+	 *
+	 * @param array $condition_options Condition Options array.
+	 * @param array $trigger_hook_args Current rule trigger hook arguments.
+	 *
+	 * @return bool If it passes or not.
+	 */
+	protected function evaluate( $condition_options, $trigger_hook_args ) {
+		$user = wp_get_current_user();
+		return in_array( $condition_options['loggedin_role'], (array) $user->roles, true );
+	}
 }

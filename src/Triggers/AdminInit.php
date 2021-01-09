@@ -17,11 +17,11 @@ class AdminInit extends AbstractTrigger {
 	 */
 	protected function init() {
 		return [
-			'id' => 'admin_init',
-			'wp_action' => 'admin_init',
-			'name' => __( 'Admin initialize', 'rules' ),
-			'wp_action_priority' => 10,
-			'wp_action_args_number' => 0
+			'id'                    => 'admin_init',
+			'wp_action'             => 'admin_init',
+			'name'                  => __( 'Admin initialize', 'rules' ),
+			'wp_action_priority'    => 10,
+			'wp_action_args_number' => 0,
 		];
 	}
 

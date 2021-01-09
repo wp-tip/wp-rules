@@ -33,8 +33,18 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 */
 	protected static $wp_action = '';
 
+	/**
+	 * Trigger WP action priority.
+	 *
+	 * @var int Default is 10 like WordPress core.
+	 */
 	protected static $wp_action_priority = 10;
 
+	/**
+	 * Trigger WP action arguments number.
+	 *
+	 * @var int Default is 0.
+	 */
 	protected static $wp_action_args_number = 0;
 
 	/**
@@ -71,11 +81,12 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 *
 	 * @return array Array of events and attached callbacks.
 	 */
-	public static function get_subscribed_events() {		return [
+	public static function get_subscribed_events() {
+		return [
 			'rules_triggers_list'          => 'register_trigger',
 			'rules_metabox_trigger_fields' => 'add_admin_options',
 			'rules_trigger_options_ajax'   => [ 'add_admin_options_ajax', 10, 2 ],
-			self::$wp_action => [ 'trigger_fired', self::$wp_action_priority, self::$wp_action_args_number ]
+			self::$wp_action               => [ 'trigger_fired', self::$wp_action_priority, self::$wp_action_args_number ],
 		];
 	}
 
@@ -154,6 +165,13 @@ abstract class AbstractTrigger implements SubscriberInterface {
 		$this->print_trigger_options_for_rule( $post_id, false );
 	}
 
+	/**
+	 * Check if this trigger is the current trigger.
+	 *
+	 * @param string $current_trigger Current trigger ID.
+	 *
+	 * @return bool
+	 */
 	private function is_allowed( $current_trigger = null ) {
 		if ( $current_trigger === $this->id ) {
 			return true;
@@ -162,11 +180,21 @@ abstract class AbstractTrigger implements SubscriberInterface {
 		return false;
 	}
 
+	/**
+	 * Fire an action with this trigger action.
+	 *
+	 * @param mixed ...$args Arguments passed to new action.
+	 */
 	public function trigger_fired( ...$args ) {
-		do_action( 'rules_trigger_fired', $args );
+		do_action( 'rules_trigger_fired', $this->id, $args );
 		do_action( "rules_trigger_{$this->id}_fired", $args );
 	}
 
+	/**
+	 * Fill attributes for current trigger.
+	 *
+	 * @param array $params Current trigger parameters.
+	 */
 	private function fill_attributes( array $params ) {
 		foreach ( $params as $param_key => $param ) {
 			switch ( $param_key ) {
