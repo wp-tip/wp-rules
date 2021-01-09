@@ -21,8 +21,9 @@ class ServiceProvider extends AbstractServiceProvider {
 		'core_admin_rule_posttype',
 		'core_admin_rule_metabox',
 		'core_admin_rule_subscriber',
-		'core_template_render_field',
 		'core_admin_trigger_subscriber',
+		'core_admin_condition_subscriber',
+		'core_admin_action_subscriber',
 	];
 
 	/**
@@ -30,17 +31,20 @@ class ServiceProvider extends AbstractServiceProvider {
 	 */
 	public function register() {
 		$container = $this->getContainer();
+
+		$filesystem = rules_get_filesystem();
+		$this->container->add( 'core_template_render_field', '\WP_Rules\Core\Template\RenderField' )
+						->addArgument( rules_get_constant( 'WP_RULES_VIEWS_PATH' ) )
+						->addArgument( $filesystem );
+
 		$container->add( 'core_admin_rule_posttype', '\WP_Rules\Core\Admin\Rule\Posttype' );
 		$container->add( 'core_admin_rule_metabox', '\WP_Rules\Core\Admin\Rule\MetaBox' );
 		$container->share( 'core_admin_rule_subscriber', '\WP_Rules\Core\Admin\Rule\Subscriber' )
 				->addArgument( $container->get( 'core_admin_rule_posttype' ) )
 				->addArgument( $container->get( 'core_admin_rule_metabox' ) );
 
-		$filesystem = new WP_Filesystem_Direct( new StdClass() );
-		$container->add( 'core_template_render_field', '\WP_Rules\Core\Template\RenderField' )
-				->addArgument( $container->get( 'template_dir' ) )
-				->addArgument( $filesystem );
-		$container->share( 'core_admin_trigger_subscriber', '\WP_Rules\Core\Admin\Trigger\Subscriber' )
-				->addArgument( $container->get( 'core_template_render_field' ) );
+		$container->share( 'core_admin_trigger_subscriber', '\WP_Rules\Core\Admin\Trigger\Subscriber' );
+		$container->share( 'core_admin_condition_subscriber', '\WP_Rules\Core\Admin\Condition\Subscriber' );
+		$container->share( 'core_admin_action_subscriber', '\WP_Rules\Core\Admin\Action\Subscriber' );
 	}
 }

@@ -5,6 +5,8 @@ use WP_Rules\Core\Plugin\EventManagement\EventManager;
 use WP_Rules\Core\Plugin\EventManagement\SubscriberInterface;
 use WP_Rules\Dependencies\League\Container\Container;
 use WP_Rules\Dependencies\League\Container\ServiceProvider\ServiceProviderInterface;
+use WP_Filesystem_Direct;
+use StdClass;
 
 class Loader {
 
@@ -47,8 +49,6 @@ class Loader {
 		$this->event_manager = new EventManager();
 		$this->container->share( 'event_manager', $this->event_manager );
 
-		$this->container->add( 'template_dir', WP_RULES_VIEWS_PATH );
-
 		foreach ( $this->get_service_providers() as $service_provider ) {
 			$service_provider_instance = new $service_provider();
 			$this->container->addServiceProvider( $service_provider_instance );
@@ -66,6 +66,10 @@ class Loader {
 	private function get_service_providers() {
 		return [
 			'WP_Rules\Core\Admin\ServiceProvider',
+			'WP_Rules\Triggers\ServiceProvider',
+			'WP_Rules\Conditions\ServiceProvider',
+			'WP_Rules\Actions\ServiceProvider',
+			'WP_Rules\Core\Evaluator\ServiceProvider',
 		];
 	}
 

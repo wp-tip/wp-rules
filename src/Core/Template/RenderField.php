@@ -27,12 +27,17 @@ class RenderField extends Render {
 	 *
 	 * @param string $field_name Field name.
 	 * @param array  $data Array of data passed to template.
+	 * @param bool   $echo Echo the content if true OR return it if false.
 	 *
 	 * @return string Contents of this field.
 	 */
-	public function render_field( string $field_name, array $data = [] ) {
+	public function render_field( string $field_name, array $data = [], bool $echo = true ) {
 		$template_name = self::ADMIN_DIR . DIRECTORY_SEPARATOR . self::FIELDS_DIR . DIRECTORY_SEPARATOR . $field_name;
-		return $this->render( $template_name, $data );
+		$return        = $this->render( $template_name, $data );
+		if ( ! $echo ) {
+			return $return;
+		}
+		echo $return;// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
@@ -42,12 +47,44 @@ class RenderField extends Render {
 	 * @param string      $label Label for textbox.
 	 * @param string|null $value Value for textbox.
 	 * @param array       $attributes Additional attributes for textbox.
+	 * @param bool        $echo Echo the content if true OR return it if false.
 	 *
 	 * @return string
 	 */
-	public function text( string $name, string $label, string $value = null, array $attributes = [] ) {
+	public function text( string $name, string $label, string $value = null, array $attributes = [], bool $echo = true ) {
 		$data = compact( 'name', 'label', 'value', 'attributes' );
-		return $this->render_field( 'text', $data );
+		return $this->render_field( 'text', $data, $echo );
+	}
+
+	/**
+	 * Render hidden text field.
+	 *
+	 * @param string      $name Name attribute for textbox.
+	 * @param string|null $value Value for textbox.
+	 * @param array       $attributes Additional attributes for hidden textbox.
+	 * @param bool        $echo Echo the content if true OR return it if false.
+	 *
+	 * @return string
+	 */
+	public function hidden( string $name, string $value = null, array $attributes = [], bool $echo = true ) {
+		$data = compact( 'name', 'value', 'attributes' );
+		return $this->render_field( 'hidden', $data, $echo );
+	}
+
+	/**
+	 * Render textarea field.
+	 *
+	 * @param string      $name Name attribute for textarea.
+	 * @param string      $label Label for textarea.
+	 * @param string|null $value Value for textarea.
+	 * @param array       $attributes Additional attributes for textarea.
+	 * @param bool        $echo Echo the content if true OR return it if false.
+	 *
+	 * @return string
+	 */
+	public function textarea( string $name, string $label, string $value = null, array $attributes = [], bool $echo = true ) {
+		$data = compact( 'name', 'label', 'value', 'attributes' );
+		return $this->render_field( 'textarea', $data, $echo );
 	}
 
 	/**
@@ -56,14 +93,15 @@ class RenderField extends Render {
 	 * @param string $name Name attribute for select.
 	 * @param string $label Label for select.
 	 * @param array  $options Select available options.
-	 * @param string $selected_key Key of selected option.
+	 * @param string $value Key of selected option.
 	 * @param array  $attributes Additional attributes for select.
+	 * @param bool   $echo Echo the content if true OR return it if false.
 	 *
 	 * @return string
 	 */
-	public function select( string $name, string $label, array $options = [], string $selected_key = '', array $attributes = [] ) {
-		$data = compact( 'name', 'label', 'options', 'selected_key', 'attributes' );
-		return $this->render_field( 'select', $data );
+	public function select( string $name, string $label, array $options = [], string $value = '', array $attributes = [], bool $echo = true ) {
+		$data = compact( 'name', 'label', 'options', 'value', 'attributes' );
+		return $this->render_field( 'select', $data, $echo );
 	}
 
 	/**
@@ -72,15 +110,45 @@ class RenderField extends Render {
 	 * @param string $name Name attribute for select.
 	 * @param string $label Label for select.
 	 * @param array  $options Select available options.
-	 * @param string $selected_key Key of selected option.
+	 * @param string $value Key of selected option.
 	 * @param array  $attributes Additional attributes for select.
+	 * @param bool   $echo Echo the content if true OR return it if false.
 	 *
 	 * @return string
 	 */
-	public function select2( string $name, string $label, array $options = [], string $selected_key = '', array $attributes = [] ) {
+	public function select2( string $name, string $label, array $options = [], string $value = '', array $attributes = [], bool $echo = true ) {
 		$attributes['class'] = 'select2';
-		$data                = compact( 'name', 'label', 'options', 'selected_key', 'attributes' );
-		return $this->render_field( 'select', $data );
+		$data                = compact( 'name', 'label', 'options', 'value', 'attributes' );
+		return $this->render_field( 'select', $data, $echo );
+	}
+
+	/**
+	 * Render container field.
+	 *
+	 * @param string $contents HTML contents.
+	 * @param array  $attributes Additional attributes for textbox.
+	 * @param bool   $echo Echo the content if true OR return it if false.
+	 *
+	 * @return string
+	 */
+	public function container( string $contents, array $attributes = [], bool $echo = true ) {
+		$data = compact( 'contents', 'attributes' );
+		return $this->render_field( 'container', $data, $echo );
+	}
+
+	/**
+	 * Render button field.
+	 *
+	 * @param string      $name Name attribute for button.
+	 * @param string|null $value Visible text on button.
+	 * @param array       $attributes Additional attributes for textbox.
+	 * @param bool        $echo Echo the content if true OR return it if false.
+	 *
+	 * @return string
+	 */
+	public function button( string $name, string $value = null, array $attributes = [], bool $echo = true ) {
+		$data = compact( 'name', 'value', 'attributes' );
+		return $this->render_field( 'button', $data, $echo );
 	}
 
 }

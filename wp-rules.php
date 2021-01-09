@@ -93,10 +93,11 @@ if ( ! class_exists( 'WPRules' ) ) {
 
 					// Load main service providers and subscribers.
 					$loader = new \WP_Rules\Core\Plugin\Loader( $container );
-					$loader->load();
 
 					// Share the container instance using filter.
 					add_filter( 'rules_container', [ $loader, 'get_container' ] );
+
+					$loader->load();
 
 				}
 			}
