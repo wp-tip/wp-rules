@@ -1,0 +1,26 @@
+.rules-field label {
+	display: block;
+}
+.rules-field select,
+.rules-field textarea {
+	display: block;
+	margin: 1em 0;
+	padding: 0.3em 1.5em 0.3em 0.5em;
+	width: 100%;
+}
+#rule_condition_add,
+#rule_action_add_button{
+	float: right;
+}
+.rule-condition-container,
+.rule-action-container{
+	display: inline-flex;
+	margin-right: 1em;
+	margin-bottom: 2em;
+	background-color: #efefef;
+	padding: 1em;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #007cba;
+}
