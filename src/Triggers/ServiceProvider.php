@@ -20,6 +20,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	public $provides = [
 		'trigger_admin_init',
 		'trigger_init',
+		'trigger_save_post',
 	];
 
 	/**
@@ -30,5 +31,6 @@ class ServiceProvider extends AbstractServiceProvider {
 
 		$container->share( 'trigger_admin_init', '\WP_Rules\Triggers\AdminInit' );
 		$container->share( 'trigger_init', '\WP_Rules\Triggers\Init' );
+		$container->share( 'trigger_save_post', '\WP_Rules\Triggers\SavePost' );
 	}
 }

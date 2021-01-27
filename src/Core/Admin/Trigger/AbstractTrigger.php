@@ -48,6 +48,13 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	protected static $wp_action_args_number = 0;
 
 	/**
+	 * Trigger WP action arguments keys.
+	 *
+	 * @var array
+	 */
+	protected static $wp_action_args = [];
+
+	/**
 	 * RenderField class instance.
 	 *
 	 * @var RenderField
@@ -86,7 +93,8 @@ abstract class AbstractTrigger implements SubscriberInterface {
 			'rules_triggers_list'          => 'register_trigger',
 			'rules_metabox_trigger_fields' => 'add_admin_options',
 			'rules_trigger_options_ajax'   => [ 'add_admin_options_ajax', 10, 2 ],
-			self::$wp_action               => [ 'trigger_fired', self::$wp_action_priority, self::$wp_action_args_number ],
+			self::$wp_action               => [ 'trigger_fired', self::$wp_action_priority, count( self::$wp_action_args ) ],
+			'rules_trigger_validated'      => [ 'validate_trigger', 10, 4 ]
 		];
 	}
 
@@ -186,8 +194,16 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 * @param mixed ...$args Arguments passed to new action.
 	 */
 	public function trigger_fired( ...$args ) {
-		do_action( 'rules_trigger_fired', $this->id, $args );
-		do_action( "rules_trigger_{$this->id}_fired", $args );
+		$hook_args = [];
+
+		if ( ! empty( $args ) && count( $args ) === count( self::$wp_action_args ) ) {
+			foreach ( $args as $arg_index => $arg ) {
+				$hook_args[ self::$wp_action_args[ $arg_index ] ] = $arg;
+			}
+		}
+
+		do_action( 'rules_trigger_fired', $this->id, $hook_args );
+		do_action( "rules_trigger_{$this->id}_fired", $hook_args );
 	}
 
 	/**
@@ -204,8 +220,8 @@ abstract class AbstractTrigger implements SubscriberInterface {
 				case 'wp_action_priority':
 					self::$wp_action_priority = $param ?? 10;
 					break;
-				case 'wp_action_args_number':
-					self::$wp_action_args_number = $param ?? 0;
+				case 'wp_action_args':
+					self::$wp_action_args = $param ?? [];
 					break;
 				default:
 					if ( isset( $this->$param_key ) ) {
@@ -213,6 +229,16 @@ abstract class AbstractTrigger implements SubscriberInterface {
 					}
 			}
 		}
+	}
+
+	public function validate_trigger( $valid, $trigger_id, $trigger_hook_args, $rule_post_id ) {
+		if ( $trigger_id !== $this->id || ! method_exists( $this, 'validate_trigger_options' ) ) {
+			return $valid;
+		}
+
+		$trigger_options = get_post_meta( $rule_post_id, 'rule_trigger_options', true );
+
+		return $this->validate_trigger_options( $trigger_hook_args, $trigger_options, $rule_post_id );
 	}
 
 }
