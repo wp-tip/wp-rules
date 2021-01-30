@@ -94,7 +94,7 @@ abstract class AbstractTrigger implements SubscriberInterface {
 			'rules_metabox_trigger_fields' => 'add_admin_options',
 			'rules_trigger_options_ajax'   => [ 'add_admin_options_ajax', 10, 2 ],
 			self::$wp_action               => [ 'trigger_fired', self::$wp_action_priority, count( self::$wp_action_args ) ],
-			'rules_trigger_validated'      => [ 'validate_trigger', 10, 4 ]
+			'rules_trigger_validated'      => [ 'validate_trigger', 10, 4 ],
 		];
 	}
 
@@ -231,7 +231,17 @@ abstract class AbstractTrigger implements SubscriberInterface {
 		}
 	}
 
-	public function validate_trigger( $valid, $trigger_id, $trigger_hook_args, $rule_post_id ) {
+	/**
+	 * Callback for rules_trigger_validated filter to validate current trigger.
+	 *
+	 * @param bool   $valid Current value for filter.
+	 * @param string $trigger_id Current trigger Identifier.
+	 * @param array  $trigger_hook_args Trigger hook passed arguments.
+	 * @param int    $rule_post_id Current rule post ID.
+	 *
+	 * @return bool
+	 */
+	public function validate_trigger( bool $valid, string $trigger_id, array $trigger_hook_args, int $rule_post_id ) {
 		if ( $trigger_id !== $this->id || ! method_exists( $this, 'validate_trigger_options' ) ) {
 			return $valid;
 		}
@@ -240,7 +250,7 @@ abstract class AbstractTrigger implements SubscriberInterface {
 
 		$validated = $this->validate_trigger_options( $trigger_hook_args, $trigger_options, $rule_post_id );
 
-		return apply_filters( 'validate_trigger_options', $validated, $trigger_id, $trigger_hook_args, $rule_post_id );
+		return (bool) apply_filters( 'rules_validate_trigger_options', $validated, $trigger_id, $trigger_hook_args, $rule_post_id );
 	}
 
 }

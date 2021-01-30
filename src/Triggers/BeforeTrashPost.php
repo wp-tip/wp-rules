@@ -17,12 +17,12 @@ class BeforeTrashPost extends AbstractTrigger {
 	 */
 	protected function init() {
 		return [
-			'id'                    => 'wp_trash_post',
-			'wp_action'             => 'wp_trash_post',
-			'name'                  => __( 'Before Trash Post', 'rules' ),
-			'wp_action_priority'    => 10,
-			'wp_action_args' => [
-				'post_id'
+			'id'                 => 'wp_trash_post',
+			'wp_action'          => 'wp_trash_post',
+			'name'               => __( 'Before Trash Post', 'rules' ),
+			'wp_action_priority' => 10,
+			'wp_action_args'     => [
+				'post_id',
 			],
 		];
 	}
@@ -39,7 +39,7 @@ class BeforeTrashPost extends AbstractTrigger {
 				'name'    => 'post_type',
 				'label'   => __( 'Post Types', 'rules' ),
 				'type'    => 'select',
-				'options' => $post_types
+				'options' => $post_types,
 			],
 		];
 	}
@@ -50,13 +50,13 @@ class BeforeTrashPost extends AbstractTrigger {
 	 * @return array
 	 */
 	private function get_post_types_list() {
-		$post_types_array = get_post_types([ 'show_ui' => true ], 'objects');
-		$post_types_list = [
-			0 => __('All post types', 'rules')
+		$post_types_array = get_post_types( [ 'show_ui' => true ], 'objects' );
+		$post_types_list  = [
+			0 => __( 'All post types', 'rules' ),
 		];
 
-		foreach ($post_types_array as $post_type) {
-			$post_types_list[$post_type->name] = $post_type->labels->singular_name;
+		foreach ( $post_types_array as $post_type ) {
+			$post_types_list[ $post_type->name ] = $post_type->labels->singular_name;
 		}
 
 		return $post_types_list;
@@ -67,20 +67,12 @@ class BeforeTrashPost extends AbstractTrigger {
 	 *
 	 * @param array $trigger_hook_args Array of Trigger hook arguments ( Associative ).
 	 * @param array $trigger_options Array if Trigger saved options for each rule.
-	 * @param int $rule_post_id Current rule post ID.
+	 * @param int   $rule_post_id Current rule post ID.
 	 *
 	 * @return bool
 	 */
 	public function validate_trigger_options( $trigger_hook_args, $trigger_options, $rule_post_id ) {
-		if (
-			$trigger_options['post_type']
-			&&
-			$trigger_options['post_type'] !== get_post_type( $trigger_hook_args['post_id'] )
-		) {
-			return false;
-		}
-
-		return true;
+		return empty( $trigger_options['post_type'] ) || get_post_type( $trigger_hook_args['post_id'] ) === $trigger_options['post_type'];
 	}
 
 }

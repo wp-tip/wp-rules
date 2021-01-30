@@ -17,14 +17,14 @@ class SavePost extends AbstractTrigger {
 	 */
 	protected function init() {
 		return [
-			'id'                    => 'wp_insert_post',
-			'wp_action'             => 'wp_insert_post',
-			'name'                  => __( 'Save Post', 'rules' ),
-			'wp_action_priority'    => 10,
-			'wp_action_args' => [
+			'id'                 => 'wp_insert_post',
+			'wp_action'          => 'wp_insert_post',
+			'name'               => __( 'Save Post', 'rules' ),
+			'wp_action_priority' => 10,
+			'wp_action_args'     => [
 				'post_id',
 				'post',
-				'update'
+				'update',
 			],
 		];
 	}
@@ -43,14 +43,14 @@ class SavePost extends AbstractTrigger {
 				'type'    => 'select',
 				'options' => [
 					0 => __( 'New Post', 'rules' ),
-					1 => __( 'Edit Post', 'rules' )
-				]
+					1 => __( 'Edit Post', 'rules' ),
+				],
 			],
 			[
 				'name'    => 'post_type',
 				'label'   => __( 'Post Types', 'rules' ),
 				'type'    => 'select',
-				'options' => $post_types
+				'options' => $post_types,
 			],
 		];
 	}
@@ -61,13 +61,13 @@ class SavePost extends AbstractTrigger {
 	 * @return array
 	 */
 	private function get_post_types_list() {
-		$post_types_array = get_post_types([ 'show_ui' => true ], 'objects');
-		$post_types_list = [
-			0 => __('All post types', 'rules')
+		$post_types_array = get_post_types( [ 'show_ui' => true ], 'objects' );
+		$post_types_list  = [
+			0 => __( 'All post types', 'rules' ),
 		];
 
-		foreach ($post_types_array as $post_type) {
-			$post_types_list[$post_type->name] = $post_type->labels->singular_name;
+		foreach ( $post_types_array as $post_type ) {
+			$post_types_list[ $post_type->name ] = $post_type->labels->singular_name;
 		}
 
 		return $post_types_list;
@@ -78,7 +78,7 @@ class SavePost extends AbstractTrigger {
 	 *
 	 * @param array $trigger_hook_args Array of Trigger hook arguments ( Associative ).
 	 * @param array $trigger_options Array if Trigger saved options for each rule.
-	 * @param int $rule_post_id Current rule post ID.
+	 * @param int   $rule_post_id Current rule post ID.
 	 *
 	 * @return bool
 	 */
@@ -87,15 +87,7 @@ class SavePost extends AbstractTrigger {
 			return false;
 		}
 
-		if (
-			$trigger_options['post_type']
-			&&
-			$trigger_options['post_type'] !== get_post_type( $trigger_hook_args['post'] )
-		) {
-			return false;
-		}
-
-		return true;
+		return empty( $trigger_options['post_type'] ) || get_post_type( $trigger_hook_args['post'] ) === $trigger_options['post_type'];
 	}
 
 }
