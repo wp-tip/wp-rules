@@ -238,7 +238,9 @@ abstract class AbstractTrigger implements SubscriberInterface {
 
 		$trigger_options = get_post_meta( $rule_post_id, 'rule_trigger_options', true );
 
-		return $this->validate_trigger_options( $trigger_hook_args, $trigger_options, $rule_post_id );
+		$validated = $this->validate_trigger_options( $trigger_hook_args, $trigger_options, $rule_post_id );
+
+		return apply_filters( 'validate_trigger_options', $validated, $trigger_id, $trigger_hook_args, $rule_post_id );
 	}
 
 }
