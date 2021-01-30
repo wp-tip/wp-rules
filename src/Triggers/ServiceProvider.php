@@ -21,6 +21,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'trigger_admin_init',
 		'trigger_init',
 		'trigger_save_post',
+		'trigger_before_delete_post',
 	];
 
 	/**
@@ -32,5 +33,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'trigger_admin_init', '\WP_Rules\Triggers\AdminInit' );
 		$container->share( 'trigger_init', '\WP_Rules\Triggers\Init' );
 		$container->share( 'trigger_save_post', '\WP_Rules\Triggers\SavePost' );
+		$container->share( 'trigger_before_delete_post', '\WP_Rules\Triggers\BeforeDeletePost' );
 	}
 }
