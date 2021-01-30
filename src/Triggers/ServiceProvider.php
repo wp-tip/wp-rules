@@ -23,6 +23,8 @@ class ServiceProvider extends AbstractServiceProvider {
 		'trigger_save_post',
 		'trigger_before_delete_post',
 		'trigger_after_delete_post',
+		'trigger_before_trash_post',
+		'trigger_after_trash_post',
 	];
 
 	/**
@@ -36,5 +38,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'trigger_save_post', '\WP_Rules\Triggers\SavePost' );
 		$container->share( 'trigger_before_delete_post', '\WP_Rules\Triggers\BeforeDeletePost' );
 		$container->share( 'trigger_after_delete_post', '\WP_Rules\Triggers\AfterDeletePost' );
+		$container->share( 'trigger_before_trash_post', '\WP_Rules\Triggers\BeforeTrashPost' );
+		$container->share( 'trigger_after_trash_post', '\WP_Rules\Triggers\AfterTrashPost' );
 	}
 }
