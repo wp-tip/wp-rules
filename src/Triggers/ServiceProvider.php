@@ -25,6 +25,10 @@ class ServiceProvider extends AbstractServiceProvider {
 		'trigger_after_delete_post',
 		'trigger_before_trash_post',
 		'trigger_after_trash_post',
+		'trigger_before_untrash_post',
+		'trigger_after_untrash_post',
+		'trigger_stick_post',
+		'trigger_unstick_post',
 	];
 
 	/**
@@ -40,5 +44,9 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'trigger_after_delete_post', '\WP_Rules\Triggers\AfterDeletePost' );
 		$container->share( 'trigger_before_trash_post', '\WP_Rules\Triggers\BeforeTrashPost' );
 		$container->share( 'trigger_after_trash_post', '\WP_Rules\Triggers\AfterTrashPost' );
+		$container->share( 'trigger_before_untrash_post', '\WP_Rules\Triggers\BeforeUnTrashPost' );
+		$container->share( 'trigger_after_untrash_post', '\WP_Rules\Triggers\AfterUnTrashPost' );
+		$container->share( 'trigger_stick_post', '\WP_Rules\Triggers\StickPost' );
+		$container->share( 'trigger_unstick_post', '\WP_Rules\Triggers\UnStickPost' );
 	}
 }
