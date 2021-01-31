@@ -33,6 +33,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'trigger_after_untrash_post_comments',
 		'trigger_stick_post',
 		'trigger_unstick_post',
+		'trigger_post_status_changed',
 	];
 
 	/**
@@ -56,5 +57,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'trigger_after_untrash_post_comments', '\WP_Rules\Triggers\AfterUnTrashPostComments' );
 		$container->share( 'trigger_stick_post', '\WP_Rules\Triggers\StickPost' );
 		$container->share( 'trigger_unstick_post', '\WP_Rules\Triggers\UnStickPost' );
+		$container->share( 'trigger_post_status_changed', '\WP_Rules\Triggers\PostStatusChanged' );
 	}
 }
