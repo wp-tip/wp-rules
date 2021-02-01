@@ -29,7 +29,7 @@ class Rule {
 			}
 		}
 
-		if ( ! apply_filters( 'rules_conditions_validated', $conditions_validated, $trigger_hook_args ) ) {
+		if ( ! apply_filters( 'rules_conditions_validated', $conditions_validated, $rule_post_id, $trigger_hook_args ) ) {
 			return;
 		}
 

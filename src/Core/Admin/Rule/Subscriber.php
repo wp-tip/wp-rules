@@ -37,8 +37,9 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public static function get_subscribed_events(): array {
 		return [
-			'init'           => 'create_rules_post_type',
-			'add_meta_boxes' => 'create_metaboxes',
+			'init'                  => 'create_rules_post_type',
+			'add_meta_boxes'        => 'create_metaboxes',
+			'admin_enqueue_scripts' => 'enqueue_style',
 		];
 	}
 
@@ -54,5 +55,18 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public function create_metaboxes() {
 		$this->meta_box->create();
+	}
+
+	/**
+	 * Enqueue main CSS file into create new rule and edit rule only.
+	 *
+	 * @param string $hook Represents current page.
+	 */
+	public function enqueue_style( $hook ) {
+		if ( ! in_array( $hook, [ 'post-new.php', 'post.php' ], true ) ) {
+			return;
+		}
+
+		wp_enqueue_style( 'rules_admin_styles', rules_get_constant( 'WP_RULES_URL' ) . 'assets/css/wp-rules.css', false, '1.0.0' );
 	}
 }
