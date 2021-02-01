@@ -4,11 +4,11 @@ namespace WP_Rules\Triggers;
 use WP_Rules\Core\Admin\Trigger\AbstractTrigger;
 
 /**
- * Class AdminInit
+ * Class AfterUpdateAttachment
  *
  * @package WP_Rules\Triggers
  */
-class AdminInit extends AbstractTrigger {
+class AfterUpdateAttachment extends AbstractTrigger {
 
 	/**
 	 * Initialize trigger details like id, name, wp_action.
@@ -17,11 +17,15 @@ class AdminInit extends AbstractTrigger {
 	 */
 	protected function init() {
 		return [
-			'id'                 => 'admin_init',
-			'wp_action'          => 'admin_init',
-			'name'               => __( 'Admin initialize', 'rules' ),
+			'id'                 => 'attachment_updated',
+			'wp_action'          => 'attachment_updated',
+			'name'               => __( 'After Update Attachment', 'rules' ),
 			'wp_action_priority' => 10,
-			'wp_action_args'     => [],
+			'wp_action_args'     => [
+				'post_id',
+				'post_after',
+				'post_before',
+			],
 		];
 	}
 

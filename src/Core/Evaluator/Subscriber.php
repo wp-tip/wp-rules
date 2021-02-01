@@ -42,11 +42,11 @@ class Subscriber implements SubscriberInterface {
 	 * Evaluate trigger code.
 	 *
 	 * @param string $trigger_id Trigger ID to be evaluated.
-	 * @param array  $args Trigger hook arguments.
+	 * @param array  $trigger_options Trigger hook arguments.
 	 */
-	public function evaluate_trigger( $trigger_id, $args ) {
+	public function evaluate_trigger( $trigger_id, $trigger_options ) {
 		// Get this trigger rules.
-		$rules_results = wp_cache_get( 'cached_trigger_rules', 'rules' );
+		$rules_results = wp_cache_get( 'cached_trigger_rules_' . $trigger_id, 'rules' );
 		if ( false === $rules_results ) {
 			global $wpdb;
 
@@ -54,7 +54,7 @@ class Subscriber implements SubscriberInterface {
 				$wpdb->prepare( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = %s AND meta_value = %s", 'rule_trigger', $trigger_id )
 			);
 
-			wp_cache_set( 'cached_trigger_rules', $rules_results, 'rules' );
+			wp_cache_set( 'cached_trigger_rules_' . $trigger_id, $rules_results, 'rules' );
 		}
 
 		if ( empty( $rules_results ) ) {
@@ -62,7 +62,9 @@ class Subscriber implements SubscriberInterface {
 		}
 
 		foreach ( $rules_results as $rule ) {
-			$this->rule->evaluate( $rule->post_id, $args );
+			if ( apply_filters( 'rules_trigger_validated', true, $trigger_id, $trigger_options, $rule->post_id ) ) {
+				$this->rule->evaluate( $rule->post_id, $trigger_options );
+			}
 		}
 	}
 
