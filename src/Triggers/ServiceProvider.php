@@ -34,6 +34,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'trigger_stick_post',
 		'trigger_unstick_post',
 		'trigger_post_status_changed',
+		'trigger_before_delete_attachment',
 	];
 
 	/**
@@ -58,5 +59,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'trigger_stick_post', '\WP_Rules\Triggers\StickPost' );
 		$container->share( 'trigger_unstick_post', '\WP_Rules\Triggers\UnStickPost' );
 		$container->share( 'trigger_post_status_changed', '\WP_Rules\Triggers\PostStatusChanged' );
+		$container->share( 'trigger_before_delete_attachment', '\WP_Rules\Triggers\BeforeDeleteAttachment' );
 	}
 }
