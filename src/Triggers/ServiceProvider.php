@@ -37,6 +37,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'trigger_before_delete_attachment',
 		'trigger_after_delete_attachment',
 		'trigger_after_update_attachment',
+		'trigger_after_create_attachment',
 	];
 
 	/**
@@ -64,5 +65,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'trigger_before_delete_attachment', '\WP_Rules\Triggers\BeforeDeleteAttachment' );
 		$container->share( 'trigger_after_delete_attachment', '\WP_Rules\Triggers\AfterDeleteAttachment' );
 		$container->share( 'trigger_after_update_attachment', '\WP_Rules\Triggers\AfterUpdateAttachment' );
+		$container->share( 'trigger_after_create_attachment', '\WP_Rules\Triggers\AfterCreateAttachment' );
 	}
 }
