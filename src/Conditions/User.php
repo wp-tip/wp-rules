@@ -38,6 +38,11 @@ class User extends AbstractCondition {
 		];
 	}
 
+	/**
+	 * Get list of all system users.
+	 *
+	 * @return array user ID => Display name - email
+	 */
 	private function get_users_list() {
 		$users = get_users();
 
@@ -47,7 +52,7 @@ class User extends AbstractCondition {
 
 		$output = [];
 		foreach ( $users as $user ) {
-			$output[ $user->ID ] = $user->display_name . " - " . $user->email;
+			$output[ $user->ID ] = $user->display_name . ' - ' . $user->email;
 		}
 		return $output;
 	}
