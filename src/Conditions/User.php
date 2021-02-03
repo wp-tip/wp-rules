@@ -4,11 +4,11 @@ namespace WP_Rules\Conditions;
 use WP_Rules\Core\Admin\Condition\AbstractCondition;
 
 /**
- * Class Role
+ * Class User
  *
  * @package WP_Rules\Conditions
  */
-class Role extends AbstractCondition {
+class User extends AbstractCondition {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,8 +17,8 @@ class Role extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'role',
-			'name' => __( 'Current logged-in user role', 'rules' ),
+			'id'   => 'loggedin-user',
+			'name' => __( 'Current logged-in user', 'rules' ),
 		];
 	}
 
@@ -28,16 +28,28 @@ class Role extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		global $wp_roles;
-
 		return [
 			[
 				'type'    => 'select',
-				'label'   => __( 'Current logged-in user role', 'rules' ),
-				'name'    => 'loggedin_role',
-				'options' => $wp_roles->get_names(),
+				'label'   => __( 'Current logged-in user', 'rules' ),
+				'name'    => 'loggedin_user',
+				'options' => $this->get_users_list(),
 			],
 		];
+	}
+
+	private function get_users_list() {
+		$users = get_users();
+
+		if ( empty( $users ) ) {
+			return [];
+		}
+
+		$output = [];
+		foreach ( $users as $user ) {
+			$output[ $user->ID ] = $user->display_name . " - " . $user->email;
+		}
+		return $output;
 	}
 
 	/**
@@ -49,7 +61,7 @@ class Role extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		$user = wp_get_current_user();
-		return in_array( $condition_options['loggedin_role'], (array) $user->roles, true );
+		$current_user_id = get_current_user_id();
+		return $current_user_id === (int) $condition_options['loggedin_user'];
 	}
 }

@@ -16,6 +16,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	 * @var string[]
 	 */
 	public $provides = [
+		'condition_user',
 		'condition_role',
 	];
 
@@ -25,6 +26,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	public function register() {
 		$container = $this->getContainer();
 
+		$container->share( 'condition_user', '\WP_Rules\Conditions\User' );
 		$container->share( 'condition_role', '\WP_Rules\Conditions\Role' );
 	}
 }
