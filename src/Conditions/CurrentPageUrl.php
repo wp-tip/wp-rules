@@ -8,7 +8,7 @@ use WP_Rules\Core\Admin\Condition\AbstractCondition;
  *
  * @package WP_Rules\Conditions
  */
-class CurrentPage extends AbstractCondition {
+class CurrentPageUrl extends AbstractCondition {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,7 +17,7 @@ class CurrentPage extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'current-page',
+			'id'   => 'current-page-url',
 			'name' => __( 'Current Page', 'rules' ),
 		];
 	}

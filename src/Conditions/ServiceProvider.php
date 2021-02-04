@@ -29,6 +29,6 @@ class ServiceProvider extends AbstractServiceProvider {
 
 		$container->share( 'condition_user', '\WP_Rules\Conditions\User' );
 		$container->share( 'condition_role', '\WP_Rules\Conditions\Role' );
-		$container->share( 'condition_current_page', '\WP_Rules\Conditions\CurrentPage' );
+		$container->share( 'condition_current_page', '\WP_Rules\Conditions\CurrentPageUrl' );
 	}
 }
