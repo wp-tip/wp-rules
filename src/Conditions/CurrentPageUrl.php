@@ -4,7 +4,7 @@ namespace WP_Rules\Conditions;
 use WP_Rules\Core\Admin\Condition\AbstractCondition;
 
 /**
- * Class CurrentPage
+ * Class CurrentPageUrl
  *
  * @package WP_Rules\Conditions
  */
