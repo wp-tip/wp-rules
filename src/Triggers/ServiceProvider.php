@@ -2,8 +2,6 @@
 namespace WP_Rules\Triggers;
 
 use WP_Rules\Dependencies\League\Container\ServiceProvider\AbstractServiceProvider;
-use \WP_Filesystem_Direct;
-use \StdClass;
 
 /**
  * Class ServiceProvider
@@ -38,6 +36,8 @@ class ServiceProvider extends AbstractServiceProvider {
 		'trigger_after_delete_attachment',
 		'trigger_after_update_attachment',
 		'trigger_after_create_attachment',
+		'trigger_admin_header',
+		'trigger_admin_footer',
 	];
 
 	/**
@@ -66,5 +66,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'trigger_after_delete_attachment', '\WP_Rules\Triggers\AfterDeleteAttachment' );
 		$container->share( 'trigger_after_update_attachment', '\WP_Rules\Triggers\AfterUpdateAttachment' );
 		$container->share( 'trigger_after_create_attachment', '\WP_Rules\Triggers\AfterCreateAttachment' );
+		$container->share( 'trigger_admin_header', '\WP_Rules\Triggers\AdminHeader' );
+		$container->share( 'trigger_admin_footer', '\WP_Rules\Triggers\AdminFooter' );
 	}
 }
