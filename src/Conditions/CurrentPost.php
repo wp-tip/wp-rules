@@ -68,7 +68,7 @@ class CurrentPost extends AbstractCondition {
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
 		global $post;
-		return ! empty( $post ) && ! empty( $condition_options['post_id'] ) && $post->ID === (int) $condition_options['post_id'];
+		return ! empty( $post ) && ! empty( $condition_options['post_id'] ) && (int) $post->ID === (int) $condition_options['post_id'];
 	}
 
 }
