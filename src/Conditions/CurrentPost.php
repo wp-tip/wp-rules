@@ -28,27 +28,33 @@ class CurrentPost extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		$posts = $this->get_posts();
 		return [
 			[
 				'type'    => 'select',
 				'label'   => __( 'Choose Post', 'rules' ),
 				'name'    => 'post_id',
-				'options' => $posts
+				'options' => $this->get_posts_list(),
 			],
 		];
 	}
 
-	private function get_posts() {
-		$post_list = get_posts( array(
-			'orderby'     => 'title',
-			'sort_order'  => 'asc',
-			'numberposts' => -1,
-			'post_type' => get_post_types( [ 'show_ui' => true ] )
-		) );
+	/**
+	 * Get list of posts.
+	 *
+	 * @return array
+	 */
+	private function get_posts_list() {
+		$post_list = get_posts(
+			[
+				'orderby'     => 'title',
+				'sort_order'  => 'asc',
+				'numberposts' => -1,
+				'post_type'   => get_post_types( [ 'show_ui' => true ] ),
+			]
+			);
 
 		$posts = [
-			0 => __( 'Choose Post', 'rules' )
+			0 => __( 'Choose Post', 'rules' ),
 		];
 
 		foreach ( $post_list as $post ) {
@@ -68,7 +74,7 @@ class CurrentPost extends AbstractCondition {
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
 		global $post;
-		return ! empty( $post ) && ! empty( $condition_options['post_id'] ) && (int) $post->ID === (int) $condition_options['post_id'];
+		return ! empty( $post ) && ! empty( $condition_options['post_id'] ) && (int) $condition_options['post_id'] === (int) $post->ID;
 	}
 
 }

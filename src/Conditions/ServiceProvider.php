@@ -20,6 +20,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_role',
 		'condition_current_page_url',
 		'condition_current_post',
+		'condition_current_admin_screen',
 	];
 
 	/**
@@ -32,5 +33,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_role', '\WP_Rules\Conditions\Role' );
 		$container->share( 'condition_current_page_url', '\WP_Rules\Conditions\CurrentPageUrl' );
 		$container->share( 'condition_current_post', '\WP_Rules\Conditions\CurrentPost' );
+		$container->share( 'condition_current_admin_screen', '\WP_Rules\Conditions\CurrentAdminScreen' );
 	}
 }

@@ -30,9 +30,9 @@ class CurrentPageUrl extends AbstractCondition {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'Page Url', 'rules' ),
-				'name'    => 'page_url',
+				'type'  => 'text',
+				'label' => __( 'Page Url', 'rules' ),
+				'name'  => 'page_url',
 			],
 		];
 	}
@@ -46,6 +46,6 @@ class CurrentPageUrl extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return $condition_options['page_url'] === site_url( $_SERVER['REQUEST_URI'] );
+		return ! empty( $_SERVER['REQUEST_URI'] ) && site_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) === $condition_options['page_url'];
 	}
 }
