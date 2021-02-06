@@ -22,6 +22,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_current_post',
 		'condition_current_admin_screen',
 		'condition_current_user_capability',
+		'condition_current_user_meta',
 	];
 
 	/**
@@ -36,5 +37,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_current_post', '\WP_Rules\Conditions\CurrentPost' );
 		$container->share( 'condition_current_admin_screen', '\WP_Rules\Conditions\CurrentAdminScreen' );
 		$container->share( 'condition_current_user_capability', '\WP_Rules\Conditions\CurrentUserCapability' );
+		$container->share( 'condition_current_user_meta', '\WP_Rules\Conditions\CurrentUserMeta' );
 	}
 }
