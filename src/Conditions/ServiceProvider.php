@@ -27,6 +27,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_is_admin_interface',
 		'condition_is_multisite',
 		'condition_is_ssl',
+		'condition_available_upload_space',
 	];
 
 	/**
@@ -46,5 +47,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_is_admin_interface', '\WP_Rules\Conditions\IsAdminInterface' );
 		$container->share( 'condition_is_multisite', '\WP_Rules\Conditions\IsMultisite' );
 		$container->share( 'condition_is_ssl', '\WP_Rules\Conditions\IsSsl' );
+		$container->share( 'condition_available_upload_space', '\WP_Rules\Conditions\AvailableUploadSpace' );
 	}
 }
