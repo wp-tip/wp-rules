@@ -24,6 +24,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_current_user_capability',
 		'condition_current_user_meta',
 		'condition_current_locale_isrtl',
+		'condition_is_admin_interface',
 	];
 
 	/**
@@ -40,5 +41,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_current_user_capability', '\WP_Rules\Conditions\CurrentUserCapability' );
 		$container->share( 'condition_current_user_meta', '\WP_Rules\Conditions\CurrentUserMeta' );
 		$container->share( 'condition_current_locale_isrtl', '\WP_Rules\Conditions\LocaleIsRtl' );
+		$container->share( 'condition_is_admin_interface', '\WP_Rules\Conditions\IsAdminInterface' );
 	}
 }

@@ -4,11 +4,11 @@ namespace WP_Rules\Conditions;
 use WP_Rules\Core\Admin\Condition\AbstractCondition;
 
 /**
- * Class LocaleIsRtl
+ * Class IsAdminInterface
  *
  * @package WP_Rules\Conditions
  */
-class LocaleIsRtl extends AbstractCondition {
+class IsAdminInterface extends AbstractCondition {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,8 +17,8 @@ class LocaleIsRtl extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'locale-is-rtl',
-			'name' => __( 'Current Locale is RTL', 'rules' ),
+			'id'   => 'is-admin-interface',
+			'name' => __( 'Is On admin Interface', 'rules' ),
 		];
 	}
 
@@ -31,11 +31,11 @@ class LocaleIsRtl extends AbstractCondition {
 		return [
 			[
 				'type'    => 'select',
-				'label'   => __( 'Text Direction', 'rules' ),
-				'name'    => 'is_rtl',
+				'label'   => __( 'Current Page Is On Admin Interface', 'rules' ),
+				'name'    => 'is_admin',
 				'options' => [
-					'no'  => __( 'LTR', 'rules' ),
-					'yes' => __( 'RTL', 'rules' ),
+					'no'  => __( 'No', 'rules' ),
+					'yes' => __( 'Yes', 'rules' ),
 				],
 			],
 		];
@@ -50,6 +50,6 @@ class LocaleIsRtl extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_rtl() && 'yes' === $condition_options['is_rtl'] ) || ( ! is_rtl() && 'yes' !== $condition_options['is_rtl'] );
+		return ( is_admin() && 'yes' === $condition_options['is_admin'] ) || ( ! is_admin() && 'yes' !== $condition_options['is_admin'] );
 	}
 }
