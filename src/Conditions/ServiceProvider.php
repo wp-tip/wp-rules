@@ -31,6 +31,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_is_archive',
 		'condition_is_post_type_archive',
 		'condition_is_attachment',
+		'condition_is_author',
 	];
 
 	/**
@@ -54,5 +55,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_is_archive', '\WP_Rules\Conditions\IsArchive' );
 		$container->share( 'condition_is_post_type_archive', '\WP_Rules\Conditions\IsPostTypeArchive' );
 		$container->share( 'condition_is_attachment', '\WP_Rules\Conditions\IsAttachment' );
+		$container->share( 'condition_is_author', '\WP_Rules\Conditions\IsAuthor' );
 	}
 }
