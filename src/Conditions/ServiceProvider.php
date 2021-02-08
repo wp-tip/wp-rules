@@ -33,6 +33,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_is_attachment',
 		'condition_is_author',
 		'condition_is_category',
+		'condition_is_tag',
 	];
 
 	/**
@@ -58,5 +59,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_is_attachment', '\WP_Rules\Conditions\IsAttachment' );
 		$container->share( 'condition_is_author', '\WP_Rules\Conditions\IsAuthor' );
 		$container->share( 'condition_is_category', '\WP_Rules\Conditions\IsCategory' );
+		$container->share( 'condition_is_tag', '\WP_Rules\Conditions\IsTag' );
 	}
 }
