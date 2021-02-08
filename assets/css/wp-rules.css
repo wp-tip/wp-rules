@@ -1,7 +1,7 @@
 .rules-field label {
 	display: block;
 }
-.rules-field input,
+.rules-field input[type=text],
 .rules-field select,
 .rules-field textarea {
 	display: block;

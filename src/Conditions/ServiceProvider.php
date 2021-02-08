@@ -29,6 +29,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_is_ssl',
 		'condition_available_upload_space',
 		'condition_is_archive',
+		'condition_is_post_type_archive',
 	];
 
 	/**
@@ -50,5 +51,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_is_ssl', '\WP_Rules\Conditions\IsSsl' );
 		$container->share( 'condition_available_upload_space', '\WP_Rules\Conditions\AvailableUploadSpace' );
 		$container->share( 'condition_is_archive', '\WP_Rules\Conditions\IsArchive' );
+		$container->share( 'condition_is_post_type_archive', '\WP_Rules\Conditions\IsPostTypeArchive' );
 	}
 }
