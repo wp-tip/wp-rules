@@ -38,6 +38,8 @@ class ServiceProvider extends AbstractServiceProvider {
 		'trigger_after_create_attachment',
 		'trigger_admin_header',
 		'trigger_admin_footer',
+		'trigger_wp_loaded',
+		'trigger_template_redirect',
 	];
 
 	/**
@@ -68,5 +70,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'trigger_after_create_attachment', '\WP_Rules\Triggers\AfterCreateAttachment' );
 		$container->share( 'trigger_admin_header', '\WP_Rules\Triggers\AdminHeader' );
 		$container->share( 'trigger_admin_footer', '\WP_Rules\Triggers\AdminFooter' );
+		$container->share( 'trigger_wp_loaded', '\WP_Rules\Triggers\WPLoaded' );
+		$container->share( 'trigger_template_redirect', '\WP_Rules\Triggers\TemplateRedirect' );
 	}
 }

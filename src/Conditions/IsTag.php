@@ -70,6 +70,6 @@ class IsTag extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return is_tag( $condition_options['tag_ids'] );
+		return is_tag( ! empty( $condition_options['tag_ids'] ) ? $condition_options['tag_ids'] : '' );
 	}
 }
