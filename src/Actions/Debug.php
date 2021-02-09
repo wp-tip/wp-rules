@@ -40,7 +40,7 @@ class Debug extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_die("This is a test message to make sure that rule evaluation works properly!");
+		wp_die( 'This is a test message to make sure that rule evaluation works properly!' );
 	}
 
 }

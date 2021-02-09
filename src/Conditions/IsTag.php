@@ -30,13 +30,13 @@ class IsTag extends AbstractCondition {
 	protected function admin_fields() {
 		return [
 			[
-				'name'    => 'tag_ids',
-				'label'   => __( 'Choose Tag(s)', 'rules' ),
-				'type'    => 'select',
-				'options' => $this->get_tags_list(),
+				'name'       => 'tag_ids',
+				'label'      => __( 'Choose Tag(s)', 'rules' ),
+				'type'       => 'select',
+				'options'    => $this->get_tags_list(),
 				'attributes' => [
-					'multiple' => 'multiple'
-				]
+					'multiple' => 'multiple',
+				],
 			],
 		];
 	}
@@ -52,7 +52,7 @@ class IsTag extends AbstractCondition {
 			return [];
 		}
 
-		$tags_list  = [];
+		$tags_list = [];
 
 		foreach ( $tags_array as $tag ) {
 			$tags_list[ $tag->term_id ] = $tag->name;

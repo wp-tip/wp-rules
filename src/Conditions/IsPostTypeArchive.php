@@ -30,13 +30,13 @@ class IsPostTypeArchive extends AbstractCondition {
 	protected function admin_fields() {
 		return [
 			[
-				'name'    => 'post_types',
-				'label'   => __( 'Post Types', 'rules' ),
-				'type'    => 'select',
-				'options' => $this->get_post_types_list(),
+				'name'       => 'post_types',
+				'label'      => __( 'Post Types', 'rules' ),
+				'type'       => 'select',
+				'options'    => $this->get_post_types_list(),
 				'attributes' => [
-					'multiple' => 'multiple'
-				]
+					'multiple' => 'multiple',
+				],
 			],
 		];
 	}

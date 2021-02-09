@@ -34,6 +34,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_is_author',
 		'condition_is_category',
 		'condition_is_tag',
+		'condition_is_date',
 	];
 
 	/**
@@ -60,5 +61,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_is_author', '\WP_Rules\Conditions\IsAuthor' );
 		$container->share( 'condition_is_category', '\WP_Rules\Conditions\IsCategory' );
 		$container->share( 'condition_is_tag', '\WP_Rules\Conditions\IsTag' );
+		$container->share( 'condition_is_date', '\WP_Rules\Conditions\IsDate' );
 	}
 }

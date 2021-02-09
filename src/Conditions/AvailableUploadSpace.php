@@ -34,19 +34,19 @@ class AvailableUploadSpace extends AbstractCondition {
 				'label'   => __( 'Operator', 'rules' ),
 				'name'    => 'operator',
 				'options' => [
-					'='          => __( 'Equals', 'rules' ),
-					'!='         => __( 'Not Equals', 'rules' ),
-					'>'          => __( 'Greater Than', 'rules' ),
-					'>='         => __( 'Greater Than Or Equals', 'rules' ),
-					'<'          => __( 'Less Than', 'rules' ),
-					'<='         => __( 'Less Than Or Equals', 'rules' ),
+					'='  => __( 'Equals', 'rules' ),
+					'!=' => __( 'Not Equals', 'rules' ),
+					'>'  => __( 'Greater Than', 'rules' ),
+					'>=' => __( 'Greater Than Or Equals', 'rules' ),
+					'<'  => __( 'Less Than', 'rules' ),
+					'<=' => __( 'Less Than Or Equals', 'rules' ),
 				],
 			],
 
 			[
-				'type'    => 'text',
-				'label'   => __( 'Reference Value in Bytes', 'rules' ),
-				'name'    => 'ref_value',
+				'type'  => 'text',
+				'label' => __( 'Reference Value in Bytes', 'rules' ),
+				'name'  => 'ref_value',
 			],
 		];
 	}
