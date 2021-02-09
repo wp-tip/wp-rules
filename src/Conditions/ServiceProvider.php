@@ -38,6 +38,8 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_is_day',
 		'condition_is_feed',
 		'condition_is_comment_feed',
+		'condition_is_front_page',
+		'condition_is_home',
 	];
 
 	/**
@@ -68,5 +70,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_is_day', '\WP_Rules\Conditions\IsDay' );
 		$container->share( 'condition_is_feed', '\WP_Rules\Conditions\IsFeed' );
 		$container->share( 'condition_is_comment_feed', '\WP_Rules\Conditions\IsCommentFeed' );
+		$container->share( 'condition_is_front_page', '\WP_Rules\Conditions\IsFrontPage' );
+		$container->share( 'condition_is_home', '\WP_Rules\Conditions\IsHome' );
 	}
 }
