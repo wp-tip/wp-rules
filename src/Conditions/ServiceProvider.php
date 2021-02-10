@@ -41,6 +41,17 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_is_front_page',
 		'condition_is_home',
 		'condition_is_privacy_policy',
+		'condition_is_month',
+		'condition_is_page',
+		'condition_is_paged',
+		'condition_is_preview',
+		'condition_is_robots',
+		'condition_is_favicon',
+		'condition_is_search',
+		'condition_is_singular',
+		'condition_is_trackback',
+		'condition_is_year',
+		'condition_is_404',
 	];
 
 	/**
@@ -74,5 +85,16 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_is_front_page', '\WP_Rules\Conditions\IsFrontPage' );
 		$container->share( 'condition_is_home', '\WP_Rules\Conditions\IsHome' );
 		$container->share( 'condition_is_privacy_policy', '\WP_Rules\Conditions\IsPrivacyPolicy' );
+		$container->share( 'condition_is_month', '\WP_Rules\Conditions\IsMonth' );
+		$container->share( 'condition_is_page', '\WP_Rules\Conditions\IsPage' );
+		$container->share( 'condition_is_paged', '\WP_Rules\Conditions\IsPaged' );
+		$container->share( 'condition_is_preview', '\WP_Rules\Conditions\IsPreview' );
+		$container->share( 'condition_is_robots', '\WP_Rules\Conditions\IsRobots' );
+		$container->share( 'condition_is_favicon', '\WP_Rules\Conditions\IsFavicon' );
+		$container->share( 'condition_is_search', '\WP_Rules\Conditions\IsSearch' );
+		$container->share( 'condition_is_singular', '\WP_Rules\Conditions\IsSingular' );
+		$container->share( 'condition_is_trackback', '\WP_Rules\Conditions\IsTrackback' );
+		$container->share( 'condition_is_year', '\WP_Rules\Conditions\IsYear' );
+		$container->share( 'condition_is_404', '\WP_Rules\Conditions\Is404' );
 	}
 }
