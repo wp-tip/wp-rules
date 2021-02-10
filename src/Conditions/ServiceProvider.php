@@ -40,6 +40,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_is_comment_feed',
 		'condition_is_front_page',
 		'condition_is_home',
+		'condition_is_privacy_policy',
 	];
 
 	/**
@@ -72,5 +73,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_is_comment_feed', '\WP_Rules\Conditions\IsCommentFeed' );
 		$container->share( 'condition_is_front_page', '\WP_Rules\Conditions\IsFrontPage' );
 		$container->share( 'condition_is_home', '\WP_Rules\Conditions\IsHome' );
+		$container->share( 'condition_is_privacy_policy', '\WP_Rules\Conditions\IsPrivacyPolicy' );
 	}
 }
