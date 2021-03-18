@@ -6,7 +6,7 @@ use WP_Rules\Core\Admin\Action\AbstractAction;
 /**
  * Class Debug
  *
- * @package WP_Rules\Triggers
+ * @package WP_Rules\Actions
  */
 class Debug extends AbstractAction {
 

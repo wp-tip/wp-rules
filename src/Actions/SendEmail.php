@@ -4,11 +4,11 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class Redirect
+ * Class SendEmail
  *
  * @package WP_Rules\Actions
  */
-class Redirect extends AbstractAction {
+class SendEmail extends AbstractAction {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,8 +17,8 @@ class Redirect extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'redirect',
-			'name' => __( 'Redirect to.', 'rules' ),
+			'id'   => 'send_email',
+			'name' => __( 'Send Email', 'rules' ),
 		];
 	}
 
@@ -31,8 +31,18 @@ class Redirect extends AbstractAction {
 		return [
 			[
 				'type'    => 'text',
-				'label'   => __( 'Url', 'rules' ),
-				'name'    => 'url',
+				'label'   => __( 'To (one or comma separated emails)', 'rules' ),
+				'name'    => 'to',
+			],
+			[
+				'type'    => 'text',
+				'label'   => __( 'Email Subject', 'rules' ),
+				'name'    => 'subject',
+			],
+			[
+				'type'    => 'text',
+				'label'   => __( 'Email Message', 'rules' ),
+				'name'    => 'message',
 			],
 		];
 	}
@@ -46,8 +56,7 @@ class Redirect extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_redirect( $action_options['url'] );
-		die();
+		wp_mail( $action_options['to'], $action_options['subject'], $action_options['message'] );
 	}
 
 }

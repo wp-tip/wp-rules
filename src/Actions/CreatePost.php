@@ -6,7 +6,7 @@ use WP_Rules\Core\Admin\Action\AbstractAction;
 /**
  * Class CreatePost
  *
- * @package WP_Rules\Triggers
+ * @package WP_Rules\Actions
  */
 class CreatePost extends AbstractAction {
 
