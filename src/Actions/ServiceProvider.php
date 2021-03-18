@@ -18,6 +18,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	public $provides = [
 		'action_admin_notices',
 		'action_debug',
+		'action_redirect',
 	];
 
 	/**
@@ -28,5 +29,6 @@ class ServiceProvider extends AbstractServiceProvider {
 
 		$container->share( 'action_admin_notices', '\WP_Rules\Actions\AdminNotices' );
 		$container->share( 'action_debug', '\WP_Rules\Actions\Debug' );
+		$container->share( 'action_redirect', '\WP_Rules\Actions\Redirect' );
 	}
 }
