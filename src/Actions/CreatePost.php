@@ -71,6 +71,11 @@ class CreatePost extends AbstractAction {
 					1 => 'Yes'
 				]
 			],
+			[
+				'type'    => 'text',
+				'label'   => __( 'Meta values (meta_key1=meta_value1&meta_key2=meta_value2)', 'rules' ),
+				'name'    => 'metas',
+			],
 		];
 	}
 
@@ -101,7 +106,22 @@ class CreatePost extends AbstractAction {
 			}
 		}
 
-		wp_insert_post( $post_array );
+		$post_id = wp_insert_post( $post_array );
+
+		if ( empty( $post_id ) || empty( $action_options['metas'] ) ) {
+			return;
+		}
+
+		$metas = explode( '&', $action_options['metas'] );
+		foreach ( $metas as $meta ) {
+			$meta_array = explode( '=', $meta );
+
+			if ( empty( $meta_array[0] ) || empty( $meta_array[1] ) ) {
+				continue;
+			}
+
+			add_post_meta( $post_id, $meta_array[0], $meta_array[1] );
+		}
 	}
 
 	/**
