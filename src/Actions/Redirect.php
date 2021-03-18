@@ -4,7 +4,7 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class AdminInit
+ * Class Redirect
  *
  * @package WP_Rules\Triggers
  */
