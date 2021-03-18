@@ -101,9 +101,11 @@ class CreatePost extends AbstractAction {
 		];
 
 		foreach ( $fields as $field ) {
-			if ( ! empty( $action_options[ $field ] ) ){
-				$post_array[ $field ] = $action_options[ $field ];
+			if ( empty( $action_options[ $field ] ) ){
+				continue;
 			}
+
+			$post_array[ $field ] = $action_options[ $field ];
 		}
 
 		$post_id = wp_insert_post( $post_array );
@@ -112,7 +114,17 @@ class CreatePost extends AbstractAction {
 			return;
 		}
 
-		$metas = explode( '&', $action_options['metas'] );
+		$this->save_metas( $post_id, $action_options['metas'] );
+	}
+
+	/**
+	 * Save new post metas.
+	 *
+	 * @param int $post_id Post ID.
+	 * @param string $post_metas Post metas string.
+	 */
+	private function save_metas( $post_id, $post_metas ) {
+		$metas = explode( '&', $post_metas );
 		foreach ( $metas as $meta ) {
 			$meta_array = explode( '=', $meta );
 
