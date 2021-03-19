@@ -24,6 +24,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'action_trash_post',
 		'action_send_email',
 		'action_create_user',
+		'action_update_user',
 	];
 
 	/**
@@ -40,5 +41,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'action_trash_post', '\WP_Rules\Actions\TrashPost' );
 		$container->share( 'action_send_email', '\WP_Rules\Actions\SendEmail' );
 		$container->share( 'action_create_user', '\WP_Rules\Actions\CreateUser' );
+		$container->share( 'action_update_user', '\WP_Rules\Actions\UpdateUser' );
 	}
 }
