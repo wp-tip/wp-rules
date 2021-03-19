@@ -68,6 +68,11 @@ class UpdateUser extends AbstractAction {
 		];
 	}
 
+	/**
+	 * Get all roles list.
+	 *
+	 * @return array
+	 */
 	private function get_roles_list() {
 		global $wp_roles;
 
