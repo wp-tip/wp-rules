@@ -29,6 +29,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'action_delete_user',
 		'action_add_image_size',
 		'action_remove_image_size',
+		'action_auth_redirect',
 	];
 
 	/**
@@ -50,6 +51,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'action_delete_user', '\WP_Rules\Actions\DeleteUser' );
 		$container->share( 'action_add_image_size', '\WP_Rules\Actions\AddImageSize' );
 		$container->share( 'action_remove_image_size', '\WP_Rules\Actions\RemoveImageSize' );
+		$container->share( 'action_auth_redirect', '\WP_Rules\Actions\AuthRedirect' );
 
 	}
 }

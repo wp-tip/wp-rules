@@ -52,6 +52,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'condition_is_trackback',
 		'condition_is_year',
 		'condition_is_404',
+		'condition_is_loggedin',
 	];
 
 	/**
@@ -96,5 +97,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'condition_is_trackback', '\WP_Rules\Conditions\IsTrackback' );
 		$container->share( 'condition_is_year', '\WP_Rules\Conditions\IsYear' );
 		$container->share( 'condition_is_404', '\WP_Rules\Conditions\Is404' );
+		$container->share( 'condition_is_loggedin', '\WP_Rules\Conditions\IsLoggedin' );
 	}
 }
