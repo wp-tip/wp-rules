@@ -30,6 +30,8 @@ class ServiceProvider extends AbstractServiceProvider {
 		'action_add_image_size',
 		'action_remove_image_size',
 		'action_auth_redirect',
+		'action_add_update_option',
+		'action_delete_option',
 	];
 
 	/**
@@ -52,6 +54,8 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'action_add_image_size', '\WP_Rules\Actions\AddImageSize' );
 		$container->share( 'action_remove_image_size', '\WP_Rules\Actions\RemoveImageSize' );
 		$container->share( 'action_auth_redirect', '\WP_Rules\Actions\AuthRedirect' );
+		$container->share( 'action_add_update_option', '\WP_Rules\Actions\AddUpdateOption' );
+		$container->share( 'action_delete_option', '\WP_Rules\Actions\DeleteOption' );
 
 	}
 }

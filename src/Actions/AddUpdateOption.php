@@ -1,0 +1,67 @@
+<?php
+namespace WP_Rules\Actions;
+
+use WP_Rules\Core\Admin\Action\AbstractAction;
+
+/**
+ * Class AddUpdateOption
+ *
+ * @package WP_Rules\Actions
+ */
+class AddUpdateOption extends AbstractAction {
+
+	/**
+	 * Initialize condition details like id, name.
+	 *
+	 * @return array
+	 */
+	protected function init() {
+		return [
+			'id'   => 'add_update_option',
+			'name' => __( 'Add/Update Option', 'rules' ),
+		];
+	}
+
+	/**
+	 * Return condition options fields array.
+	 *
+	 * @return array Admin fields.
+	 */
+	protected function admin_fields() {
+		return [
+			[
+				'type'    => 'text',
+				'label'   => __( 'Option Name', 'rules' ),
+				'name'    => 'option_name',
+			],
+			[
+				'type'    => 'text',
+				'label'   => __( 'Option Value', 'rules' ),
+				'name'    => 'option_value',
+			],
+		];
+	}
+
+	/**
+	 * Evaluate / Run action code.
+	 *
+	 * @param array $action_options Action options.
+	 * @param array $trigger_hook_args Current rule trigger hook arguments.
+	 *
+	 * @return void
+	 */
+	protected function evaluate( $action_options, $trigger_hook_args ) {
+		if ( empty( $action_options['option_name'] ) ) {
+			return;
+		}
+
+		if ( get_option( $action_options['option_name'] ) ) {
+			update_option( $action_options['option_name'], $action_options['option_value'] );
+
+			return;
+		}
+
+		add_option( $action_options['option_name'], $action_options['option_value'] );
+	}
+
+}
