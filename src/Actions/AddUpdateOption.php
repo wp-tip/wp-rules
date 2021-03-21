@@ -39,6 +39,15 @@ class AddUpdateOption extends AbstractAction {
 				'label'   => __( 'Option Value', 'rules' ),
 				'name'    => 'option_value',
 			],
+			[
+				'type'    => 'select',
+				'label'   => __( 'Append', 'rules' ),
+				'name'    => 'append',
+				'options' => [
+					'no' => __( 'No', 'rules' ),
+					'yes' => __( 'Yes', 'rules' ),
+				]
+			],
 		];
 	}
 
@@ -55,7 +64,13 @@ class AddUpdateOption extends AbstractAction {
 			return;
 		}
 
-		if ( get_option( $action_options['option_name'] ) ) {
+		$current_option_value = get_option( $action_options['option_name'] );
+
+		if ( $current_option_value ) {
+			if ( 'yes' === $action_options['append'] ) {
+				$action_options['option_value'] = $current_option_value . $action_options['option_value'];
+			}
+
 			update_option( $action_options['option_name'], $action_options['option_value'] );
 
 			return;
