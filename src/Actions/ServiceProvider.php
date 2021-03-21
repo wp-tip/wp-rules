@@ -26,6 +26,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'action_create_user',
 		'action_update_user',
 		'action_update_user_meta',
+		'action_delete_user_meta',
 		'action_delete_user',
 		'action_add_image_size',
 		'action_remove_image_size',
@@ -50,6 +51,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'action_create_user', '\WP_Rules\Actions\CreateUser' );
 		$container->share( 'action_update_user', '\WP_Rules\Actions\UpdateUser' );
 		$container->share( 'action_update_user_meta', '\WP_Rules\Actions\UpdateUserMeta' );
+		$container->share( 'action_delete_user_meta', '\WP_Rules\Actions\DeleteUserMeta' );
 		$container->share( 'action_delete_user', '\WP_Rules\Actions\DeleteUser' );
 		$container->share( 'action_add_image_size', '\WP_Rules\Actions\AddImageSize' );
 		$container->share( 'action_remove_image_size', '\WP_Rules\Actions\RemoveImageSize' );
