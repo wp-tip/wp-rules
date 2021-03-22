@@ -33,6 +33,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'action_auth_redirect',
 		'action_add_update_option',
 		'action_delete_option',
+		'action_flush_rewrite_rules',
 	];
 
 	/**
@@ -58,6 +59,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'action_auth_redirect', '\WP_Rules\Actions\AuthRedirect' );
 		$container->share( 'action_add_update_option', '\WP_Rules\Actions\AddUpdateOption' );
 		$container->share( 'action_delete_option', '\WP_Rules\Actions\DeleteOption' );
+		$container->share( 'action_flush_rewrite_rules', '\WP_Rules\Actions\FlushRewriteRules' );
 
 	}
 }
