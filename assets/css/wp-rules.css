@@ -1,6 +1,7 @@
 .rules-field label {
 	display: block;
 }
+.rules-field input[type=text],
 .rules-field select,
 .rules-field textarea {
 	display: block;
@@ -23,4 +24,8 @@
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	border: 1px solid #007cba;
+}
+#rule_conditions_container,
+#rule_actions_container{
+	min-height: 2em;
 }

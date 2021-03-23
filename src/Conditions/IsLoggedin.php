@@ -4,11 +4,11 @@ namespace WP_Rules\Conditions;
 use WP_Rules\Core\Admin\Condition\AbstractCondition;
 
 /**
- * Class Role
+ * Class IsLoggedin
  *
  * @package WP_Rules\Conditions
  */
-class Role extends AbstractCondition {
+class IsLoggedin extends AbstractCondition {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,8 +17,8 @@ class Role extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'role',
-			'name' => __( 'Current logged-in user role', 'rules' ),
+			'id'   => 'is-loggedin',
+			'name' => __( 'Is Loggedin', 'rules' ),
 		];
 	}
 
@@ -28,14 +28,15 @@ class Role extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		global $wp_roles;
-
 		return [
 			[
 				'type'    => 'select',
-				'label'   => __( 'Current logged-in user role', 'rules' ),
-				'name'    => 'loggedin_role',
-				'options' => $wp_roles->get_names(),
+				'label'   => __( 'User is logged-in', 'rules' ),
+				'name'    => 'is_loggedin',
+				'options' => [
+					'no'  => __( 'No', 'rules' ),
+					'yes' => __( 'Yes', 'rules' ),
+				],
 			],
 		];
 	}
@@ -49,7 +50,6 @@ class Role extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		$user = wp_get_current_user();
-		return in_array( $condition_options['loggedin_role'], (array) $user->roles, true );
+		return ( is_user_logged_in() && 'yes' === $condition_options['is_loggedin'] ) || ( ! is_user_logged_in() && 'yes' !== $condition_options['is_loggedin'] );
 	}
 }

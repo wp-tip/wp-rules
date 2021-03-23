@@ -4,11 +4,11 @@ namespace WP_Rules\Conditions;
 use WP_Rules\Core\Admin\Condition\AbstractCondition;
 
 /**
- * Class Role
+ * Class CurrentPageUrl
  *
  * @package WP_Rules\Conditions
  */
-class Role extends AbstractCondition {
+class CurrentPageUrl extends AbstractCondition {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,8 +17,8 @@ class Role extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'role',
-			'name' => __( 'Current logged-in user role', 'rules' ),
+			'id'   => 'current-page-url',
+			'name' => __( 'Current Page', 'rules' ),
 		];
 	}
 
@@ -28,14 +28,11 @@ class Role extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		global $wp_roles;
-
 		return [
 			[
-				'type'    => 'select',
-				'label'   => __( 'Current logged-in user role', 'rules' ),
-				'name'    => 'loggedin_role',
-				'options' => $wp_roles->get_names(),
+				'type'  => 'text',
+				'label' => __( 'Page Url', 'rules' ),
+				'name'  => 'page_url',
 			],
 		];
 	}
@@ -49,7 +46,6 @@ class Role extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		$user = wp_get_current_user();
-		return in_array( $condition_options['loggedin_role'], (array) $user->roles, true );
+		return ! empty( $_SERVER['REQUEST_URI'] ) && site_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) === $condition_options['page_url'];
 	}
 }
