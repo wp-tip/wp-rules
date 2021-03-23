@@ -4,11 +4,11 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class Debug
+ * Class SendEmail
  *
  * @package WP_Rules\Actions
  */
-class Debug extends AbstractAction {
+class SendEmail extends AbstractAction {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,8 +17,8 @@ class Debug extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'debug',
-			'name' => __( 'Debug.', 'rules' ),
+			'id'   => 'send_email',
+			'name' => __( 'Send Email', 'rules' ),
 		];
 	}
 
@@ -28,7 +28,23 @@ class Debug extends AbstractAction {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [];
+		return [
+			[
+				'type'    => 'text',
+				'label'   => __( 'To (one or comma separated emails)', 'rules' ),
+				'name'    => 'to',
+			],
+			[
+				'type'    => 'text',
+				'label'   => __( 'Email Subject', 'rules' ),
+				'name'    => 'subject',
+			],
+			[
+				'type'    => 'text',
+				'label'   => __( 'Email Message', 'rules' ),
+				'name'    => 'message',
+			],
+		];
 	}
 
 	/**
@@ -40,7 +56,7 @@ class Debug extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_die( 'This is a test message to make sure that rule evaluation works properly!' );
+		wp_mail( $action_options['to'], $action_options['subject'], $action_options['message'] );
 	}
 
 }

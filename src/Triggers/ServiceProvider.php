@@ -40,6 +40,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'trigger_admin_footer',
 		'trigger_wp_loaded',
 		'trigger_template_redirect',
+		'trigger_after_setup_theme',
 	];
 
 	/**
@@ -72,5 +73,6 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'trigger_admin_footer', '\WP_Rules\Triggers\AdminFooter' );
 		$container->share( 'trigger_wp_loaded', '\WP_Rules\Triggers\WPLoaded' );
 		$container->share( 'trigger_template_redirect', '\WP_Rules\Triggers\TemplateRedirect' );
+		$container->share( 'trigger_after_setup_theme', '\WP_Rules\Triggers\AfterSetupTheme' );
 	}
 }

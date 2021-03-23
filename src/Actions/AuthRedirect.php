@@ -4,11 +4,11 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class Debug
+ * Class AuthRedirect
  *
  * @package WP_Rules\Actions
  */
-class Debug extends AbstractAction {
+class AuthRedirect extends AbstractAction {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,8 +17,8 @@ class Debug extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'debug',
-			'name' => __( 'Debug.', 'rules' ),
+			'id'   => 'auth_redirect',
+			'name' => __( 'Require Login', 'rules' ),
 		];
 	}
 
@@ -40,7 +40,11 @@ class Debug extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_die( 'This is a test message to make sure that rule evaluation works properly!' );
+		if ( is_user_logged_in() ) {
+			return;
+		}
+
+		auth_redirect();
 	}
 
 }

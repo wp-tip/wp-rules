@@ -25,3 +25,7 @@
 	border-radius: 5px;
 	border: 1px solid #007cba;
 }
+#rule_conditions_container,
+#rule_actions_container{
+	min-height: 2em;
+}

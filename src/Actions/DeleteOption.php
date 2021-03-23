@@ -4,11 +4,11 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class Debug
+ * Class DeleteOption
  *
  * @package WP_Rules\Actions
  */
-class Debug extends AbstractAction {
+class DeleteOption extends AbstractAction {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,8 +17,8 @@ class Debug extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'debug',
-			'name' => __( 'Debug.', 'rules' ),
+			'id'   => 'delete_option',
+			'name' => __( 'Delete Option', 'rules' ),
 		];
 	}
 
@@ -28,7 +28,13 @@ class Debug extends AbstractAction {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [];
+		return [
+			[
+				'type'    => 'text',
+				'label'   => __( 'Option Name', 'rules' ),
+				'name'    => 'option_name',
+			],
+		];
 	}
 
 	/**
@@ -40,7 +46,15 @@ class Debug extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_die( 'This is a test message to make sure that rule evaluation works properly!' );
+		if ( empty( $action_options['option_name'] ) ) {
+			return;
+		}
+
+		if ( ! get_option( $action_options['option_name'] ) ) {
+			return;
+		}
+
+		delete_option( $action_options['option_name'] );
 	}
 
 }

@@ -4,11 +4,11 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class Debug
+ * Class TrashPost
  *
  * @package WP_Rules\Actions
  */
-class Debug extends AbstractAction {
+class TrashPost extends AbstractAction {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,8 +17,8 @@ class Debug extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'debug',
-			'name' => __( 'Debug.', 'rules' ),
+			'id'   => 'trash_post',
+			'name' => __( 'Trash Post', 'rules' ),
 		];
 	}
 
@@ -28,7 +28,13 @@ class Debug extends AbstractAction {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [];
+		return [
+			[
+				'type'    => 'text',
+				'label'   => __( 'Post ID', 'rules' ),
+				'name'    => 'ID',
+			],
+		];
 	}
 
 	/**
@@ -40,7 +46,11 @@ class Debug extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_die( 'This is a test message to make sure that rule evaluation works properly!' );
+		if ( empty( $action_options['ID'] ) ) {
+			return;
+		}
+
+		wp_trash_post( $action_options['ID'] );
 	}
 
 }

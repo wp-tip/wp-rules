@@ -4,11 +4,11 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class Debug
+ * Class FlushRewriteRules
  *
  * @package WP_Rules\Actions
  */
-class Debug extends AbstractAction {
+class FlushRewriteRules extends AbstractAction {
 
 	/**
 	 * Initialize condition details like id, name.
@@ -17,8 +17,8 @@ class Debug extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'debug',
-			'name' => __( 'Debug.', 'rules' ),
+			'id'   => 'flush_rewrite_rules',
+			'name' => __( 'Flush Rewrite Rules', 'rules' ),
 		];
 	}
 
@@ -40,7 +40,7 @@ class Debug extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_die( 'This is a test message to make sure that rule evaluation works properly!' );
+		flush_rewrite_rules();
 	}
 
 }
