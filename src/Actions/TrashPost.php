@@ -30,9 +30,9 @@ class TrashPost extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'Post ID', 'rules' ),
-				'name'    => 'ID',
+				'type'  => 'text',
+				'label' => __( 'Post ID', 'rules' ),
+				'name'  => 'ID',
 			],
 		];
 	}

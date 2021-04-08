@@ -30,14 +30,14 @@ class DeleteUserMeta extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'User ID', 'rules' ),
-				'name'    => 'ID',
+				'type'  => 'text',
+				'label' => __( 'User ID', 'rules' ),
+				'name'  => 'ID',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Meta Key', 'rules' ),
-				'name'    => 'meta_key',
+				'type'  => 'text',
+				'label' => __( 'Meta Key', 'rules' ),
+				'name'  => 'meta_key',
 			],
 		];
 	}

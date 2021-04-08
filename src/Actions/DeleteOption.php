@@ -30,9 +30,9 @@ class DeleteOption extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'Option Name', 'rules' ),
-				'name'    => 'option_name',
+				'type'  => 'text',
+				'label' => __( 'Option Name', 'rules' ),
+				'name'  => 'option_name',
 			],
 		];
 	}

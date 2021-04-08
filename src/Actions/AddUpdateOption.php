@@ -30,23 +30,23 @@ class AddUpdateOption extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'Option Name', 'rules' ),
-				'name'    => 'option_name',
+				'type'  => 'text',
+				'label' => __( 'Option Name', 'rules' ),
+				'name'  => 'option_name',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Option Value', 'rules' ),
-				'name'    => 'option_value',
+				'type'  => 'text',
+				'label' => __( 'Option Value', 'rules' ),
+				'name'  => 'option_value',
 			],
 			[
 				'type'    => 'select',
 				'label'   => __( 'Append', 'rules' ),
 				'name'    => 'append',
 				'options' => [
-					'no' => __( 'No', 'rules' ),
+					'no'  => __( 'No', 'rules' ),
 					'yes' => __( 'Yes', 'rules' ),
-				]
+				],
 			],
 		];
 	}

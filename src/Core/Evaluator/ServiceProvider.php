@@ -16,6 +16,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	 * @var string[]
 	 */
 	public $provides = [
+		'core_evaluator_variable',
 		'core_evaluator_rule',
 		'core_evaluator_subscriber',
 	];
@@ -25,7 +26,10 @@ class ServiceProvider extends AbstractServiceProvider {
 	 */
 	public function register() {
 		$container = $this->getContainer();
-		$container->add( 'core_evaluator_rule', '\WP_Rules\Core\Evaluator\Rule' );
+
+		$container->add( 'core_evaluator_variable', '\WP_Rules\Core\Evaluator\Variable' );
+		$container->add( 'core_evaluator_rule', '\WP_Rules\Core\Evaluator\Rule' )
+				->addArgument( $container->get( 'core_evaluator_variable' ) );
 		$container->share( 'core_evaluator_subscriber', '\WP_Rules\Core\Evaluator\Subscriber' )
 				->addArgument( $container->get( 'core_evaluator_rule' ) );
 	}
