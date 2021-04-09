@@ -35,6 +35,7 @@ class Subscriber implements SubscriberInterface {
 		return [
 			'rules_trigger_fired' => [ 'evaluate_trigger', 10, 2 ],
 			'save_post_rules'     => 'removed_cached_trigger_rules',
+			'rules_metabox_variables_fields' => 'print_variables',
 		];
 	}
 
@@ -75,6 +76,10 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public function removed_cached_trigger_rules( $post_id ) {
 		wp_cache_delete( 'cached_trigger_rules', 'rules' );
+	}
+
+	public function print_variables( \WP_Post$post ) {
+		var_dump( $this->rule->get_variables( $post->ID ) );
 	}
 
 }

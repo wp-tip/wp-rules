@@ -64,4 +64,18 @@ class Rule {
 
 	}
 
+	public function get_variables( $rule_post_id ) {
+		$trigger_id = get_post_meta( $rule_post_id, 'rule_trigger', true );
+		// Get this trigger wp_action_args.
+		$args = apply_filters( 'rules_trigger_variables', [], $trigger_id );
+
+		if ( empty( $args ) ) {
+			return $this->variable->get_all();
+		}
+
+		$this->variable->insert( $args );
+
+		return $this->variable->get_all();
+	}
+
 }
