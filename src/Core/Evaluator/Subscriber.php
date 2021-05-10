@@ -78,8 +78,8 @@ class Subscriber implements SubscriberInterface {
 		wp_cache_delete( 'cached_trigger_rules', 'rules' );
 	}
 
-	public function print_variables( \WP_Post$post ) {
-		var_dump( $this->rule->get_variables( $post->ID ) );
+	public function print_variables( \WP_Post $post ) {
+		
 	}
 
 }

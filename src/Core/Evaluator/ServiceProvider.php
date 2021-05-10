@@ -29,7 +29,8 @@ class ServiceProvider extends AbstractServiceProvider {
 
 		$container->add( 'core_evaluator_variable', '\WP_Rules\Core\Evaluator\Variable' );
 		$container->add( 'core_evaluator_rule', '\WP_Rules\Core\Evaluator\Rule' )
-				->addArgument( $container->get( 'core_evaluator_variable' ) );
+				->addArgument( $container->get( 'core_evaluator_variable' ) )
+				->addArgument( $container->get( 'core_admin_rule_postmeta' ) );
 		$container->share( 'core_evaluator_subscriber', '\WP_Rules\Core\Evaluator\Subscriber' )
 				->addArgument( $container->get( 'core_evaluator_rule' ) );
 	}

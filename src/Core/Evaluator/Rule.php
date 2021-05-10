@@ -1,6 +1,8 @@
 <?php
 namespace WP_Rules\Core\Evaluator;
 
+use WP_Rules\Core\Admin\Rule\PostMeta;
+
 /**
  * Class Rule
  *
@@ -15,13 +17,16 @@ class Rule {
 	 */
 	private $variable;
 
+	private $post_meta;
+
 	/**
 	 * Rule constructor.
 	 *
 	 * @param Variable $variable Variable instance.
 	 */
-	public function __construct( Variable $variable ) {
+	public function __construct( Variable $variable, PostMeta $post_meta ) {
 		$this->variable = $variable;
+		$this->post_meta = $post_meta;
 	}
 
 	/**
@@ -34,6 +39,7 @@ class Rule {
 		// This is the main entry point for evaluation so we will here evaluate conditions and fire actions.
 
 		$this->variable->insert( $trigger_hook_args );
+		$this->post_meta->set_rule_variables( $rule_post_id, $this->variable->get_all() );
 
 		// Get Rule Conditions.
 		$conditions           = get_post_meta( $rule_post_id, 'rule_conditions', true );
@@ -65,17 +71,7 @@ class Rule {
 	}
 
 	public function get_variables( $rule_post_id ) {
-		$trigger_id = get_post_meta( $rule_post_id, 'rule_trigger', true );
-		// Get this trigger wp_action_args.
-		$args = apply_filters( 'rules_trigger_variables', [], $trigger_id );
-
-		if ( empty( $args ) ) {
-			return $this->variable->get_all();
-		}
-
-		$this->variable->insert( $args );
-
-		return $this->variable->get_all();
+		return $this->post_meta->get_rule_variables( $rule_post_id );
 	}
 
 }

@@ -24,6 +24,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'core_admin_trigger_subscriber',
 		'core_admin_condition_subscriber',
 		'core_admin_action_subscriber',
+		'core_admin_rule_postmeta',
 	];
 
 	/**
@@ -42,6 +43,8 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'core_admin_rule_subscriber', '\WP_Rules\Core\Admin\Rule\Subscriber' )
 				->addArgument( $container->get( 'core_admin_rule_posttype' ) )
 				->addArgument( $container->get( 'core_admin_rule_metabox' ) );
+
+		$container->add( 'core_admin_rule_postmeta', '\WP_Rules\Core\Admin\Rule\PostMeta' );
 
 		$container->share( 'core_admin_trigger_subscriber', '\WP_Rules\Core\Admin\Trigger\Subscriber' );
 		$container->share( 'core_admin_condition_subscriber', '\WP_Rules\Core\Admin\Condition\Subscriber' );
