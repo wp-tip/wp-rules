@@ -95,7 +95,6 @@ abstract class AbstractTrigger implements SubscriberInterface {
 			'rules_trigger_options_ajax'   => [ 'add_admin_options_ajax', 10, 2 ],
 			self::$wp_action               => [ 'trigger_fired', self::$wp_action_priority, count( self::$wp_action_args ) ],
 			'rules_trigger_validated'      => [ 'validate_trigger', 10, 4 ],
-			'rules_trigger_variables'      => [ 'register_variables', 10, 2 ]
 		];
 	}
 
@@ -197,9 +196,9 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	public function trigger_fired( ...$args ) {
 		$hook_args = [];
 
-		if ( ! empty( $args ) && count( $args ) === count( self::$wp_action_args ) ) {
+		if ( ! empty( $args ) && count( $args ) === count( $this->init()['wp_action_args'] ) ) {
 			foreach ( $args as $arg_index => $arg ) {
-				$hook_args[ self::$wp_action_args[ $arg_index ] ] = $arg;
+				$hook_args[ $this->init()['wp_action_args'][ $arg_index ] ] = $arg;
 			}
 		}
 
@@ -252,20 +251,6 @@ abstract class AbstractTrigger implements SubscriberInterface {
 		$validated = $this->validate_trigger_options( $trigger_hook_args, $trigger_options, $rule_post_id );
 
 		return (bool) apply_filters( 'rules_validate_trigger_options', $validated, $trigger_id, $trigger_hook_args, $rule_post_id );
-	}
-
-	public function register_variables( $variables, $trigger_id ) {
-		if ( ! $this->is_allowed( $trigger_id ) ) {
-			return $variables;
-		}
-
-		$wp_action_args = $this->init()['wp_action_args'];
-
-		if ( empty( $wp_action_args ) ) {
-			return $variables;
-		}
-
-		return array_flip( $wp_action_args );
 	}
 
 }

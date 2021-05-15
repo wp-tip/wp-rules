@@ -17,15 +17,21 @@ class Rule {
 	 */
 	private $variable;
 
+	/**
+	 * Post Meta Instance.
+	 *
+	 * @var PostMeta
+	 */
 	private $post_meta;
 
 	/**
 	 * Rule constructor.
 	 *
 	 * @param Variable $variable Variable instance.
+	 * @param PostMeta $post_meta PostMeta instance.
 	 */
 	public function __construct( Variable $variable, PostMeta $post_meta ) {
-		$this->variable = $variable;
+		$this->variable  = $variable;
 		$this->post_meta = $post_meta;
 	}
 
@@ -70,7 +76,14 @@ class Rule {
 
 	}
 
-	public function get_variables( $rule_post_id ) {
+	/**
+	 * Get rule saved variables.
+	 *
+	 * @param int $rule_post_id Rule Post ID.
+	 *
+	 * @return array
+	 */
+	public function get_variables( int $rule_post_id ) : array {
 		return $this->post_meta->get_rule_variables( $rule_post_id );
 	}
 
