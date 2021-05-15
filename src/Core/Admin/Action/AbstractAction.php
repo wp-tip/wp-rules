@@ -37,7 +37,7 @@ abstract class AbstractAction implements SubscriberInterface {
 	 */
 	public function __construct() {
 		$this->render_field = rules_render_fields();
-		$this->fill_attributes( (array) $this->init() );
+		$this->fill_attributes( $this->init() );
 	}
 
 	/**

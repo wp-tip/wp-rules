@@ -30,34 +30,34 @@ class UpdateUser extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'User ID', 'rules' ),
-				'name'    => 'ID',
+				'type'  => 'text',
+				'label' => __( 'User ID', 'rules' ),
+				'name'  => 'ID',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'First Name', 'rules' ),
-				'name'    => 'first_name',
+				'type'  => 'text',
+				'label' => __( 'First Name', 'rules' ),
+				'name'  => 'first_name',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Last Name', 'rules' ),
-				'name'    => 'last_name',
+				'type'  => 'text',
+				'label' => __( 'Last Name', 'rules' ),
+				'name'  => 'last_name',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Username', 'rules' ),
-				'name'    => 'user_login',
+				'type'  => 'text',
+				'label' => __( 'Username', 'rules' ),
+				'name'  => 'user_login',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Password', 'rules' ),
-				'name'    => 'user_pass',
+				'type'  => 'text',
+				'label' => __( 'Password', 'rules' ),
+				'name'  => 'user_pass',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Email', 'rules' ),
-				'name'    => 'user_email',
+				'type'  => 'text',
+				'label' => __( 'Email', 'rules' ),
+				'name'  => 'user_email',
 			],
 			[
 				'type'    => 'select',

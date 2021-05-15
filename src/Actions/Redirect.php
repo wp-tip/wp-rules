@@ -30,9 +30,9 @@ class Redirect extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'Url', 'rules' ),
-				'name'    => 'url',
+				'type'  => 'text',
+				'label' => __( 'Url', 'rules' ),
+				'name'  => 'url',
 			],
 		];
 	}
@@ -46,7 +46,7 @@ class Redirect extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_redirect( $action_options['url'] );
+		wp_safe_redirect( $action_options['url'] );
 		die();
 	}
 

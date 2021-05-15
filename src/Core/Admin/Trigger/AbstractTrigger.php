@@ -66,7 +66,7 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 */
 	public function __construct() {
 		$this->render_field = rules_render_fields();
-		$this->fill_attributes( (array) $this->init() );
+		$this->fill_attributes( $this->init() );
 	}
 
 	/**
@@ -196,9 +196,9 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	public function trigger_fired( ...$args ) {
 		$hook_args = [];
 
-		if ( ! empty( $args ) && count( $args ) === count( self::$wp_action_args ) ) {
+		if ( ! empty( $args ) && count( $args ) === count( $this->init()['wp_action_args'] ) ) {
 			foreach ( $args as $arg_index => $arg ) {
-				$hook_args[ self::$wp_action_args[ $arg_index ] ] = $arg;
+				$hook_args[ $this->init()['wp_action_args'][ $arg_index ] ] = $arg;
 			}
 		}
 

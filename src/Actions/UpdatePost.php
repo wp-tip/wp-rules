@@ -30,42 +30,42 @@ class UpdatePost extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'Post ID', 'rules' ),
-				'name'    => 'ID',
+				'type'  => 'text',
+				'label' => __( 'Post ID', 'rules' ),
+				'name'  => 'ID',
 			],
 			[
 				'type'    => 'select',
 				'label'   => __( 'Post Type', 'rules' ),
 				'name'    => 'post_type',
-				'options' => $this->get_post_types_list()
+				'options' => $this->get_post_types_list(),
 			],
 			[
 				'type'    => 'select',
 				'label'   => __( 'Post Author', 'rules' ),
 				'name'    => 'post_author',
-				'options' => $this->get_users_list()
+				'options' => $this->get_users_list(),
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Post Title', 'rules' ),
-				'name'    => 'post_title',
+				'type'  => 'text',
+				'label' => __( 'Post Title', 'rules' ),
+				'name'  => 'post_title',
 			],
 			[
-				'type'    => 'textarea',
-				'label'   => __( 'Post Content', 'rules' ),
-				'name'    => 'post_content',
+				'type'  => 'textarea',
+				'label' => __( 'Post Content', 'rules' ),
+				'name'  => 'post_content',
 			],
 			[
-				'type'    => 'textarea',
-				'label'   => __( 'Post Excerpt', 'rules' ),
-				'name'    => 'post_excerpt',
+				'type'  => 'textarea',
+				'label' => __( 'Post Excerpt', 'rules' ),
+				'name'  => 'post_excerpt',
 			],
 			[
 				'type'    => 'select',
 				'label'   => __( 'Post Status', 'rules' ),
 				'name'    => 'post_status',
-				'options' => get_post_statuses()
+				'options' => get_post_statuses(),
 			],
 			[
 				'type'    => 'select',
@@ -73,13 +73,13 @@ class UpdatePost extends AbstractAction {
 				'name'    => 'comment_status',
 				'options' => [
 					0 => 'No',
-					1 => 'Yes'
-				]
+					1 => 'Yes',
+				],
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Meta values (meta_key1=meta_value1&meta_key2=meta_value2)', 'rules' ),
-				'name'    => 'metas',
+				'type'  => 'text',
+				'label' => __( 'Meta values (meta_key1=meta_value1&meta_key2=meta_value2)', 'rules' ),
+				'name'  => 'metas',
 			],
 		];
 	}
@@ -111,7 +111,7 @@ class UpdatePost extends AbstractAction {
 		];
 
 		foreach ( $fields as $field ) {
-			if ( empty( $action_options[ $field ] ) ){
+			if ( empty( $action_options[ $field ] ) ) {
 				continue;
 			}
 
@@ -130,7 +130,7 @@ class UpdatePost extends AbstractAction {
 	/**
 	 * Save new post metas.
 	 *
-	 * @param int $post_id Post ID.
+	 * @param int    $post_id Post ID.
 	 * @param string $post_metas Post metas string.
 	 */
 	private function save_metas( $post_id, $post_metas ) {
@@ -154,7 +154,7 @@ class UpdatePost extends AbstractAction {
 	private function get_post_types_list() {
 		$post_types_array = get_post_types( [], 'objects' );
 		$post_types_list  = [
-			0 => __( 'Choose Post Type', 'rules' )
+			0 => __( 'Choose Post Type', 'rules' ),
 		];
 
 		foreach ( $post_types_array as $post_type ) {
@@ -177,7 +177,7 @@ class UpdatePost extends AbstractAction {
 		}
 
 		$output = [
-			0 => __( 'Choose Author', 'rules' )
+			0 => __( 'Choose Author', 'rules' ),
 		];
 		foreach ( $users as $user ) {
 			$output[ $user->ID ] = $user->display_name . ' - ' . $user->email;

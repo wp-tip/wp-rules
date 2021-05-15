@@ -30,19 +30,19 @@ class SendEmail extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'To (one or comma separated emails)', 'rules' ),
-				'name'    => 'to',
+				'type'  => 'text',
+				'label' => __( 'To (one or comma separated emails)', 'rules' ),
+				'name'  => 'to',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Email Subject', 'rules' ),
-				'name'    => 'subject',
+				'type'  => 'text',
+				'label' => __( 'Email Subject', 'rules' ),
+				'name'  => 'subject',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Email Message', 'rules' ),
-				'name'    => 'message',
+				'type'  => 'text',
+				'label' => __( 'Email Message', 'rules' ),
+				'name'  => 'message',
 			],
 		];
 	}
