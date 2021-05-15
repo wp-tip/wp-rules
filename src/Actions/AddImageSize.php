@@ -11,7 +11,7 @@ use WP_Rules\Core\Admin\Action\AbstractAction;
 class AddImageSize extends AbstractAction {
 
 	/**
-	 * Initialize condition details like id, name.
+	 * Initialize action details like id, name.
 	 *
 	 * @return array
 	 */

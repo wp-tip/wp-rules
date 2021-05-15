@@ -34,6 +34,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'action_add_update_option',
 		'action_delete_option',
 		'action_flush_rewrite_rules',
+		'action_show_admin_bar',
 	];
 
 	/**
@@ -60,6 +61,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'action_add_update_option', '\WP_Rules\Actions\AddUpdateOption' );
 		$container->share( 'action_delete_option', '\WP_Rules\Actions\DeleteOption' );
 		$container->share( 'action_flush_rewrite_rules', '\WP_Rules\Actions\FlushRewriteRules' );
+		$container->share( 'action_show_admin_bar', '\WP_Rules\Actions\ShowAdminBar' );
 
 	}
 }

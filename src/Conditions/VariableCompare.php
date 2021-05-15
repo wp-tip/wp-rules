@@ -68,18 +68,18 @@ class VariableCompare extends AbstractCondition {
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
 		switch ( $condition_options['operator'] ) {
 			case '!=':
-				return $condition_options[ 'variable' ] !== $condition_options['ref_value'];
+				return $condition_options['variable'] !== $condition_options['ref_value'];
 			case '>':
-				return $condition_options[ 'variable' ] > $condition_options['ref_value'];
+				return $condition_options['variable'] > $condition_options['ref_value'];
 			case '>=':
-				return $condition_options[ 'variable' ] >= $condition_options['ref_value'];
+				return $condition_options['variable'] >= $condition_options['ref_value'];
 			case '<':
-				return $condition_options[ 'variable' ] < $condition_options['ref_value'];
+				return $condition_options['variable'] < $condition_options['ref_value'];
 			case '<=':
-				return $condition_options[ 'variable' ] <= $condition_options['ref_value'];
+				return $condition_options['variable'] <= $condition_options['ref_value'];
 			case '=':
 			default:
-				return $condition_options[ 'variable' ] === $condition_options['ref_value'];
+				return $condition_options['variable'] === $condition_options['ref_value'];
 		}
 	}
 }
