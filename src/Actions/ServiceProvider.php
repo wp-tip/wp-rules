@@ -37,6 +37,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'action_show_admin_bar',
 		'action_show_login_page_message',
 		'action_add_post_status',
+		'action_remove_menu_page',
 	];
 
 	/**
@@ -66,6 +67,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'action_show_admin_bar', '\WP_Rules\Actions\ShowAdminBar' );
 		$container->share( 'action_show_login_page_message', '\WP_Rules\Actions\ShowLoginPageMessage' );
 		$container->share( 'action_add_post_status', '\WP_Rules\Actions\AddPostStatus' );
+		$container->share( 'action_remove_menu_page', '\WP_Rules\Actions\RemoveMenuPage' );
 
 	}
 }
