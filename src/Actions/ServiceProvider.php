@@ -38,6 +38,14 @@ class ServiceProvider extends AbstractServiceProvider {
 		'action_show_login_page_message',
 		'action_add_post_status',
 		'action_remove_menu_page',
+		'action_post_title_replace',
+		'action_post_content_replace',
+		'action_post_excerpt_replace',
+		'action_post_class_add',
+		'action_post_class_remove',
+		'action_body_class_add',
+		'action_body_class_remove',
+		'action_post_password_protected',
 	];
 
 	/**
@@ -68,6 +76,14 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'action_show_login_page_message', '\WP_Rules\Actions\ShowLoginPageMessage' );
 		$container->share( 'action_add_post_status', '\WP_Rules\Actions\AddPostStatus' );
 		$container->share( 'action_remove_menu_page', '\WP_Rules\Actions\RemoveMenuPage' );
+		$container->share( 'action_post_title_replace', '\WP_Rules\Actions\PostTitleReplace' );
+		$container->share( 'action_post_content_replace', '\WP_Rules\Actions\PostContentReplace' );
+		$container->share( 'action_post_excerpt_replace', '\WP_Rules\Actions\PostExcerptReplace' );
+		$container->share( 'action_post_class_add', '\WP_Rules\Actions\PostClassAdd' );
+		$container->share( 'action_post_class_remove', '\WP_Rules\Actions\PostClassRemove' );
+		$container->share( 'action_body_class_add', '\WP_Rules\Actions\BodyClassAdd' );
+		$container->share( 'action_body_class_remove', '\WP_Rules\Actions\BodyClassRemove' );
+		$container->share( 'action_post_password_protected', '\WP_Rules\Actions\PostPasswordProtected' );
 
 	}
 }
