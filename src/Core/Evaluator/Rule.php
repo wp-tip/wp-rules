@@ -72,7 +72,7 @@ class Rule {
 					$action_options = $this->variable->evaluate_all( $action[ $action_id ] );
 				}
 
-				do_action( 'rules_action_fired', $action_id, $action_options, $trigger_hook_args );
+				do_action( 'rules_action_fired', $action_id, $action_options, $trigger_hook_args, $rule_post_id );
 			}
 		}
 

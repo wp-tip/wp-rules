@@ -40,12 +40,14 @@ class VariableCompare extends AbstractCondition {
 				'label'   => __( 'Operator', 'rules' ),
 				'name'    => 'operator',
 				'options' => [
-					'='  => __( 'Equals', 'rules' ),
-					'!=' => __( 'Not Equals', 'rules' ),
-					'>'  => __( 'Greater Than', 'rules' ),
-					'>=' => __( 'Greater Than Or Equals', 'rules' ),
-					'<'  => __( 'Less Than', 'rules' ),
-					'<=' => __( 'Less Than Or Equals', 'rules' ),
+					'='           => __( 'Equals', 'rules' ),
+					'!='          => __( 'Not Equals', 'rules' ),
+					'>'           => __( 'Greater Than', 'rules' ),
+					'>='          => __( 'Greater Than Or Equals', 'rules' ),
+					'<'           => __( 'Less Than', 'rules' ),
+					'<='          => __( 'Less Than Or Equals', 'rules' ),
+					'contain'     => __( 'Contains', 'rules' ),
+					'not_contain' => __( 'Doesn\'t Contain', 'rules' ),
 				],
 			],
 
@@ -77,6 +79,10 @@ class VariableCompare extends AbstractCondition {
 				return $condition_options['variable'] < $condition_options['ref_value'];
 			case '<=':
 				return $condition_options['variable'] <= $condition_options['ref_value'];
+			case 'contain':
+				return false !== stripos( $condition_options['variable'], $condition_options['ref_value'] );
+			case 'not_contain':
+				return ! ( false !== stripos( $condition_options['variable'], $condition_options['ref_value'] ) );
 			case '=':
 			default:
 				return $condition_options['variable'] === $condition_options['ref_value'];
