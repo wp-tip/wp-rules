@@ -31,4 +31,50 @@ class PostMeta {
 		return get_post_meta( $rule_post_id, 'rules_variables', true );
 	}
 
+	/**
+	 * Save rule trigger.
+	 *
+	 * @param int    $rule_post_id Current rule Post ID.
+	 * @param string $trigger_id Trigger ID.
+	 *
+	 * @return bool|int
+	 */
+	public function set_rule_trigger( int $rule_post_id, string $trigger_id ) {
+		return update_post_meta( $rule_post_id, 'rule_trigger', $trigger_id );
+	}
+
+	/**
+	 * Get rule attached trigger.
+	 *
+	 * @param int $rule_post_id Rule Post ID.
+	 *
+	 * @return mixed
+	 */
+	public function get_rule_trigger( int $rule_post_id ) {
+		return get_post_meta( $rule_post_id, 'rule_trigger', true );
+	}
+
+	/**
+	 * Save rule trigger options.
+	 *
+	 * @param int   $rule_post_id Current rule Post ID.
+	 * @param array $trigger_options Trigger options.
+	 *
+	 * @return bool|int
+	 */
+	public function set_rule_trigger_options( int $rule_post_id, array $trigger_options ) {
+		return update_post_meta( $rule_post_id, 'rule_trigger_options', $trigger_options );
+	}
+
+	/**
+	 * Get rule attached trigger.
+	 *
+	 * @param int $rule_post_id Rule Post ID.
+	 *
+	 * @return mixed
+	 */
+	public function get_rule_trigger_options( int $rule_post_id ) {
+		return get_post_meta( $rule_post_id, 'rule_trigger_options', true );
+	}
+
 }

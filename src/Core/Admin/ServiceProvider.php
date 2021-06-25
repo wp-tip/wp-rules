@@ -38,15 +38,16 @@ class ServiceProvider extends AbstractServiceProvider {
 						->addArgument( rules_get_constant( 'WP_RULES_VIEWS_PATH' ) )
 						->addArgument( $filesystem );
 
+		$container->add( 'core_admin_rule_postmeta', '\WP_Rules\Core\Admin\Rule\PostMeta' );
+
 		$container->add( 'core_admin_rule_posttype', '\WP_Rules\Core\Admin\Rule\Posttype' );
 		$container->add( 'core_admin_rule_metabox', '\WP_Rules\Core\Admin\Rule\MetaBox' );
 		$container->share( 'core_admin_rule_subscriber', '\WP_Rules\Core\Admin\Rule\Subscriber' )
 				->addArgument( $container->get( 'core_admin_rule_posttype' ) )
 				->addArgument( $container->get( 'core_admin_rule_metabox' ) );
 
-		$container->add( 'core_admin_rule_postmeta', '\WP_Rules\Core\Admin\Rule\PostMeta' );
-
-		$container->share( 'core_admin_trigger_subscriber', '\WP_Rules\Core\Admin\Trigger\Subscriber' );
+		$container->share( 'core_admin_trigger_subscriber', '\WP_Rules\Core\Admin\Trigger\Subscriber' )
+				->addArgument( $container->get( 'core_admin_rule_postmeta' ) );
 		$container->share( 'core_admin_condition_subscriber', '\WP_Rules\Core\Admin\Condition\Subscriber' );
 		$container->share( 'core_admin_action_subscriber', '\WP_Rules\Core\Admin\Action\Subscriber' );
 	}
