@@ -2,6 +2,8 @@
 namespace WP_Rules\Core\Evaluator;
 
 use WP_Rules\Core\Plugin\EventManagement\SubscriberInterface;
+use WP_Post;
+use WP_Rules\Core\Template\RenderField;
 
 /**
  * Class Subscriber
@@ -18,12 +20,20 @@ class Subscriber implements SubscriberInterface {
 	private $rule;
 
 	/**
+	 * RenderField class instance.
+	 *
+	 * @var RenderField
+	 */
+	private $render_field;
+
+	/**
 	 * Subscriber constructor.
 	 *
 	 * @param Rule $rule Rule instance.
 	 */
 	public function __construct( Rule $rule ) {
-		$this->rule = $rule;
+		$this->rule         = $rule;
+		$this->render_field = rules_render_fields();
 	}
 
 	/**
@@ -33,8 +43,9 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public static function get_subscribed_events(): array {
 		return [
-			'rules_trigger_fired' => [ 'evaluate_trigger', 10, 2 ],
-			'save_post_rules'     => 'removed_cached_trigger_rules',
+			'rules_trigger_fired'            => [ 'evaluate_trigger', 10, 2 ],
+			'save_post_rules'                => 'removed_cached_trigger_rules',
+			'rules_metabox_variables_fields' => 'print_variables',
 		];
 	}
 
@@ -47,6 +58,7 @@ class Subscriber implements SubscriberInterface {
 	public function evaluate_trigger( $trigger_id, $trigger_options ) {
 		// Get this trigger rules.
 		$rules_results = wp_cache_get( 'cached_trigger_rules_' . $trigger_id, 'rules' );
+
 		if ( false === $rules_results ) {
 			global $wpdb;
 
@@ -62,9 +74,11 @@ class Subscriber implements SubscriberInterface {
 		}
 
 		foreach ( $rules_results as $rule ) {
-			if ( apply_filters( 'rules_trigger_validated', true, $trigger_id, $trigger_options, $rule->post_id ) ) {
-				$this->rule->evaluate( $rule->post_id, $trigger_options );
+			if ( ! apply_filters( 'rules_trigger_validated', true, $trigger_id, $trigger_options, $rule->post_id ) ) {
+				continue;
 			}
+
+			$this->rule->evaluate( $rule->post_id, $trigger_options );
 		}
 	}
 
@@ -75,6 +89,27 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public function removed_cached_trigger_rules( $post_id ) {
 		wp_cache_delete( 'cached_trigger_rules', 'rules' );
+	}
+
+	/**
+	 * Print variables on the metaBox.
+	 *
+	 * @param WP_Post $post Current rule Post object.
+	 */
+	public function print_variables( WP_Post $post ) {
+		$variables = $this->rule->get_variables( $post->ID );
+		if ( empty( $variables ) ) {
+			return;
+		}
+
+		$rows = array_map(
+				function ( $item ) {
+					return [ '{{' . $item . '}}' ];
+				},
+			array_keys( $variables )
+			);
+
+		$this->render_field->table( $rows );
 	}
 
 }

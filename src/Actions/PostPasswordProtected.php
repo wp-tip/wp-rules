@@ -4,21 +4,21 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class SendEmail
+ * Class PostPasswordProtected
  *
  * @package WP_Rules\Actions
  */
-class SendEmail extends AbstractAction {
+class PostPasswordProtected extends AbstractAction {
 
 	/**
-	 * Initialize condition details like id, name.
+	 * Initialize action details like id, name.
 	 *
 	 * @return array
 	 */
 	protected function init() {
 		return [
-			'id'   => 'send_email',
-			'name' => __( 'Send Email', 'rules' ),
+			'id'   => 'post_password_protected',
+			'name' => __( 'Make post password protected', 'rules' ),
 		];
 	}
 
@@ -31,18 +31,8 @@ class SendEmail extends AbstractAction {
 		return [
 			[
 				'type'  => 'text',
-				'label' => __( 'To (one or comma separated emails)', 'rules' ),
-				'name'  => 'to',
-			],
-			[
-				'type'  => 'text',
-				'label' => __( 'Email Subject', 'rules' ),
-				'name'  => 'subject',
-			],
-			[
-				'type'  => 'text',
-				'label' => __( 'Email Message', 'rules' ),
-				'name'  => 'message',
+				'label' => __( 'Password', 'rules' ),
+				'name'  => 'password',
 			],
 		];
 	}
@@ -56,7 +46,15 @@ class SendEmail extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_mail( $action_options['to'], $action_options['subject'], $action_options['message'] );
+		if ( empty( $action_options['password'] ) ) {
+			return;
+		}
+
+		if ( empty( $GLOBALS['post'] ) ) {
+			return;
+		}
+
+		$GLOBALS['post']->post_password = $action_options['password'];
 	}
 
 }

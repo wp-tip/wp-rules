@@ -4,21 +4,21 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class SendEmail
+ * Class PostContentReplace
  *
  * @package WP_Rules\Actions
  */
-class SendEmail extends AbstractAction {
+class PostContentReplace extends AbstractAction {
 
 	/**
-	 * Initialize condition details like id, name.
+	 * Initialize action details like id, name.
 	 *
 	 * @return array
 	 */
 	protected function init() {
 		return [
-			'id'   => 'send_email',
-			'name' => __( 'Send Email', 'rules' ),
+			'id'   => 'post_content_replace',
+			'name' => __( 'Replace in post content', 'rules' ),
 		];
 	}
 
@@ -31,18 +31,13 @@ class SendEmail extends AbstractAction {
 		return [
 			[
 				'type'  => 'text',
-				'label' => __( 'To (one or comma separated emails)', 'rules' ),
-				'name'  => 'to',
+				'label' => __( 'Search word', 'rules' ),
+				'name'  => 'search',
 			],
 			[
 				'type'  => 'text',
-				'label' => __( 'Email Subject', 'rules' ),
-				'name'  => 'subject',
-			],
-			[
-				'type'  => 'text',
-				'label' => __( 'Email Message', 'rules' ),
-				'name'  => 'message',
+				'label' => __( 'Replace word', 'rules' ),
+				'name'  => 'replace',
 			],
 		];
 	}
@@ -56,7 +51,16 @@ class SendEmail extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_mail( $action_options['to'], $action_options['subject'], $action_options['message'] );
+		if ( empty( $action_options['search'] ) ) {
+			return;
+		}
+
+		add_filter(
+			'the_content',
+			function ( $title ) use ( $action_options ) {
+				return str_replace( $action_options['search'], $action_options['replace'] ?? '', $title );
+			}
+		);
 	}
 
 }

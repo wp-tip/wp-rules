@@ -30,9 +30,9 @@ class DeleteUser extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'User ID', 'rules' ),
-				'name'    => 'ID',
+				'type'  => 'text',
+				'label' => __( 'User ID', 'rules' ),
+				'name'  => 'ID',
 			],
 		];
 	}
@@ -50,8 +50,8 @@ class DeleteUser extends AbstractAction {
 			return;
 		}
 
-		if ( ! function_exists( 'wp_delete_user' ) ){
-			require_once( rules_get_constant( 'ABSPATH' ) .'wp-admin/includes/user.php' );
+		if ( ! function_exists( 'wp_delete_user' ) ) {
+			require_once rules_get_constant( 'ABSPATH' ) . 'wp-admin/includes/user.php';
 		}
 
 		wp_delete_user( $action_options['ID'] );

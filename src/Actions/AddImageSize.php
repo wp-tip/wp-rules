@@ -11,7 +11,7 @@ use WP_Rules\Core\Admin\Action\AbstractAction;
 class AddImageSize extends AbstractAction {
 
 	/**
-	 * Initialize condition details like id, name.
+	 * Initialize action details like id, name.
 	 *
 	 * @return array
 	 */
@@ -30,19 +30,19 @@ class AddImageSize extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'Name', 'rules' ),
-				'name'    => 'name',
+				'type'  => 'text',
+				'label' => __( 'Name', 'rules' ),
+				'name'  => 'name',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Width', 'rules' ),
-				'name'    => 'width',
+				'type'  => 'text',
+				'label' => __( 'Width', 'rules' ),
+				'name'  => 'width',
 			],
 			[
-				'type'    => 'text',
-				'label'   => __( 'Height', 'rules' ),
-				'name'    => 'height',
+				'type'  => 'text',
+				'label' => __( 'Height', 'rules' ),
+				'name'  => 'height',
 			],
 			[
 				'type'    => 'select',
@@ -51,7 +51,7 @@ class AddImageSize extends AbstractAction {
 				'options' => [
 					0 => __( 'No', 'rules' ),
 					1 => __( 'Yes', 'rules' ),
-				]
+				],
 			],
 		];
 	}
@@ -65,7 +65,7 @@ class AddImageSize extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		if ( empty( $action_options['name'] ) || empty( $action_options['width'] ) || empty( $action_options['height'] ) ){
+		if ( empty( $action_options['name'] ) || empty( $action_options['width'] ) || empty( $action_options['height'] ) ) {
 			return;
 		}
 

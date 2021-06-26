@@ -30,9 +30,9 @@ class RemoveImageSize extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'    => 'text',
-				'label'   => __( 'Name', 'rules' ),
-				'name'    => 'name',
+				'type'  => 'text',
+				'label' => __( 'Name', 'rules' ),
+				'name'  => 'name',
 			],
 		];
 	}
@@ -46,7 +46,7 @@ class RemoveImageSize extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		if ( empty( $action_options['name'] ) ){
+		if ( empty( $action_options['name'] ) ) {
 			return;
 		}
 

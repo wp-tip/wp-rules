@@ -4,21 +4,21 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class SendEmail
+ * Class RemoveMenuPage
  *
  * @package WP_Rules\Actions
  */
-class SendEmail extends AbstractAction {
+class RemoveMenuPage extends AbstractAction {
 
 	/**
-	 * Initialize condition details like id, name.
+	 * Initialize action details like id, name.
 	 *
 	 * @return array
 	 */
 	protected function init() {
 		return [
-			'id'   => 'send_email',
-			'name' => __( 'Send Email', 'rules' ),
+			'id'   => 'remove_menu_page',
+			'name' => __( 'Remove Menu Page', 'rules' ),
 		];
 	}
 
@@ -31,18 +31,8 @@ class SendEmail extends AbstractAction {
 		return [
 			[
 				'type'  => 'text',
-				'label' => __( 'To (one or comma separated emails)', 'rules' ),
-				'name'  => 'to',
-			],
-			[
-				'type'  => 'text',
-				'label' => __( 'Email Subject', 'rules' ),
-				'name'  => 'subject',
-			],
-			[
-				'type'  => 'text',
-				'label' => __( 'Email Message', 'rules' ),
-				'name'  => 'message',
+				'label' => __( 'Menu page to remove', 'rules' ),
+				'name'  => 'menu_slug',
 			],
 		];
 	}
@@ -56,7 +46,16 @@ class SendEmail extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_mail( $action_options['to'], $action_options['subject'], $action_options['message'] );
+		if ( empty( $action_options['menu_slug'] ) ) {
+			return;
+		}
+
+		global $menu;
+		if ( empty( $menu ) ) {
+			return;
+		}
+
+		remove_menu_page( $action_options['menu_slug'] );
 	}
 
 }

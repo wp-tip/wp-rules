@@ -33,11 +33,18 @@ abstract class AbstractAction implements SubscriberInterface {
 	protected $render_field;
 
 	/**
+	 * Fired in rules cache array [ action_id => [ rule_ids ] ]
+	 *
+	 * @var array
+	 */
+	private $fired_in_rules = [];
+
+	/**
 	 * AbstractAction constructor.
 	 */
 	public function __construct() {
 		$this->render_field = rules_render_fields();
-		$this->fill_attributes( (array) $this->init() );
+		$this->fill_attributes( $this->init() );
 	}
 
 	/**
@@ -76,7 +83,7 @@ abstract class AbstractAction implements SubscriberInterface {
 		return [
 			'rules_actions_list'        => 'register_action',
 			'rules_action_options_html' => [ 'get_action_options_html', 10, 5 ],
-			'rules_action_fired'        => [ 'fire_action', 10, 3 ],
+			'rules_action_fired'        => [ 'fire_action', 10, 4 ],
 		];
 	}
 
@@ -138,13 +145,47 @@ abstract class AbstractAction implements SubscriberInterface {
 	 * @param string $action_id Action ID.
 	 * @param array  $action_options Action options.
 	 * @param array  $trigger_hook_args Current rule trigger hook arguments.
+	 * @param int    $rule_post_id Rule post ID.
 	 */
-	public function fire_action( $action_id, $action_options, $trigger_hook_args ) {
+	public function fire_action( $action_id, $action_options, $trigger_hook_args, $rule_post_id ) {
 		if ( $action_id !== $this->id ) {
 			return;
 		}
 
+		if ( $this->fired_before( $action_id, $action_options, $rule_post_id ) ) {
+			remove_action( 'rules_action_fired', [ $this, 'fire_action' ] );
+		}
+
 		$this->evaluate( $action_options, $trigger_hook_args );
+
+		$this->set_fired_before( $action_id, $action_options, $rule_post_id );
+	}
+
+	/**
+	 * Check if this action is fired before for this rule.
+	 *
+	 * @param string $action_id Action ID.
+	 * @param array  $action_options Action selected options.
+	 * @param int    $rule_post_id Rule post ID.
+	 *
+	 * @return bool
+	 */
+	private function fired_before( string $action_id, array $action_options, int $rule_post_id ) {
+		$action_hash = md5( wp_json_encode( [ $action_id, $action_options, $rule_post_id ] ) );
+		return isset( $this->fired_in_rules[ $action_hash ] );
+	}
+
+	/**
+	 * Set the fired action before to make it fired uniquely.
+	 *
+	 * @param string $action_id Action ID.
+	 * @param array  $action_options Action selected options.
+	 * @param int    $rule_post_id Rule post ID.
+	 */
+	private function set_fired_before( $action_id, $action_options, $rule_post_id ) {
+		$action_hash = md5( wp_json_encode( [ $action_id, $action_options, $rule_post_id ] ) );
+
+		$this->fired_in_rules[ $action_hash ] = true;
 	}
 
 	/**

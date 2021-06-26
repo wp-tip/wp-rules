@@ -4,21 +4,21 @@ namespace WP_Rules\Actions;
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
 /**
- * Class SendEmail
+ * Class ShowAdminBar
  *
  * @package WP_Rules\Actions
  */
-class SendEmail extends AbstractAction {
+class ShowAdminBar extends AbstractAction {
 
 	/**
-	 * Initialize condition details like id, name.
+	 * Initialize action details like id, name.
 	 *
 	 * @return array
 	 */
 	protected function init() {
 		return [
-			'id'   => 'send_email',
-			'name' => __( 'Send Email', 'rules' ),
+			'id'   => 'show_admin_bar',
+			'name' => __( 'Show admin bar', 'rules' ),
 		];
 	}
 
@@ -30,19 +30,13 @@ class SendEmail extends AbstractAction {
 	protected function admin_fields() {
 		return [
 			[
-				'type'  => 'text',
-				'label' => __( 'To (one or comma separated emails)', 'rules' ),
-				'name'  => 'to',
-			],
-			[
-				'type'  => 'text',
-				'label' => __( 'Email Subject', 'rules' ),
-				'name'  => 'subject',
-			],
-			[
-				'type'  => 'text',
-				'label' => __( 'Email Message', 'rules' ),
-				'name'  => 'message',
+				'type'    => 'select',
+				'label'   => __( 'Show', 'rules' ),
+				'name'    => 'show',
+				'options' => [
+					0 => __( 'No', 'rules' ),
+					1 => __( 'Yes', 'rules' ),
+				],
 			],
 		];
 	}
@@ -56,7 +50,16 @@ class SendEmail extends AbstractAction {
 	 * @return void
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
-		wp_mail( $action_options['to'], $action_options['subject'], $action_options['message'] );
+		if ( ! isset( $action_options['show'] ) ) {
+			return;
+		}
+
+		add_filter(
+			'show_admin_bar',
+			function ( $shown ) use ( $action_options ) {
+				return $shown && 1 === $action_options['show'];
+			}
+		);
 	}
 
 }

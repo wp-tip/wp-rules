@@ -151,4 +151,32 @@ class RenderField extends Render {
 		return $this->render_field( 'button', $data, $echo );
 	}
 
+	/**
+	 * Render Table.
+	 *
+	 * @param array $rows Table rows like [ [ 'col_1_row_1', 'col_2_row_1' ], [ 'col_1_row_2', 'col_2_row_2' ] ].
+	 * @param array $attributes Additional attributes for textbox.
+	 * @param bool  $echo Echo the content if true OR return it if false.
+	 *
+	 * @return string
+	 */
+	public function table( array $rows = [], array $attributes = [], bool $echo = true ) {
+		$data = compact( 'rows', 'attributes' );
+		return $this->render_field( 'table', $data, $echo );
+	}
+
+	/**
+	 * Render Key/Value Table.
+	 *
+	 * @param array $items Table rows like [ [ 'col_1_row_1' => 'col_2_row_1' ], [ 'col_1_row_2' => 'col_2_row_2' ] ].
+	 * @param array $attributes Additional attributes for textbox.
+	 * @param bool  $echo Echo the content if true OR return it if false.
+	 *
+	 * @return string
+	 */
+	public function tableKeyValue( array $items = [], array $attributes = [], bool $echo = true ) {
+		$data = compact( 'items', 'attributes' );
+		return $this->render_field( 'tablekeyvalue', $data, $echo );
+	}
+
 }
