@@ -67,12 +67,12 @@ class Rule {
 		$actions = get_post_meta( $rule_post_id, 'rule_actions', true );
 		if ( ! empty( $actions ) ) {
 			foreach ( $actions as $action ) {
-				$action_id      = array_keys( $action )[0];
+				$action_id = array_keys( $action )[0];
 				if ( ! empty( $action[ $action_id ] ) ) {
 					$action_options = $this->variable->evaluate_all( $action[ $action_id ] );
 				}
 
-				do_action( 'rules_action_fired', $action_id, $action_options, $trigger_hook_args );
+				do_action( 'rules_action_fired', $action_id, $action_options, $trigger_hook_args, $rule_post_id );
 			}
 		}
 

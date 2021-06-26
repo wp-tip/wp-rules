@@ -1,6 +1,7 @@
 <?php
 namespace WP_Rules\Core\Admin\Trigger;
 
+use WP_Rules\Core\Admin\Rule\PostMeta;
 use WP_Rules\Core\Plugin\EventManagement\SubscriberInterface;
 use WP_Rules\Core\Template\RenderField;
 use WP_Post;
@@ -20,10 +21,20 @@ class Subscriber implements SubscriberInterface {
 	private $render_field;
 
 	/**
-	 * Subscriber constructor.
+	 * Post Meta Instance.
+	 *
+	 * @var PostMeta
 	 */
-	public function __construct() {
+	private $post_meta;
+
+	/**
+	 * Subscriber constructor.
+	 *
+	 * @param PostMeta $post_meta PostMeta instance.
+	 */
+	public function __construct( PostMeta $post_meta ) {
 		$this->render_field = rules_render_fields();
+		$this->post_meta    = $post_meta;
 	}
 
 	/**
@@ -48,7 +59,7 @@ class Subscriber implements SubscriberInterface {
 	public function add_trigger_fields( $post ) {
 		$selected_trigger = null;
 		if ( isset( $post->ID ) ) {
-			$selected_trigger = get_post_meta( $post->ID, 'rule_trigger', true );
+			$selected_trigger = $this->post_meta->get_rule_trigger( $post->ID );
 		}
 
 		$triggers_list = apply_filters( 'rules_triggers_list', [ 0 => __( 'Please select trigger', 'rules' ) ] );
@@ -69,6 +80,10 @@ class Subscriber implements SubscriberInterface {
 	 * @param int $post_ID Current Post ID.
 	 */
 	public function save_trigger( $post_ID ) {
+		if ( rules_has_constant( 'DOING_AUTOSAVE' ) ) {
+			return;
+		}
+
 		if ( ! isset( $_POST ) || empty( $_POST ) ) {
 			return;
 		}
@@ -78,17 +93,18 @@ class Subscriber implements SubscriberInterface {
 			exit();
 		}
 
-		$fields_to_save = [
-			'rule_trigger',
-			'rule_trigger_options',
-		];
+		$this->post_meta->set_rule_trigger(
+			$post_ID,
+			isset( $_POST['rule_trigger'] ) ? sanitize_title( wp_unslash( $_POST['rule_trigger'] ) ) : ''
+		);
 
-		foreach ( $fields_to_save as $field ) {
-			if ( isset( $_POST[ $field ] ) ) {
-				$field_value = sanitize_meta( $field, wp_unslash( $_POST[ $field ] ), 'post' );
-				update_post_meta( $post_ID, $field, $field_value );
-			}
-		}
+		$this->post_meta->set_rule_trigger_options(
+			$post_ID,
+			isset( $_POST['rule_trigger_options'] ) ? sanitize_meta( 'rule_trigger_options', wp_unslash( $_POST['rule_trigger_options'] ), 'post' ) : []
+		);
+
+		// Reset rule variables.
+		$this->post_meta->set_rule_variables( $post_ID, [] );
 	}
 
 	/**
