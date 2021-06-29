@@ -33,6 +33,19 @@ class RenderField extends Render {
 	 */
 	public function render_field( string $field_name, array $data = [], bool $echo = true ) {
 		$template_name = self::ADMIN_DIR . DIRECTORY_SEPARATOR . self::FIELDS_DIR . DIRECTORY_SEPARATOR . $field_name;
+
+		if ( ! empty( $data['attributes'] ) ) {
+			$data['attributes_html'] = '';
+			foreach ( $data['attributes'] as $attribute_key => $attribute_value ) {
+				$data['attributes_html'] .= " {$attribute_key}='{$attribute_value}' ";
+			}
+		}
+
+		if ( ! empty( $data['attributes']['container_class'] ) ) {
+			$data['container_class'] = $data['attributes']['container_class'] ?? "";
+			unset( $data['attributes']['container_class'] );
+		}
+
 		$return        = $this->render( $template_name, $data );
 		if ( ! $echo ) {
 			return $return;

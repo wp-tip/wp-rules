@@ -51,7 +51,7 @@ class DeleteUser extends AbstractAction {
 		}
 
 		if ( ! function_exists( 'wp_delete_user' ) ) {
-			require_once rules_get_constant( 'ABSPATH' ) . 'wp-admin/includes/user.php';
+			require_once wpbr_get_constant( 'ABSPATH' ) . 'wp-admin/includes/user.php';
 		}
 
 		wp_delete_user( $action_options['ID'] );

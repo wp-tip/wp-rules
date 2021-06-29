@@ -33,9 +33,9 @@ class ServiceProvider extends AbstractServiceProvider {
 	public function register() {
 		$container = $this->getContainer();
 
-		$filesystem = rules_get_filesystem();
+		$filesystem = wpbr_get_filesystem();
 		$this->container->add( 'core_template_render_field', '\WP_Rules\Core\Template\RenderField' )
-						->addArgument( rules_get_constant( 'WP_RULES_VIEWS_PATH' ) )
+						->addArgument( wpbr_get_constant( 'WP_RULES_VIEWS_PATH' ) )
 						->addArgument( $filesystem );
 
 		$container->add( 'core_admin_rule_postmeta', '\WP_Rules\Core\Admin\Rule\PostMeta' );

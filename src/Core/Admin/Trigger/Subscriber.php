@@ -33,7 +33,7 @@ class Subscriber implements SubscriberInterface {
 	 * @param PostMeta $post_meta PostMeta instance.
 	 */
 	public function __construct( PostMeta $post_meta ) {
-		$this->render_field = rules_render_fields();
+		$this->render_field = wpbr_render_fields();
 		$this->post_meta    = $post_meta;
 	}
 
@@ -80,7 +80,7 @@ class Subscriber implements SubscriberInterface {
 	 * @param int $post_ID Current Post ID.
 	 */
 	public function save_trigger( $post_ID ) {
-		if ( rules_has_constant( 'DOING_AUTOSAVE' ) ) {
+		if ( wpbr_has_constant( 'DOING_AUTOSAVE' ) ) {
 			return;
 		}
 

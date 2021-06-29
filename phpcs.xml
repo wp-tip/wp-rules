@@ -12,7 +12,6 @@
 	<exclude-pattern>/src/Dependencies/*</exclude-pattern>
 	<exclude-pattern>/Tests/*</exclude-pattern>
 	<exclude-pattern>/vendor/*</exclude-pattern>
-	<exclude-pattern>/Views/*</exclude-pattern>
 
 	<!-- ** HOW TO SCAN ** -->
 
@@ -52,7 +51,7 @@
     </rule>
     <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
         <properties>
-            <property name="prefixes" type="array" value="rules,wp_rules,WPRules" />
+            <property name="prefixes" type="array" value="rules,wp_rules,WPRules,wpbr" />
         </properties>
     </rule>
     <rule ref="WordPress.Files.FileName">

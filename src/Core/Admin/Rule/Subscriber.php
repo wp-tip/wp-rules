@@ -67,6 +67,6 @@ class Subscriber implements SubscriberInterface {
 			return;
 		}
 
-		wp_enqueue_style( 'rules_admin_styles', rules_get_constant( 'WP_RULES_URL' ) . 'assets/css/wp-rules.css', false, '1.0.0' );
+		wp_enqueue_style( 'rules_admin_styles', wpbr_get_constant( 'WP_RULES_URL' ) . 'assets/css/wp-rules.css', false, '1.0.0' );
 	}
 }
