@@ -1,6 +1,6 @@
-<div class="rules-field rules-field-text" id="<?php esc_attr_e( $data['name'] ); ?>">
+<div class="rules-field rules-field-text" id="<?php echo esc_attr( $data['name'] ); ?>">
 	<label>
-		<?php echo $data['label']; ?>
-		<input type="text" name="<?php esc_attr_e( $data['name'] ); ?>" value="<?php esc_attr_e( $data['value'] ); ?>" <?php esc_attr_e( $data['attributes_html'] ); ?> >
+		<?php echo esc_html( $data['label'] ); ?>
+		<input type="text" name="<?php echo esc_attr( $data['name'] ); ?>" value="<?php echo esc_attr( $data['value'] ); ?>" <?php echo esc_html( $data['attributes_html'] ?? '' ); ?> >
 	</label>
 </div>

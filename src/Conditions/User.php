@@ -52,7 +52,7 @@ class User extends AbstractCondition {
 
 		$output = [];
 		foreach ( $users as $user ) {
-			$output[ $user->ID ] = $user->display_name . ' - ' . $user->email;
+			$output[ $user->ID ] = $user->display_name . ' - ' . $user->user_email;
 		}
 		return $output;
 	}
