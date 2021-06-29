@@ -114,6 +114,7 @@ class RenderField extends Render {
 	 */
 	public function select( string $name, string $label, array $options = [], string $value = '', array $attributes = [], bool $echo = true ) {
 		$data = compact( 'name', 'label', 'options', 'value', 'attributes' );
+		$data['multiple'] = array_key_exists( 'multiple', $attributes );
 		return $this->render_field( 'select', $data, $echo );
 	}
 
