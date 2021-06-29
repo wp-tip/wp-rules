@@ -57,7 +57,7 @@ class ShowAdminBar extends AbstractAction {
 		add_filter(
 			'show_admin_bar',
 			function ( $shown ) use ( $action_options ) {
-				return $shown && 1 === $action_options['show'];
+				return $shown && '1' === $action_options['show'];
 			}
 		);
 	}
