@@ -23,7 +23,7 @@ class Subscriber implements SubscriberInterface {
 	 * Subscriber constructor.
 	 */
 	public function __construct() {
-		$this->render_field = rules_render_fields();
+		$this->render_field = wpbr_render_fields();
 	}
 
 	/**
@@ -191,8 +191,8 @@ class Subscriber implements SubscriberInterface {
 		}
 
 		// Prepare rule_actions meta array.
-		$post_rule_actions        = rules_recursive_sanitize_text( wp_unslash( $_POST['rule_actions'] ?? [] ) );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$post_rule_action_options = rules_recursive_sanitize_text( wp_unslash( $_POST['rule_action_options'] ?? [] ) );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$post_rule_actions        = wpbr_recursive_sanitize_text( wp_unslash( $_POST['rule_actions'] ?? [] ) );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$post_rule_action_options = wpbr_recursive_sanitize_text( wp_unslash( $_POST['rule_action_options'] ?? [] ) );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( empty( $post_rule_actions ) ) {
 			delete_post_meta( $post_ID, 'rule_actions' );

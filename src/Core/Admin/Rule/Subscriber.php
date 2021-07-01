@@ -40,6 +40,7 @@ class Subscriber implements SubscriberInterface {
 			'init'                  => 'create_rules_post_type',
 			'add_meta_boxes'        => 'create_metaboxes',
 			'admin_enqueue_scripts' => 'enqueue_style',
+			'wp_kses_allowed_html'  => 'allow_form_elements',
 		];
 	}
 
@@ -67,6 +68,47 @@ class Subscriber implements SubscriberInterface {
 			return;
 		}
 
-		wp_enqueue_style( 'rules_admin_styles', rules_get_constant( 'WP_RULES_URL' ) . 'assets/css/wp-rules.css', false, '1.0.0' );
+		wp_enqueue_style( 'rules_admin_styles', wpbr_get_constant( 'WP_RULES_URL' ) . 'assets/css/wp-rules.css', false, '1.0.0' );
+	}
+
+	/**
+	 * Allow form input html tags.
+	 *
+	 * @param array $allowed Array of allowed tags.
+	 *
+	 * @return array
+	 */
+	public function allow_form_elements( array $allowed = [] ): array {
+		$allowed['input'] = [
+			'class' => [],
+			'id'    => [],
+			'name'  => [],
+			'value' => [],
+			'type'  => [],
+		];
+
+		$allowed['select'] = [
+			'class'    => [],
+			'id'       => [],
+			'name'     => [],
+			'value'    => [],
+			'type'     => [],
+			'multiple' => [],
+		];
+
+		$allowed['option'] = [
+			'class'    => [],
+			'id'       => [],
+			'value'    => [],
+			'selected' => [],
+		];
+
+		$allowed['textarea'] = [
+			'class' => [],
+			'id'    => [],
+			'name'  => [],
+		];
+
+		return $allowed;
 	}
 }

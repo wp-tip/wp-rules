@@ -33,7 +33,7 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public function __construct( Rule $rule ) {
 		$this->rule         = $rule;
-		$this->render_field = rules_render_fields();
+		$this->render_field = wpbr_render_fields();
 	}
 
 	/**

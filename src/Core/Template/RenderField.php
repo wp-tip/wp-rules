@@ -33,11 +33,24 @@ class RenderField extends Render {
 	 */
 	public function render_field( string $field_name, array $data = [], bool $echo = true ) {
 		$template_name = self::ADMIN_DIR . DIRECTORY_SEPARATOR . self::FIELDS_DIR . DIRECTORY_SEPARATOR . $field_name;
-		$return        = $this->render( $template_name, $data );
+
+		if ( ! empty( $data['attributes'] ) ) {
+			$data['attributes_html'] = '';
+			foreach ( $data['attributes'] as $attribute_key => $attribute_value ) {
+				$data['attributes_html'] .= " {$attribute_key}='{$attribute_value}' ";
+			}
+		}
+
+		if ( ! empty( $data['attributes']['container_class'] ) ) {
+			$data['container_class'] = $data['attributes']['container_class'] ?? '';
+			unset( $data['attributes']['container_class'] );
+		}
+
+		$return = $this->render( $template_name, $data );
 		if ( ! $echo ) {
 			return $return;
 		}
-		echo $return;// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo wp_kses_post( $return );
 	}
 
 	/**
@@ -100,7 +113,11 @@ class RenderField extends Render {
 	 * @return string
 	 */
 	public function select( string $name, string $label, array $options = [], string $value = '', array $attributes = [], bool $echo = true ) {
-		$data = compact( 'name', 'label', 'options', 'value', 'attributes' );
+		$data             = compact( 'name', 'label', 'options', 'value', 'attributes' );
+		$data['multiple'] = array_key_exists( 'multiple', $attributes );
+		if ( $data['multiple'] ) {
+			$data['name'] .= '[]';
+		}
 		return $this->render_field( 'select', $data, $echo );
 	}
 
