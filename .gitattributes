@@ -1,6 +1,8 @@
 bin export-ignore
 Tests export-ignore
 vendor export-ignore
+/.wordpress-org export-ignore
+/.github export-ignore
 
 .editorconfig export-ignore
 .gitattributes export-ignore
