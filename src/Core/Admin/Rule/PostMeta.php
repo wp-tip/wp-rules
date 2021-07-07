@@ -25,10 +25,14 @@ class PostMeta {
 	 *
 	 * @param int $rule_post_id Rule Post ID.
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	public function get_rule_variables( int $rule_post_id ) {
-		return get_post_meta( $rule_post_id, 'rules_variables', true );
+	public function get_rule_variables( int $rule_post_id ): array {
+		$variables = get_post_meta( $rule_post_id, 'rules_variables', true );
+		if ( ! $variables ) {
+			return [];
+		}
+		return $variables;
 	}
 
 	/**
