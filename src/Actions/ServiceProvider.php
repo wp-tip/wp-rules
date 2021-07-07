@@ -46,6 +46,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'action_body_class_add',
 		'action_body_class_remove',
 		'action_post_password_protected',
+		'action_add_schedule_interval',
 	];
 
 	/**
@@ -84,6 +85,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->share( 'action_body_class_add', '\WP_Rules\Actions\BodyClassAdd' );
 		$container->share( 'action_body_class_remove', '\WP_Rules\Actions\BodyClassRemove' );
 		$container->share( 'action_post_password_protected', '\WP_Rules\Actions\PostPasswordProtected' );
+		$container->share( 'action_add_schedule_interval', '\WP_Rules\Actions\AddScheduleInterval' );
 
 	}
 }
