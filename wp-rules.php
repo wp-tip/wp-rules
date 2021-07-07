@@ -123,4 +123,7 @@ if ( ! class_exists( 'WPRules' ) ) {
 
 add_action( 'plugins_loaded', [ 'WPRules', 'init' ] );
 
+register_deactivation_hook( $rules_plugin_file_path, [ 'WP_Rules\Core\Deactivation\Deactivate', 'index' ] );
+register_activation_hook( $rules_plugin_file_path, [ 'WP_Rules\Core\Activation\Activate', 'index' ] );
+
 unset( $rules_plugin_dir, $rules_plugin_file_path, $rules_plugin_url );
