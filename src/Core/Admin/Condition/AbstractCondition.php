@@ -1,6 +1,7 @@
 <?php
 namespace WP_Rules\Core\Admin\Condition;
 
+use WP_Rocket\Logger\Logger;
 use WP_Rules\Core\Plugin\EventManagement\SubscriberInterface;
 use WP_Rules\Core\Template\RenderField;
 use WP_Post;
@@ -105,6 +106,13 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 * @return string HTML of condition fields.
 	 */
 	public function get_condition_options_html( $html, $number, $condition_id, $options, $with_container = false ) {
+		if ( empty( $condition_id ) ) {
+			if ( $with_container ) {
+				return $this->render_field->container( '', [ 'class' => 'rule-condition-options-container' ], false );
+			}
+			return '';
+		}
+
 		if ( $condition_id !== $this->id ) {
 			if ( $with_container ) {
 				return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
