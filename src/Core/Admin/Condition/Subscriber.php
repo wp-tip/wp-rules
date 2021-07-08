@@ -39,7 +39,7 @@ class Subscriber implements SubscriberInterface {
 			'wp_ajax_rules_condition_new'       => 'rules_condition_add_new',
 			'wp_ajax_refresh_condition_options' => 'refresh_condition_options',
 			'rules_condition_admin_fields'      => [
-				['add_inverted_field', 1000 ],
+				[ 'add_inverted_field', 1000 ],
 			],
 		];
 	}
@@ -216,11 +216,18 @@ class Subscriber implements SubscriberInterface {
 
 	}
 
-	public function add_inverted_field( $admin_fields ) {
+	/**
+	 * Add inverted field to all conditions.
+	 *
+	 * @param array $admin_fields Condition's admin fields.
+	 *
+	 * @return array
+	 */
+	public function add_inverted_field( array $admin_fields = [] ) {
 		$admin_fields[] = [
-			'type' => 'checkbox',
-			'name' => 'inverted',
-			'label' => __( 'Inverted', 'rules' ),
+			'type'        => 'checkbox',
+			'name'        => 'inverted',
+			'label'       => __( 'Inverted', 'rules' ),
 			'field_class' => 'inverted-field',
 		];
 

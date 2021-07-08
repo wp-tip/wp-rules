@@ -134,7 +134,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 * Enclose HTML with the container or return it as is.
 	 *
 	 * @param string $html HTML to be enclosed.
-	 * @param bool $with_container Enclose with container or not.
+	 * @param bool   $with_container Enclose with container or not.
 	 *
 	 * @return string
 	 */
@@ -161,7 +161,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 			return $validated;
 		}
 
-		return $this->evaluate( $condition_options, $trigger_hook_args );
+		return ! empty( $condition_options['inverted'] ) xor $this->evaluate( $condition_options, $trigger_hook_args );
 	}
 
 	/**
