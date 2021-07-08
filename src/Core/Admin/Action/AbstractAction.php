@@ -111,10 +111,14 @@ abstract class AbstractAction implements SubscriberInterface {
 	 * @return string HTML of action fields.
 	 */
 	public function get_action_options_html( $html, $number, $action_id, $options, $with_container = false ) {
-		if ( $action_id !== $this->id ) {
+		if ( empty( $action_id ) ) {
 			if ( $with_container ) {
-				return $this->render_field->container( $html, [ 'class' => 'rule-action-options-container' ], false );
+				return $this->render_field->container( '', [ 'class' => 'rule-action-options-container' ], false );
 			}
+			return '';
+		}
+
+		if ( $action_id !== $this->id ) {
 			return $html;
 		}
 

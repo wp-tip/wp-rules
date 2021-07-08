@@ -28,17 +28,7 @@ class IsAdminInterface extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Current Page Is On Admin Interface', 'rules' ),
-				'name'    => 'is_admin',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsAdminInterface extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_admin() && 'yes' === $condition_options['is_admin'] ) || ( ! is_admin() && 'yes' !== $condition_options['is_admin'] );
+		return is_admin();
 	}
 }

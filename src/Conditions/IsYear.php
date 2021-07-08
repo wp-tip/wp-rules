@@ -17,7 +17,7 @@ class IsYear extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'is-month',
+			'id'   => 'is-year',
 			'name' => __( 'Is On Year Archive Page', 'rules' ),
 		];
 	}
@@ -28,17 +28,7 @@ class IsYear extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Year Archive Page', 'rules' ),
-				'name'    => 'is_year',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsYear extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_year() && 'yes' === $condition_options['is_year'] ) || ( ! is_year() && 'yes' !== $condition_options['is_year'] );
+		return is_year();
 	}
 }

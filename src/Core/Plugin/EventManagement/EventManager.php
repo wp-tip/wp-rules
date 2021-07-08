@@ -107,8 +107,8 @@ class EventManager {
 	private function add_subscriber_callback( SubscriberInterface $subscriber, $hook_name, $parameters ) {
 		if ( is_string( $parameters ) ) {
 			$this->add_callback( $hook_name, [ $subscriber, $parameters ] );
-		} elseif ( is_array( $parameters ) && isset( $parameters[0] ) && is_array( $parameters[0] ) ) {
-			foreach ( $parameters[0] as $parameter ) {
+		} elseif ( is_array( $parameters ) && count( $parameters ) !== count( $parameters, COUNT_RECURSIVE ) ) {
+			foreach ( $parameters as $parameter ) {
 				$this->add_subscriber_callback( $subscriber, $hook_name, $parameter );
 			}
 		} elseif ( is_array( $parameters ) && isset( $parameters[0] ) ) {

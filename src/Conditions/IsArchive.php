@@ -28,17 +28,7 @@ class IsArchive extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Archive Page', 'rules' ),
-				'name'    => 'is_archive',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsArchive extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_archive() && 'yes' === $condition_options['is_archive'] ) || ( ! is_archive() && 'yes' !== $condition_options['is_archive'] );
+		return is_archive();
 	}
 }

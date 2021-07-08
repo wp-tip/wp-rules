@@ -28,17 +28,7 @@ class IsPaged extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Paged', 'rules' ),
-				'name'    => 'is_paged',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsPaged extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_paged() && 'yes' === $condition_options['is_paged'] ) || ( ! is_paged() && 'yes' !== $condition_options['is_paged'] );
+		return is_paged();
 	}
 }

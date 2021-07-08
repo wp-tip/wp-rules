@@ -28,17 +28,7 @@ class IsSsl extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Site Is Using SSL Certificate', 'rules' ),
-				'name'    => 'is_ssl',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsSsl extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_ssl() && 'yes' === $condition_options['is_ssl'] ) || ( ! is_ssl() && 'yes' !== $condition_options['is_ssl'] );
+		return is_ssl();
 	}
 }

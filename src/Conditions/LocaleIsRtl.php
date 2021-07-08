@@ -28,17 +28,7 @@ class LocaleIsRtl extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Text Direction', 'rules' ),
-				'name'    => 'is_rtl',
-				'options' => [
-					'no'  => __( 'LTR', 'rules' ),
-					'yes' => __( 'RTL', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class LocaleIsRtl extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_rtl() && 'yes' === $condition_options['is_rtl'] ) || ( ! is_rtl() && 'yes' !== $condition_options['is_rtl'] );
+		return is_rtl();
 	}
 }

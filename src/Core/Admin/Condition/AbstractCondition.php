@@ -1,6 +1,7 @@
 <?php
 namespace WP_Rules\Core\Admin\Condition;
 
+use WP_Rocket\Logger\Logger;
 use WP_Rules\Core\Plugin\EventManagement\SubscriberInterface;
 use WP_Rules\Core\Template\RenderField;
 use WP_Post;
@@ -105,19 +106,17 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 * @return string HTML of condition fields.
 	 */
 	public function get_condition_options_html( $html, $number, $condition_id, $options, $with_container = false ) {
+		if ( empty( $condition_id ) ) {
+			return $this->enclose_html( '', $with_container );
+		}
+
 		if ( $condition_id !== $this->id ) {
-			if ( $with_container ) {
-				return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
-			}
 			return $html;
 		}
 
-		$admin_fields = $this->admin_fields();
+		$admin_fields = apply_filters( 'rules_condition_admin_fields', $this->admin_fields(), $condition_id );
 		if ( empty( $admin_fields ) ) {
-			if ( $with_container ) {
-				return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
-			}
-			return $html;
+			return $this->enclose_html( $html, $with_container );
 		}
 
 		foreach ( $admin_fields as $admin_field ) {
@@ -126,6 +125,18 @@ abstract class AbstractCondition implements SubscriberInterface {
 			$html                .= $this->render_field->render_field( $admin_field['type'], $admin_field, false );
 		}
 
+		return $this->enclose_html( $html, $with_container );
+	}
+
+	/**
+	 * Enclose HTML with the container or return it as is.
+	 *
+	 * @param string $html HTML to be enclosed.
+	 * @param bool   $with_container Enclose with container or not.
+	 *
+	 * @return string
+	 */
+	private function enclose_html( string $html, bool $with_container = false ): string {
 		if ( $with_container ) {
 			return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
 		}
@@ -148,7 +159,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 			return $validated;
 		}
 
-		return $this->evaluate( $condition_options, $trigger_hook_args );
+		return ! empty( $condition_options['inverted'] ) xor $this->evaluate( $condition_options, $trigger_hook_args );
 	}
 
 	/**

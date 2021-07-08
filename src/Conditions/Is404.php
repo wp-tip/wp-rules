@@ -28,17 +28,7 @@ class Is404 extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On 404 Page', 'rules' ),
-				'name'    => 'is_404',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class Is404 extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_404() && 'yes' === $condition_options['is_404'] ) || ( ! is_404() && 'yes' !== $condition_options['is_404'] );
+		return is_404();
 	}
 }
