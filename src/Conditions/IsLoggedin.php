@@ -28,17 +28,7 @@ class IsLoggedin extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'User is logged-in', 'rules' ),
-				'name'    => 'is_loggedin',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsLoggedin extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_user_logged_in() && 'yes' === $condition_options['is_loggedin'] ) || ( ! is_user_logged_in() && 'yes' !== $condition_options['is_loggedin'] );
+		return is_user_logged_in();
 	}
 }

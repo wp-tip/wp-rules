@@ -28,17 +28,7 @@ class IsCategory extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Category Page', 'rules' ),
-				'name'    => 'is_category',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsCategory extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_category() && 'yes' === $condition_options['is_category'] ) || ( ! is_category() && 'yes' !== $condition_options['is_category'] );
+		return is_category();
 	}
 }

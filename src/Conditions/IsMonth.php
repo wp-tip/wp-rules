@@ -28,17 +28,7 @@ class IsMonth extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Month Archive Page', 'rules' ),
-				'name'    => 'is_month',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsMonth extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_month() && 'yes' === $condition_options['is_month'] ) || ( ! is_month() && 'yes' !== $condition_options['is_month'] );
+		return is_month();
 	}
 }

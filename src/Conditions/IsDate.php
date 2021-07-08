@@ -28,17 +28,7 @@ class IsDate extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Date Archive Page', 'rules' ),
-				'name'    => 'is_date',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsDate extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_date() && 'yes' === $condition_options['is_date'] ) || ( ! is_date() && 'yes' !== $condition_options['is_date'] );
+		return is_date();
 	}
 }

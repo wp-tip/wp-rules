@@ -28,17 +28,7 @@ class IsMultisite extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'WordPress Is Multisite', 'rules' ),
-				'name'    => 'is_multisite',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsMultisite extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_multisite() && 'yes' === $condition_options['is_multisite'] ) || ( ! is_multisite() && 'yes' !== $condition_options['is_multisite'] );
+		return is_multisite();
 	}
 }

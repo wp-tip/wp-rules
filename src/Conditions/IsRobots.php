@@ -28,17 +28,7 @@ class IsRobots extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Robots.txt Page', 'rules' ),
-				'name'    => 'is_robots',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsRobots extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_robots() && 'yes' === $condition_options['is_robots'] ) || ( ! is_robots() && 'yes' !== $condition_options['is_robots'] );
+		return is_robots();
 	}
 }

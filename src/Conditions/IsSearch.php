@@ -28,17 +28,7 @@ class IsSearch extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Search Page', 'rules' ),
-				'name'    => 'is_search',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsSearch extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_search() && 'yes' === $condition_options['is_search'] ) || ( ! is_search() && 'yes' !== $condition_options['is_search'] );
+		return is_search();
 	}
 }

@@ -28,17 +28,7 @@ class IsDay extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Day Archive Page', 'rules' ),
-				'name'    => 'is_day',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsDay extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_day() && 'yes' === $condition_options['is_day'] ) || ( ! is_day() && 'yes' !== $condition_options['is_day'] );
+		return is_day();
 	}
 }

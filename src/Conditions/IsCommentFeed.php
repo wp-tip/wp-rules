@@ -28,17 +28,7 @@ class IsCommentFeed extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Comment Feed Page', 'rules' ),
-				'name'    => 'is_comment_feed',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,8 +40,6 @@ class IsCommentFeed extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_comment_feed() && 'yes' === $condition_options['is_comment_feed'] )
-			||
-			( ! is_comment_feed() && 'yes' !== $condition_options['is_comment_feed'] );
+		return is_comment_feed();
 	}
 }

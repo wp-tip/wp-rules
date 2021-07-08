@@ -28,17 +28,7 @@ class IsTrackback extends AbstractCondition {
 	 * @return array Admin fields.
 	 */
 	protected function admin_fields() {
-		return [
-			[
-				'type'    => 'select',
-				'label'   => __( 'Visitor Is On Trackback Page', 'rules' ),
-				'name'    => 'is_trackback',
-				'options' => [
-					'no'  => __( 'No', 'rules' ),
-					'yes' => __( 'Yes', 'rules' ),
-				],
-			],
-		];
+		return [];
 	}
 
 	/**
@@ -50,6 +40,6 @@ class IsTrackback extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
-		return ( is_trackback() && 'yes' === $condition_options['is_trackback'] ) || ( ! is_trackback() && 'yes' !== $condition_options['is_trackback'] );
+		return is_trackback();
 	}
 }
