@@ -114,12 +114,10 @@ abstract class AbstractCondition implements SubscriberInterface {
 			return $html;
 		}
 
-		$admin_fields = $this->admin_fields();
+		$admin_fields = apply_filters( 'rules_condition_admin_fields', $this->admin_fields(), $condition_id );
 		if ( empty( $admin_fields ) ) {
 			return $this->enclose_html( $html, $with_container );
 		}
-
-		$admin_fields = apply_filters( 'rules_condition_admin_fields', $admin_fields, $condition_id );
 
 		foreach ( $admin_fields as $admin_field ) {
 			$admin_field['value'] = $options[ $admin_field['name'] ] ?? null;
