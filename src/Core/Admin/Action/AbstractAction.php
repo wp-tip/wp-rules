@@ -119,9 +119,6 @@ abstract class AbstractAction implements SubscriberInterface {
 		}
 
 		if ( $action_id !== $this->id ) {
-			if ( $with_container ) {
-				return $this->render_field->container( $html, [ 'class' => 'rule-action-options-container' ], false );
-			}
 			return $html;
 		}
 

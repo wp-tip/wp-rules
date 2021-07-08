@@ -38,6 +38,9 @@ class Subscriber implements SubscriberInterface {
 			'admin_enqueue_scripts'             => 'enqueue_condition_script',
 			'wp_ajax_rules_condition_new'       => 'rules_condition_add_new',
 			'wp_ajax_refresh_condition_options' => 'refresh_condition_options',
+			'rules_condition_admin_fields'      => [
+				['add_inverted_field', 1000 ],
+			],
 		];
 	}
 
@@ -211,6 +214,17 @@ class Subscriber implements SubscriberInterface {
 
 		update_post_meta( $post_ID, 'rule_conditions', $rule_conditions );
 
+	}
+
+	public function add_inverted_field( $admin_fields ) {
+		$admin_fields[] = [
+			'type' => 'checkbox',
+			'name' => 'inverted',
+			'label' => __( 'Inverted', 'rules' ),
+			'field_class' => 'inverted-field',
+		];
+
+		return $admin_fields;
 	}
 
 }

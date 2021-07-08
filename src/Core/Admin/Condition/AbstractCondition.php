@@ -107,26 +107,19 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 */
 	public function get_condition_options_html( $html, $number, $condition_id, $options, $with_container = false ) {
 		if ( empty( $condition_id ) ) {
-			if ( $with_container ) {
-				return $this->render_field->container( '', [ 'class' => 'rule-condition-options-container' ], false );
-			}
-			return '';
+			return $this->enclose_html( '', $with_container );
 		}
 
 		if ( $condition_id !== $this->id ) {
-			if ( $with_container ) {
-				return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
-			}
 			return $html;
 		}
 
 		$admin_fields = $this->admin_fields();
 		if ( empty( $admin_fields ) ) {
-			if ( $with_container ) {
-				return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
-			}
-			return $html;
+			return $this->enclose_html( $html, $with_container );
 		}
+
+		$admin_fields = apply_filters( 'rules_condition_admin_fields', $admin_fields, $condition_id );
 
 		foreach ( $admin_fields as $admin_field ) {
 			$admin_field['value'] = $options[ $admin_field['name'] ] ?? null;
@@ -134,6 +127,18 @@ abstract class AbstractCondition implements SubscriberInterface {
 			$html                .= $this->render_field->render_field( $admin_field['type'], $admin_field, false );
 		}
 
+		return $this->enclose_html( $html, $with_container );
+	}
+
+	/**
+	 * Enclose HTML with the container or return it as is.
+	 *
+	 * @param string $html HTML to be enclosed.
+	 * @param bool $with_container Enclose with container or not.
+	 *
+	 * @return string
+	 */
+	private function enclose_html( string $html, bool $with_container = false ): string {
 		if ( $with_container ) {
 			return $this->render_field->container( $html, [ 'class' => 'rule-condition-options-container' ], false );
 		}
