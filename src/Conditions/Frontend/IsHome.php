@@ -17,8 +17,8 @@ class IsHome extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'is-home',
-			'name' => __( 'Is On Blog Home Page', 'rules' ),
+			'id'    => 'is-home',
+			'name'  => __( 'Is On Blog Home Page', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

@@ -17,8 +17,8 @@ class CurrentPageUrl extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'current-page-url',
-			'name' => __( 'Current Page', 'rules' ),
+			'id'    => 'current-page-url',
+			'name'  => __( 'Current Page', 'rules' ),
 			'group' => __( 'General', 'rules' ),
 		];
 	}

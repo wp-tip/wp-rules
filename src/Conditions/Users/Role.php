@@ -17,8 +17,8 @@ class Role extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'role',
-			'name' => __( 'Current logged-in user role', 'rules' ),
+			'id'    => 'role',
+			'name'  => __( 'Current logged-in user role', 'rules' ),
 			'group' => __( 'Users', 'rules' ),
 		];
 	}

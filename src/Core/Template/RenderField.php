@@ -121,20 +121,29 @@ class RenderField extends Render {
 		return $this->render_field( 'select', $data, $echo );
 	}
 
-	private function handle_select_groups( $data ) {
-		$groups = [];
+	/**
+	 * Handle select groups for select field.
+	 *
+	 * @param array $data Data array.
+	 *
+	 * @return array Data array after doing some logic on it.
+	 */
+	private function handle_select_groups( array $data ): array {
+		$groups   = [];
+		$nogroups = [];
 		if ( ! empty( $data['options'] ) ) {
 			foreach ( $data['options'] as $option_key => $option ) {
 				if ( ! is_array( $option ) ) {
+					$nogroups[ $option_key ] = $option;
 					continue;
 				}
 
 				foreach ( $option as $item_group => $item_name ) {
-					if ( ! isset( $groups[$item_group] ) ) {
-						$groups[$item_group] = [];
+					if ( ! isset( $groups[ $item_group ] ) ) {
+						$groups[ $item_group ] = [];
 					}
 
-					$groups[$item_group][$option_key] = $item_name;
+					$groups[ $item_group ][ $option_key ] = $item_name;
 				}
 			}
 		}
@@ -144,9 +153,27 @@ class RenderField extends Render {
 		if ( ! empty( $groups ) ) {
 			$data['groups'] = [];
 			foreach ( $groups as $group => $options ) {
-				$data['groups'][$group] = $this->render_field( 'option', [ 'options' => $options, 'attributes' => $data['attributes'], 'value' => $data['value'] ], false );
+				$data['groups'][ $group ] = $this->render_field(
+					'option',
+					[
+						'options'    => $options,
+						'attributes' => $data['attributes'],
+						'value'      => $data['value'],
+					],
+					false
+				);
 			}
-		}else{
+
+			$data['nogroups_html'] = $this->render_field(
+				'option',
+				[
+					'options'    => $nogroups,
+					'attributes' => $data['attributes'],
+					'value'      => $data['value'],
+				],
+				false
+			);
+		}else {
 			$data['options_html'] = $this->render_field( 'option', $data, false );
 		}
 

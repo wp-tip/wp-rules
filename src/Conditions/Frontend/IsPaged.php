@@ -17,8 +17,8 @@ class IsPaged extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'is-paged',
-			'name' => __( 'Is On Paged result not first page', 'rules' ),
+			'id'    => 'is-paged',
+			'name'  => __( 'Is On Paged result not first page', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

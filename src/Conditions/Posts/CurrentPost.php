@@ -17,8 +17,8 @@ class CurrentPost extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'current-post',
-			'name' => __( 'Current Post', 'rules' ),
+			'id'    => 'current-post',
+			'name'  => __( 'Current Post', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

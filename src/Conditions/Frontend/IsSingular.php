@@ -17,8 +17,8 @@ class IsSingular extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'is-singular',
-			'name' => __( 'Is On Single Post Type Page', 'rules' ),
+			'id'    => 'is-singular',
+			'name'  => __( 'Is On Single Post Type Page', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

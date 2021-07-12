@@ -17,8 +17,8 @@ class LocaleIsRtl extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'locale-is-rtl',
-			'name' => __( 'Current Locale is RTL', 'rules' ),
+			'id'    => 'locale-is-rtl',
+			'name'  => __( 'Current Locale is RTL', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

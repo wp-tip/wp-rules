@@ -17,8 +17,8 @@ class IsAuthor extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'is-author',
-			'name' => __( 'Is On Author Page', 'rules' ),
+			'id'    => 'is-author',
+			'name'  => __( 'Is On Author Page', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

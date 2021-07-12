@@ -17,8 +17,8 @@ class IsPrivacyPolicy extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'is-privacy-policy',
-			'name' => __( 'Is On Privacy Policy Page', 'rules' ),
+			'id'    => 'is-privacy-policy',
+			'name'  => __( 'Is On Privacy Policy Page', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

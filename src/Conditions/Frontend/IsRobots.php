@@ -17,8 +17,8 @@ class IsRobots extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'is-robots',
-			'name' => __( 'Is On Robots.txt Page', 'rules' ),
+			'id'    => 'is-robots',
+			'name'  => __( 'Is On Robots.txt Page', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

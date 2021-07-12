@@ -17,8 +17,8 @@ class IsAdminInterface extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'   => 'is-admin-interface',
-			'name' => __( 'Is On admin Interface', 'rules' ),
+			'id'    => 'is-admin-interface',
+			'name'  => __( 'Is On admin Interface', 'rules' ),
 			'group' => __( 'Backend', 'rules' ),
 		];
 	}
