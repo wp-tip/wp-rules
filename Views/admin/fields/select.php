@@ -3,19 +3,16 @@
 		<?php echo esc_html( $data['label'] ); ?>
 		<select name="<?php echo esc_attr( $data['name'] ); ?>" <?php echo wp_kses_data( $data['attributes_html'] ?? '' ); ?> >
 			<?php
-			if ( ! empty( $data['options'] ) ) {
-				foreach ( $data['options'] as $wpbr_option_key => $wpbr_option_value ) {
-					$wpbr_selected = ( empty( $data['multiple'] ) && (string) $wpbr_option_key === $data['value'] ) || ( ! empty( $data['multiple'] ) && in_array( (string) $wpbr_option_key, $data['value'], true ) );
+			if ( ! empty( $data['groups'] ) ) {
+				foreach ( $data['groups'] as $group => $group_options ) {
 					?>
-					<option value="<?php echo esc_attr( $wpbr_option_key ); ?>"
-											<?php
-											if ( $wpbr_selected ) {
-												?>
-						selected="selected"<?php } ?> >
-						<?php echo wp_kses_data( $wpbr_option_value ); ?>
-					</option>
-					<?php
+					<optgroup label="<?php echo esc_attr( $group );?>">
+					<?php echo wp_kses_post( $group_options ); ?>
+					</optgroup>
+				<?php
 				}
+			}else{
+				echo wp_kses_post( $data['options_html'] );
 			}
 			?>
 		</select>

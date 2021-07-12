@@ -28,6 +28,13 @@ abstract class AbstractCondition implements SubscriberInterface {
 	protected $name = '';
 
 	/**
+	 * Condition group name.
+	 *
+	 * @var string
+	 */
+	protected $group = '';
+
+	/**
 	 * RenderField class instance.
 	 *
 	 * @var RenderField
@@ -90,7 +97,7 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 * @return array List of conditions after adding current one.
 	 */
 	public function register_condition( array $conditions_list ) {
-		$conditions_list[ $this->id ] = $this->name;
+		$conditions_list[ $this->id ] = empty( $this->group ) ? $this->name : [ $this->group => $this->name ];
 		return $conditions_list;
 	}
 

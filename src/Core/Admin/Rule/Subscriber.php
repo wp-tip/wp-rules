@@ -97,6 +97,10 @@ class Subscriber implements SubscriberInterface {
 			'multiple' => [],
 		];
 
+		$allowed['optgroup'] = [
+			'label' => [],
+		];
+
 		$allowed['option'] = [
 			'class'    => [],
 			'id'       => [],
