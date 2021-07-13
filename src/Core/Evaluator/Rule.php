@@ -53,7 +53,7 @@ class Rule {
 		if ( ! empty( $conditions ) ) {
 			foreach ( $conditions as $condition ) {
 				$condition_id      = array_keys( $condition )[0];
-				$condition_options = $this->variable->evaluate_all( $condition[ $condition_id ] );
+				$condition_options = $this->variable->evaluate_all( $condition[ $condition_id ] ?? [] );
 
 				$conditions_validated &= apply_filters( 'rules_condition_validated', false, $condition_id, $condition_options, $trigger_hook_args );
 			}
@@ -72,7 +72,7 @@ class Rule {
 					$action_options = $this->variable->evaluate_all( $action[ $action_id ] );
 				}
 
-				do_action( 'rules_action_fired', $action_id, $action_options, $trigger_hook_args, $rule_post_id );
+				do_action( 'rules_action_fired', $action_id, $action_options ?? [], $trigger_hook_args, $rule_post_id );
 			}
 		}
 

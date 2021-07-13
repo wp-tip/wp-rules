@@ -92,13 +92,16 @@ class Variable {
 	 *
 	 * @return array|string[] Array of input items with replaced variables.
 	 */
-	public function evaluate_all( array $items ) {
+	public function evaluate_all( array $items = [] ) {
+		if ( empty( $items ) ) {
+			return [];
+		}
 		return array_map(
-				function ( $item ) {
+			function ( $item ) {
 					return $this->evaluate_string( $item );
-				},
+			},
 			$items
-			);
+		);
 	}
 
 	/**

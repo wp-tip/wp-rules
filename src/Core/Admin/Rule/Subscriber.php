@@ -80,11 +80,12 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public function allow_form_elements( array $allowed = [] ): array {
 		$allowed['input'] = [
-			'class' => [],
-			'id'    => [],
-			'name'  => [],
-			'value' => [],
-			'type'  => [],
+			'class'   => [],
+			'id'      => [],
+			'name'    => [],
+			'value'   => [],
+			'type'    => [],
+			'checked' => [],
 		];
 
 		$allowed['select'] = [
@@ -94,6 +95,10 @@ class Subscriber implements SubscriberInterface {
 			'value'    => [],
 			'type'     => [],
 			'multiple' => [],
+		];
+
+		$allowed['optgroup'] = [
+			'label' => [],
 		];
 
 		$allowed['option'] = [
