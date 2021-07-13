@@ -46,6 +46,10 @@ class RenderField extends Render {
 			unset( $data['attributes']['container_class'] );
 		}
 
+		if ( 'select' === $field_name ) {
+			$data = $this->handle_select_groups( $data );
+		}
+
 		$return = $this->render( $template_name, $data );
 		if ( ! $echo ) {
 			return $return;
@@ -113,12 +117,71 @@ class RenderField extends Render {
 	 * @return string
 	 */
 	public function select( string $name, string $label, array $options = [], string $value = '', array $attributes = [], bool $echo = true ) {
-		$data             = compact( 'name', 'label', 'options', 'value', 'attributes' );
-		$data['multiple'] = array_key_exists( 'multiple', $attributes );
+		$data = compact( 'name', 'label', 'options', 'value', 'attributes' );
+		return $this->render_field( 'select', $data, $echo );
+	}
+
+	/**
+	 * Handle select groups for select field.
+	 *
+	 * @param array $data Data array.
+	 *
+	 * @return array Data array after doing some logic on it.
+	 */
+	private function handle_select_groups( array $data ): array {
+		$groups   = [];
+		$nogroups = [];
+		if ( ! empty( $data['options'] ) ) {
+			foreach ( $data['options'] as $option_key => $option ) {
+				if ( ! is_array( $option ) ) {
+					$nogroups[ $option_key ] = $option;
+					continue;
+				}
+
+				foreach ( $option as $item_group => $item_name ) {
+					if ( ! isset( $groups[ $item_group ] ) ) {
+						$groups[ $item_group ] = [];
+					}
+
+					$groups[ $item_group ][ $option_key ] = $item_name;
+				}
+			}
+		}
+
+		$data['multiple'] = array_key_exists( 'multiple', $data['attributes'] ?? [] );
+
+		if ( ! empty( $groups ) ) {
+			$data['groups'] = [];
+			foreach ( $groups as $group => $options ) {
+				$data['groups'][ $group ] = $this->render_field(
+					'option',
+					[
+						'options'    => $options,
+						'attributes' => $data['attributes'],
+						'value'      => $data['value'],
+					],
+					false
+				);
+			}
+
+			$data['nogroups_html'] = $this->render_field(
+				'option',
+				[
+					'options'    => $nogroups,
+					'attributes' => $data['attributes'],
+					'value'      => $data['value'],
+				],
+				false
+			);
+		}else {
+			$data['options_html'] = $this->render_field( 'option', $data, false );
+		}
+
 		if ( $data['multiple'] ) {
 			$data['name'] .= '[]';
 		}
-		return $this->render_field( 'select', $data, $echo );
+
+		return $data;
 	}
 
 	/**
