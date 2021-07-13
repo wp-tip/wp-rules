@@ -26,6 +26,13 @@ abstract class AbstractAction implements SubscriberInterface {
 	protected $name = '';
 
 	/**
+	 * Action group name.
+	 *
+	 * @var string
+	 */
+	protected $group = '';
+
+	/**
 	 * RenderField class instance.
 	 *
 	 * @var RenderField
@@ -95,7 +102,7 @@ abstract class AbstractAction implements SubscriberInterface {
 	 * @return array List of actions after adding current one.
 	 */
 	public function register_action( array $actions_list ) {
-		$actions_list[ $this->id ] = $this->name;
+		$actions_list[ $this->id ] = empty( $this->group ) ? $this->name : [ $this->group => $this->name ];
 		return $actions_list;
 	}
 
