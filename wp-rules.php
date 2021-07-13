@@ -2,10 +2,10 @@
 /**
  * Plugin Name: WP Rules
  * Plugin URI:  https://github.com/engahmeds3ed/wp-rules
- * Description: WP Rules is business workflow rules plugin for WordPress CMS.
+ * Description: WP Business Rules is business workflow rules plugin for WordPress CMS.
  * Author:      Ahmed Saeed
  * Author URI:  https://github.com/engahmeds3ed
- * Version:     0.1
+ * Version:     0.1.1
  * Text Domain: wp_rules
  * Domain Path: /languages/
  * License:     GPLv2 or later (license.txt)
@@ -18,7 +18,7 @@ $rules_plugin_file_path = __FILE__;
 $rules_plugin_dir       = plugin_dir_path( $rules_plugin_file_path );
 $rules_plugin_url       = plugin_dir_url( $rules_plugin_file_path );
 
-defined( 'WP_RULES_VERSION' ) || define( 'WP_RULES_VERSION', '0.1' );
+defined( 'WP_RULES_VERSION' ) || define( 'WP_RULES_VERSION', '0.1.1' );
 defined( 'WP_RULES_PATH' ) || define( 'WP_RULES_PATH', $rules_plugin_dir );
 defined( 'WP_RULES_URL' ) || define( 'WP_RULES_URL', $rules_plugin_url );
 defined( 'WP_RULES_MIN_PHP' ) || define( 'WP_RULES_MIN_PHP', '7.2' );
