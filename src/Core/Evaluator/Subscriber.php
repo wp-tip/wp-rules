@@ -74,6 +74,10 @@ class Subscriber implements SubscriberInterface {
 		}
 
 		foreach ( $rules_results as $rule ) {
+			if ( 'publish' !== get_post_status( $rule->post_id ) ) {
+				continue;
+			}
+
 			if ( ! apply_filters( 'rules_trigger_validated', true, $trigger_id, $trigger_options, $rule->post_id ) ) {
 				continue;
 			}
