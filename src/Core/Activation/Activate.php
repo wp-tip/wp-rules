@@ -11,7 +11,7 @@ class Activate {
 	/**
 	 * Entry point of activation.
 	 */
-	public function index() {
+	public static function index() {
 
 	}
 
