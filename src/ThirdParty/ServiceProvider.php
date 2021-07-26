@@ -22,7 +22,9 @@ class ServiceProvider extends AbstractServiceProvider {
 	 *
 	 * @var array
 	 */
-	private $plugins = [];
+	private $plugins = [
+		'NinjaForms',
+	];
 
 	/**
 	 * List of themes
