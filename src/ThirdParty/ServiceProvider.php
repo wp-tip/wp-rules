@@ -11,21 +11,40 @@ use WP_Rules\Dependencies\League\Container\ServiceProvider\AbstractServiceProvid
 class ServiceProvider extends AbstractServiceProvider {
 
 	/**
-	 * Provides array.
+	 * Provides array, will be filled on constructor.
 	 *
 	 * @var string[]
 	 */
 	public $provides = [];
 
-	private $plugins = [
-		'Dummy'
-	];
+	/**
+	 * List of plugins.
+	 *
+	 * @var array
+	 */
+	private $plugins = [];
+
+	/**
+	 * List of themes
+	 *
+	 * @var string[]
+	 */
 	private $themes = [];
+
+	/**
+	 * List of registered classes sent to the container
+	 *
+	 * @var array
+	 */
 	private $registered_classes = [];
 
+	/**
+	 * Load plugins and themes then fill provides array.
+	 */
 	public function __construct() {
 		$this->register_thirdparty_plugins();
 		$this->register_thirdparty_themes();
+
 		if ( empty( $this->registered_classes ) ) {
 			return;
 		}
@@ -33,6 +52,9 @@ class ServiceProvider extends AbstractServiceProvider {
 		$this->provides = array_keys( $this->registered_classes );
 	}
 
+	/**
+	 * Register plugins.
+	 */
 	private function register_thirdparty_plugins() {
 		foreach ( $this->plugins as $plugin ) {
 			$plugin_class = '\\WP_Rules\\ThirdParty\\Plugins\\' . $plugin . '\\Plugin';
@@ -50,9 +72,12 @@ class ServiceProvider extends AbstractServiceProvider {
 		}
 	}
 
+	/**
+	 * Register themes.
+	 */
 	private function register_thirdparty_themes() {
 		foreach ( $this->themes as $theme ) {
-			$theme_class = '\\WP_Rules\\ThirdParty\\Themes\\' . $theme . '\\Plugin';
+			$theme_class = '\\WP_Rules\\ThirdParty\\Themes\\' . $theme . '\\Theme';
 			if ( ! method_exists( $theme_class, 'is_allowed' ) || ! $theme_class::is_allowed() ) {
 				continue;
 			}
