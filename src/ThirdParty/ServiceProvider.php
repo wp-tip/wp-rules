@@ -22,7 +22,9 @@ class ServiceProvider extends AbstractServiceProvider {
 	 *
 	 * @var array
 	 */
-	private $plugins = [];
+	private $plugins = [
+		'ContactForm7',
+	];
 
 	/**
 	 * List of themes
