@@ -25,6 +25,7 @@ class Plugin {
 	public static function register(): array {
 		return [
 			'trigger_before_send_email' => '\WP_Rules\ThirdParty\Plugins\ContactForm7\Triggers\BeforeSendEmail',
+			'action_stop_submission'    => '\WP_Rules\ThirdParty\Plugins\ContactForm7\Actions\StopSubmission',
 		];
 	}
 

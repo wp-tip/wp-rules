@@ -2,6 +2,7 @@
 namespace WP_Rules\ThirdParty\Plugins\ContactForm7\Triggers;
 
 use WP_Rules\Core\Admin\Trigger\AbstractTrigger;
+use WPCF7_ContactForm;
 
 /**
  * Class BeforeSendEmail
@@ -17,12 +18,13 @@ class BeforeSendEmail extends AbstractTrigger {
 	 */
 	protected function init() {
 		return [
-			'id'                 => 'wpcf7_before_send_mail',
-			'wp_action'          => 'wpcf7_before_send_mail',
-			'name'               => __( 'Contact Form 7 - Before sending email', 'rules' ),
+			'id'                 => 'wpcf7_submit',
+			'wp_action'          => 'wpcf7_submit',
+			'name'               => __( 'Contact Form 7 - Form submission', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
-				'form',
+				'cf7form',
+				'result',
 			],
 		];
 	}
@@ -34,6 +36,20 @@ class BeforeSendEmail extends AbstractTrigger {
 	 */
 	protected function admin_fields() {
 		return [];
+	}
+
+	protected function register_variable( $variable_name, $variable_value ) {
+		if ( 'cf7form' !== $variable_name || ! ( $variable_value instanceof WPCF7_ContactForm ) ) {
+			return null;
+		}
+
+		return array_merge(
+			[
+				'form_id' => $variable_value->id()
+			],
+			(array) $variable_value->get_properties()
+		);
+
 	}
 
 }
