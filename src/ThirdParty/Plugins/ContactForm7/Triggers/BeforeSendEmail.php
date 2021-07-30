@@ -18,13 +18,12 @@ class BeforeSendEmail extends AbstractTrigger {
 	 */
 	protected function init() {
 		return [
-			'id'                 => 'wpcf7_submit',
-			'wp_action'          => 'wpcf7_submit',
-			'name'               => __( 'Contact Form 7 - Form submission', 'rules' ),
+			'id'                 => 'wpcf7_before_send_mail',
+			'wp_action'          => 'wpcf7_before_send_mail',
+			'name'               => __( 'Contact Form 7 - Before sending mail', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'cf7form',
-				'result',
 			],
 		];
 	}
