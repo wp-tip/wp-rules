@@ -68,6 +68,12 @@ class Variable {
 	 * @param mixed  $variable_value Variable value.
 	 */
 	private function parse_insert( string $variable_name, $variable_value ) {
+		$filtered_variable_value = apply_filters( 'rules_variable_value', null, $variable_name, $variable_value );
+		if ( ! is_null( $filtered_variable_value ) ) {
+			$this->parse_insert( $variable_name, $filtered_variable_value );
+			return;
+		}
+
 		if ( is_string( $variable_value ) || is_int( $variable_value ) ) {
 			$this->variables[ $variable_name ] = $variable_value;
 			return;
