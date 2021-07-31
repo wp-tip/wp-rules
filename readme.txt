@@ -2,8 +2,8 @@
 Contributors: engahmeds3ed
 Tags: Business rules, rules, conditions, wp rules, triggers, actions
 Requires at least: 5.2
-Tested up to: 5.7.2
-Stable tag: 0.1.1
+Tested up to: 5.8
+Stable tag: 0.1.2
 Requires PHP: 7.2
 License: GNU General Public License v2.0 or later
 
@@ -29,5 +29,9 @@ Example use cases
 3. Choose one trigger to fire this business rule with.
 4. Choose some conditions that will check once this business rule is fired.
 5. Choose some actions that will occur when this business rule is fired and conditions are met.
+
+== Third-Party Integrations ==
+1. Contact Form 7 plugin.
+2. Ninja Forms plugin.
 
 Learn more about: <a href="https://wp-tip.com/business-rules-workflow-wordpress-plugin/">Business rules WordPress plugin</a>
