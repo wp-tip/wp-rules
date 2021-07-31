@@ -5,11 +5,11 @@ use WP_Rules\Core\Admin\Trigger\AbstractTrigger;
 use WPCF7_ContactForm;
 
 /**
- * Class FormSubmitted
+ * Class MailSent
  *
  * @package WP_Rules\ThirdParty\Plugins\CotactForm7\Triggers
  */
-class FormSubmitted extends AbstractTrigger {
+class MailSent extends AbstractTrigger {
 
 	/**
 	 * Initialize trigger details like id, name, wp_action.
@@ -18,9 +18,9 @@ class FormSubmitted extends AbstractTrigger {
 	 */
 	protected function init() {
 		return [
-			'id'                 => 'wpcf7_contact_form',
-			'wp_action'          => 'wpcf7_contact_form',
-			'name'               => __( 'Contact Form 7 - Form submitted', 'rules' ),
+			'id'                 => 'wpcf7_mail_sent',
+			'wp_action'          => 'wpcf7_mail_sent',
+			'name'               => __( 'Contact Form 7 - Mail sent', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'cf7form',
@@ -57,19 +57,6 @@ class FormSubmitted extends AbstractTrigger {
 			(array) $variable_value->get_properties()
 		);
 
-	}
-
-	/**
-	 * Validate trigger options by comparing options with trigger hook arguments.
-	 *
-	 * @param array $trigger_hook_args Array of Trigger hook arguments ( Associative ).
-	 * @param array $trigger_options Array if Trigger saved options for each rule.
-	 * @param int   $rule_post_id Current rule post ID.
-	 *
-	 * @return bool
-	 */
-	public function validate_trigger_options( $trigger_hook_args, $trigger_options, $rule_post_id ) {
-		return wpbr_has_constant( 'REST_REQUEST' );
 	}
 
 }
