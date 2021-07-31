@@ -2,6 +2,8 @@
 namespace WP_Rules\ThirdParty\Plugins\NinjaForms;
 
 use WP_Rules\ThirdParty\Plugins\AbstractPlugin;
+use WP_Rules\ThirdParty\Plugins\NinjaForms\Triggers\AfterSubmission;
+use WP_Rules\ThirdParty\Plugins\NinjaForms\Triggers\BeforeResponse;
 
 /**
  * Class Plugin
@@ -26,7 +28,8 @@ class Plugin extends AbstractPlugin {
 	 */
 	public static function register(): array {
 		return [
-			'trigger_after_submission' => '\WP_Rules\ThirdParty\Plugins\NinjaForms\Triggers\AfterSubmission',
+			'trigger_after_submission' => AfterSubmission::class,
+			'trigger_before_response'  => BeforeResponse::class,
 		];
 	}
 
