@@ -34,3 +34,7 @@
 	margin-bottom: 1em;
 	border-top: 1px solid #f3f3f3;
 }
+#rules_variables .inside{
+	height: 20rem;
+	overflow: scroll;
+}
