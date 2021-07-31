@@ -254,7 +254,16 @@ abstract class AbstractTrigger implements SubscriberInterface {
 		return (bool) apply_filters( 'rules_validate_trigger_options', $validated, $trigger_id, $trigger_hook_args, $rule_post_id );
 	}
 
-	public function maybe_variable_value( $final_value, $variable_name, $variable_value ) {
+	/**
+	 * Register variable value if register_variable method is there.
+	 *
+	 * @param mixed  $final_value Final value of variable.
+	 * @param string $variable_name Variable name.
+	 * @param mixed  $variable_value Current variable value.
+	 *
+	 * @return mixed
+	 */
+	public function maybe_variable_value( $final_value, string $variable_name, $variable_value ) {
 		if ( ! method_exists( $this, 'register_variable' ) ) {
 			return $final_value;
 		}

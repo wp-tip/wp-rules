@@ -3,7 +3,7 @@ namespace WP_Rules\ThirdParty\Plugins\ContactForm7\Actions;
 
 use WP_Rules\Core\Admin\Action\AbstractAction;
 
-class StopSubmission extends AbstractAction {
+class SkipMail extends AbstractAction {
 
 	/**
 	 * Initialize Action details like id, name.
@@ -12,8 +12,8 @@ class StopSubmission extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'cf7_stop_submission',
-			'name'  => __( 'Contact form 7 stop form submission', 'rules' ),
+			'id'    => 'cf7_skip_mail',
+			'name'  => __( 'Contact form 7 Skip sending mail', 'rules' ),
 			'group' => __( 'ThirdParty', 'rules' ),
 		];
 	}
@@ -43,13 +43,13 @@ class StopSubmission extends AbstractAction {
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
 		add_filter(
-			'wpcf7_before_send_mail',
-			function ( $data, &$abort ) use ( $action_options ) {
-				if ( (int) $action_options['form_id'] !== $data->id() ) {
-					return;
+			'wpcf7_skip_mail',
+			function ( $skip, $cf7form ) use ( $action_options ) {
+				if ( (int) $action_options['form_id'] !== $cf7form->id() ) {
+					return $skip;
 				}
 
-				$abort = true;
+				return true;
 			},
 			10,
 			2
