@@ -18,7 +18,7 @@ class Debug extends AbstractAction {
 	protected function init() {
 		return [
 			'id'    => 'debug',
-			'name'  => __( 'Debug.', 'rules' ),
+			'name'  => __( 'Debug', 'rules' ),
 			'group' => __( 'General', 'rules' ),
 		];
 	}

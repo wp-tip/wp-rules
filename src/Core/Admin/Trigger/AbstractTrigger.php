@@ -95,6 +95,7 @@ abstract class AbstractTrigger implements SubscriberInterface {
 			'rules_trigger_options_ajax'   => [ 'add_admin_options_ajax', 10, 2 ],
 			self::$wp_action               => [ 'trigger_fired', self::$wp_action_priority, count( self::$wp_action_args ) ],
 			'rules_trigger_validated'      => [ 'validate_trigger', 10, 4 ],
+			'rules_variable_value'         => [ 'maybe_variable_value', 10, 3 ],
 		];
 	}
 
@@ -251,6 +252,28 @@ abstract class AbstractTrigger implements SubscriberInterface {
 		$validated = $this->validate_trigger_options( $trigger_hook_args, $trigger_options, $rule_post_id );
 
 		return (bool) apply_filters( 'rules_validate_trigger_options', $validated, $trigger_id, $trigger_hook_args, $rule_post_id );
+	}
+
+	/**
+	 * Register variable value if register_variable method is there.
+	 *
+	 * @param mixed  $final_value Final value of variable.
+	 * @param string $variable_name Variable name.
+	 * @param mixed  $variable_value Current variable value.
+	 *
+	 * @return mixed
+	 */
+	public function maybe_variable_value( $final_value, string $variable_name, $variable_value ) {
+		if ( ! method_exists( $this, 'register_variable' ) ) {
+			return $final_value;
+		}
+
+		$registered_value = $this->register_variable( $variable_name, $variable_value );
+		if ( is_null( $registered_value ) ) {
+			return $final_value;
+		}
+
+		return $registered_value;
 	}
 
 }

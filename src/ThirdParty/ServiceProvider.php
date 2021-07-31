@@ -23,6 +23,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	 * @var array
 	 */
 	private $plugins = [
+		'ContactForm7',
 		'NinjaForms',
 	];
 
