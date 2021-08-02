@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: WP Rules
- * Plugin URI:  https://github.com/engahmeds3ed/wp-rules
+ * Plugin Name: Business Rules
+ * Plugin URI:  https://github.com/wp-tip/wp-rules
  * Description: WP Business Rules is business workflow rules plugin for WordPress CMS.
- * Author:      Ahmed Saeed
- * Author URI:  https://github.com/engahmeds3ed
+ * Author:      WP Tip
+ * Author URI:  https://github.com/wp-tip
  * Version:     0.1.2
  * Text Domain: wp_rules
  * Domain Path: /languages/
