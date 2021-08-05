@@ -27,13 +27,22 @@ class Subscriber implements SubscriberInterface {
 	private $render_field;
 
 	/**
+	 * RuleLog class instance.
+	 *
+	 * @var RuleLog
+	 */
+	private $rule_log;
+
+	/**
 	 * Subscriber constructor.
 	 *
 	 * @param Rule $rule Rule instance.
+	 * @param RuleLog $rule_log RuleLog instance.
 	 */
-	public function __construct( Rule $rule ) {
+	public function __construct( Rule $rule, RuleLog $rule_log ) {
 		$this->rule         = $rule;
 		$this->render_field = wpbr_render_fields();
+		$this->rule_log = $rule_log;
 	}
 
 	/**
@@ -46,6 +55,10 @@ class Subscriber implements SubscriberInterface {
 			'rules_trigger_fired'            => [ 'evaluate_trigger', 10, 2 ],
 			'save_post_rules'                => 'removed_cached_trigger_rules',
 			'rules_metabox_variables_fields' => 'print_variables',
+			'rules_trigger_validated'        => [ 'log_rule_trigger', 10, 4 ],
+			'rules_condition_validated'      => [ 'log_rule_conditions', 10, 5 ],
+			'rules_action_fired'             => [ 'log_rule_actions', 10, 4 ],
+			'rules_after_trigger_save'       => 'reset_rule_logs',
 		];
 	}
 
@@ -114,6 +127,24 @@ class Subscriber implements SubscriberInterface {
 			);
 
 		$this->render_field->table( $rows );
+	}
+
+	public function log_rule_trigger( $validated, $trigger_id, $trigger_options, $rule_post_id ) {
+		$this->rule_log->save_trigger( $validated, $trigger_id, $trigger_options, $rule_post_id );
+		return $validated;
+	}
+
+	public function log_rule_conditions( $validated, $condition_id, $condition_options, $trigger_hook_args, $rule_post_id ) {
+		$this->rule_log->save_condition( $validated, $condition_id, $condition_options, $rule_post_id );
+		return $validated;
+	}
+
+	public function log_rule_actions( $action_id, $action_options, $trigger_hook_args, $rule_post_id ) {
+		$this->rule_log->save_action( $action_id, $action_options, $rule_post_id );
+	}
+
+	public function reset_rule_logs( $rule_post_id ) {
+		$this->rule_log->remove_rule_logs( $rule_post_id );
 	}
 
 }
