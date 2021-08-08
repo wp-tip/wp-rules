@@ -36,13 +36,13 @@ class Subscriber implements SubscriberInterface {
 	/**
 	 * Subscriber constructor.
 	 *
-	 * @param Rule $rule Rule instance.
+	 * @param Rule    $rule Rule instance.
 	 * @param RuleLog $rule_log RuleLog instance.
 	 */
 	public function __construct( Rule $rule, RuleLog $rule_log ) {
 		$this->rule         = $rule;
 		$this->render_field = wpbr_render_fields();
-		$this->rule_log = $rule_log;
+		$this->rule_log     = $rule_log;
 	}
 
 	/**
@@ -129,20 +129,54 @@ class Subscriber implements SubscriberInterface {
 		$this->render_field->table( $rows );
 	}
 
+	/**
+	 * Log rule trigger.
+	 *
+	 * @param bool   $validated Trigger status.
+	 * @param string $trigger_id Trigger ID.
+	 * @param array  $trigger_options Trigger options.
+	 * @param int    $rule_post_id Rule Post ID.
+	 *
+	 * @return mixed
+	 */
 	public function log_rule_trigger( $validated, $trigger_id, $trigger_options, $rule_post_id ) {
 		$this->rule_log->save_trigger( $validated, $trigger_id, $trigger_options, $rule_post_id );
 		return $validated;
 	}
 
+	/**
+	 * Save Condition into log.
+	 *
+	 * @param bool   $validated Condition status.
+	 * @param string $condition_id Condition ID.
+	 * @param array  $condition_options Condition options.
+	 * @param array  $trigger_hook_args Trigger hook arguments.
+	 * @param int    $rule_post_id Rule Post ID.
+	 *
+	 * @return bool
+	 */
 	public function log_rule_conditions( $validated, $condition_id, $condition_options, $trigger_hook_args, $rule_post_id ) {
 		$this->rule_log->save_condition( $validated, $condition_id, $condition_options, $rule_post_id );
 		return $validated;
 	}
 
+	/**
+	 * Save action into log.
+	 *
+	 * @param string $action_id Action ID.
+	 * @param array  $action_options Action Options.
+	 * @param array  $trigger_hook_args Trigger hook arguments.
+	 * @param int    $rule_post_id Rule Post ID.
+	 */
 	public function log_rule_actions( $action_id, $action_options, $trigger_hook_args, $rule_post_id ) {
 		$this->rule_log->save_action( $action_id, $action_options, $rule_post_id );
 	}
 
+	/**
+	 * Remove all rule logs.
+	 *
+	 * @param int $rule_post_id Rule Post ID.
+	 */
 	public function reset_rule_logs( $rule_post_id ) {
 		$this->rule_log->remove_rule_logs( $rule_post_id );
 	}

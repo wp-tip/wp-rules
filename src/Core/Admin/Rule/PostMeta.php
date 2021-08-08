@@ -81,10 +81,25 @@ class PostMeta {
 		return get_post_meta( $rule_post_id, 'rule_trigger_options', true );
 	}
 
+	/**
+	 * Get rule log entries.
+	 *
+	 * @param int $rule_post_id Rule Post ID.
+	 *
+	 * @return mixed
+	 */
 	public function get_rule_log( int $rule_post_id ) {
 		return get_post_meta( $rule_post_id, 'rule_log', true );
 	}
 
+	/**
+	 * Set rule log entries.
+	 *
+	 * @param int   $rule_post_id Rule Post ID.
+	 * @param array $rule_log Log to be saved.
+	 *
+	 * @return bool|int
+	 */
 	public function set_rule_log( int $rule_post_id, array $rule_log ) {
 		return update_post_meta( $rule_post_id, 'rule_log', $rule_log );
 	}

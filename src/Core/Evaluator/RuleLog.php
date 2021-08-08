@@ -5,16 +5,52 @@ use WP_Rules\Core\Admin\Rule\PostMeta;
 
 class RuleLog {
 
+	/**
+	 * PostMeta instance.
+	 *
+	 * @var PostMeta
+	 */
 	private $post_meta;
 
+	/**
+	 * Current request unique ID.
+	 *
+	 * @var string
+	 */
 	public $request_id;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param PostMeta $post_meta PostMeta instance.
+	 */
 	public function __construct( PostMeta $post_meta ) {
-		$this->post_meta = $post_meta;
-		$this->request_id = sprintf("%08x", abs(crc32($_SERVER['REMOTE_ADDR'] . $_SERVER['REQUEST_TIME_FLOAT'] . $_SERVER['REMOTE_PORT'])));
+		$this->post_meta  = $post_meta;
+		$this->request_id = sprintf(
+			'%08x',
+			abs(
+				crc32(
+					sanitize_title(
+						wp_unslash(
+							$_SERVER['REMOTE_ADDR'] ?? '' . $_SERVER['REQUEST_TIME_FLOAT'] ?? '' . $_SERVER['REMOTE_PORT'] ?? ''
+						)
+					)
+				)
+			)
+		);
 	}
 
-	public function save_trigger( $validated, $trigger_id, $trigger_options, $rule_post_id ) {
+	/**
+	 * Save trigger into the log
+	 *
+	 * @param bool   $validated Trigger status.
+	 * @param string $trigger_id Trigger ID.
+	 * @param array  $trigger_options Trigger options.
+	 * @param int    $rule_post_id Rule Post ID.
+	 *
+	 * @return bool|int
+	 */
+	public function save_trigger( bool $validated, string $trigger_id, array $trigger_options, int $rule_post_id ) {
 		$rule_log = $this->post_meta->get_rule_log( $rule_post_id );
 
 		if ( ! $rule_log ) {
@@ -22,57 +58,90 @@ class RuleLog {
 		}
 
 		$rule_log[ $this->request_id ] = [
-			'trigger' => [
+			'trigger'    => [
 				$trigger_id => [
-					'status' => $validated,
+					'status'  => $validated,
 					'options' => $trigger_options ?? [],
-				]
+				],
 			],
 			'conditions' => [],
-			'actions' => [],
+			'actions'    => [],
 		];
 
-		if ( apply_filters( 'rules_log_max', 5, $rule_post_id ) < count( $rule_log ) ) {
+		if ( apply_filters( 'rules_log_max_entries', 5, $rule_post_id ) < count( $rule_log ) ) {
 			array_shift( $rule_log );
 		}
 
 		return $this->post_meta->set_rule_log( $rule_post_id, $rule_log );
 	}
 
-	public function save_condition( $validated, $condition_id, $condition_options, $rule_post_id ) {
+	/**
+	 * Save Condition into log.
+	 *
+	 * @param bool   $validated Condition status.
+	 * @param string $condition_id Condition ID.
+	 * @param array  $condition_options Condition options.
+	 * @param int    $rule_post_id Rule Post ID.
+	 *
+	 * @return bool|int
+	 */
+	public function save_condition( bool $validated, string $condition_id, array $condition_options, int $rule_post_id ) {
 		$rule_log = $this->post_meta->get_rule_log( $rule_post_id );
 
 		if ( ! $rule_log || empty( $rule_log[ $this->request_id ] ) ) {
 			return false;
 		}
 
-		$rule_log[ $this->request_id]['conditions'][$condition_id] = [
-			'status' => $validated,
+		$rule_log[ $this->request_id ]['conditions'][ $condition_id ] = [
+			'status'  => $validated,
 			'options' => $condition_options,
 		];
 
 		return $this->post_meta->set_rule_log( $rule_post_id, $rule_log );
 	}
 
-	public function save_action( $action_id, $action_options, $rule_post_id ) {
+	/**
+	 * Save action into log.
+	 *
+	 * @param string $action_id Action ID.
+	 * @param array  $action_options Action Options.
+	 * @param int    $rule_post_id Rule Post ID.
+	 *
+	 * @return bool|int
+	 */
+	public function save_action( string $action_id, array $action_options, int $rule_post_id ) {
 		$rule_log = $this->post_meta->get_rule_log( $rule_post_id );
 
 		if ( ! $rule_log || empty( $rule_log[ $this->request_id ] ) ) {
 			return false;
 		}
 
-		$rule_log[ $this->request_id]['actions'][$action_id] = [
+		$rule_log[ $this->request_id ]['actions'][ $action_id ] = [
 			'options' => $action_options,
 		];
 
 		return $this->post_meta->set_rule_log( $rule_post_id, $rule_log );
 	}
 
-	public function get_rule_logs( $rule_post_id ) {
-		return $this->post_meta->get_rule_log( $rule_post_id ) ?? [];
+	/**
+	 * Get rule log entries.
+	 *
+	 * @param int $rule_post_id Rule Post ID.
+	 *
+	 * @return array
+	 */
+	public function get_rule_logs( int $rule_post_id ) {
+		return (array) $this->post_meta->get_rule_log( $rule_post_id ) ?? [];
 	}
 
-	public function remove_rule_logs( $rule_post_id ) {
+	/**
+	 * Remove all rule logs.
+	 *
+	 * @param int $rule_post_id Rule Post ID.
+	 *
+	 * @return bool|int
+	 */
+	public function remove_rule_logs( int $rule_post_id ) {
 		return $this->post_meta->set_rule_log( $rule_post_id, [] );
 	}
 

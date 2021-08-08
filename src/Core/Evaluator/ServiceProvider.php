@@ -33,7 +33,7 @@ class ServiceProvider extends AbstractServiceProvider {
 				->addArgument( $container->get( 'core_admin_rule_postmeta' ) );
 
 		$container->share( 'core_evaluator_rule_log', '\WP_Rules\Core\Evaluator\RuleLog' )
-		          ->addArgument( $container->get( 'core_admin_rule_postmeta' ) );
+				->addArgument( $container->get( 'core_admin_rule_postmeta' ) );
 		$container->share( 'core_evaluator_subscriber', '\WP_Rules\Core\Evaluator\Subscriber' )
 				->addArgument( $container->get( 'core_evaluator_rule' ) )
 				->addArgument( $container->get( 'core_evaluator_rule_log' ) );
