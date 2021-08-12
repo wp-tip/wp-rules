@@ -38,3 +38,14 @@
 	height: 20rem;
 	overflow: scroll;
 }
+#rules_logs .inside {
+	max-height: 20rem;
+	overflow-y: scroll;
+}
+#rules_logs .rules-field-tablekeyvalue {
+	background-color: #efefef;
+	margin-bottom: 1em;
+}
+#rules_logs .rules-field-tablekeyvalue th{
+	text-align: left;
+}
