@@ -132,7 +132,8 @@ class RuleLog {
 	 * @return array
 	 */
 	public function get_rule_logs( int $rule_post_id ): array {
-		return (array) $this->post_meta->get_rule_log( $rule_post_id ) ?? [];
+		$logs = $this->post_meta->get_rule_log( $rule_post_id );
+		return ! empty( $logs ) ? $logs : [];
 	}
 
 	/**
