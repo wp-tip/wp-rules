@@ -105,6 +105,8 @@ class Subscriber implements SubscriberInterface {
 
 		// Reset rule variables.
 		$this->post_meta->set_rule_variables( $post_ID, [] );
+
+		do_action( 'rules_after_trigger_save', $post_ID );
 	}
 
 	/**

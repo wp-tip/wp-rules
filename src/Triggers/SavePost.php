@@ -83,6 +83,14 @@ class SavePost extends AbstractTrigger {
 	 * @return bool
 	 */
 	public function validate_trigger_options( $trigger_hook_args, $trigger_options, $rule_post_id ) {
+		if ( empty( $trigger_hook_args['post'] ) ) {
+			return false;
+		}
+
+		if ( $trigger_hook_args['post']->post_status === 'auto-draft' ) {
+			return false;
+		}
+
 		if ( (int) $trigger_options['new_or_edit'] !== (int) $trigger_hook_args['update'] ) {
 			return false;
 		}
