@@ -52,13 +52,13 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public static function get_subscribed_events(): array {
 		return [
-			'rules_trigger_fired'            => [ 'evaluate_trigger', 10, 2 ],
-			'save_post_rules'                => 'removed_cached_trigger_rules',
-			'rules_metabox_variables_fields' => 'print_variables',
-			'rules_trigger_validated'        => [ 'log_rule_trigger', 10, 4 ],
-			'rules_condition_validated'      => [ 'log_rule_conditions', 10, 5 ],
-			'rules_action_fired'             => [ 'log_rule_actions', 10, 4 ],
-			'rules_after_trigger_save'       => 'reset_rule_logs',
+			'rules_trigger_fired'       => [ 'evaluate_trigger', 10, 2 ],
+			'save_post_rules'           => 'removed_cached_trigger_rules',
+			'rules_trigger_validated'   => [ 'log_rule_trigger', 10, 4 ],
+			'rules_condition_validated' => [ 'log_rule_conditions', 10, 5 ],
+			'rules_action_fired'        => [ 'log_rule_actions', 10, 4 ],
+			'rules_after_trigger_save'  => 'reset_rule_logs',
+			'rules_metabox_logs'        => 'show_rule_logs',
 		];
 	}
 
@@ -106,27 +106,6 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public function removed_cached_trigger_rules( $post_id ) {
 		wp_cache_delete( 'cached_trigger_rules', 'rules' );
-	}
-
-	/**
-	 * Print variables on the metaBox.
-	 *
-	 * @param WP_Post $post Current rule Post object.
-	 */
-	public function print_variables( WP_Post $post ) {
-		$variables = $this->rule->get_variables( $post->ID );
-		if ( empty( $variables ) ) {
-			return;
-		}
-
-		$rows = array_map(
-				function ( $item ) {
-					return [ '{{' . $item . '}}' ];
-				},
-			array_keys( $variables )
-			);
-
-		$this->render_field->table( $rows );
 	}
 
 	/**
@@ -179,6 +158,22 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public function reset_rule_logs( $rule_post_id ) {
 		$this->rule_log->remove_rule_logs( $rule_post_id );
+	}
+
+	/**
+	 * Show rule formatted logs.
+	 *
+	 * @param WP_Post $post Rule post object.
+	 */
+	public function show_rule_logs( WP_Post $post ) {
+		$logs = $this->rule_log->get_rule_logs( $post->ID );
+		if ( empty( $logs ) ) {
+			return;
+		}
+
+		foreach ( $logs as $log ) {
+			$this->render_field->tableKeyValue( $this->rule_log->format_rule_log_entry( $log ), [ 'class' => 'rule_log_table' ] );
+		}
 	}
 
 }

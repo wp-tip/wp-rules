@@ -32,7 +32,7 @@ class RuleLog {
 				crc32(
 					sanitize_title(
 						wp_unslash(
-							$_SERVER['REMOTE_ADDR'] ?? '' . $_SERVER['REQUEST_TIME_FLOAT'] ?? '' . $_SERVER['REMOTE_PORT'] ?? ''
+							( $_SERVER['REMOTE_ADDR'] ?? '' ) . ( $_SERVER['REQUEST_TIME_FLOAT'] ?? '' ) . ( $_SERVER['REMOTE_PORT'] ?? '' )
 						)
 					)
 				)
@@ -58,6 +58,7 @@ class RuleLog {
 		}
 
 		$rule_log[ $this->request_id ] = [
+			'datetime'   => current_time( 'mysql' ),
 			'trigger'    => [
 				$trigger_id => [
 					'status'  => $validated,
@@ -130,8 +131,49 @@ class RuleLog {
 	 *
 	 * @return array
 	 */
-	public function get_rule_logs( int $rule_post_id ) {
+	public function get_rule_logs( int $rule_post_id ): array {
 		return (array) $this->post_meta->get_rule_log( $rule_post_id ) ?? [];
+	}
+
+	/**
+	 * Format one rule log entry to be key-value array.
+	 *
+	 * @param array $log Rule Logs.
+	 *
+	 * @return array
+	 */
+	public function format_rule_log_entry( array $log ): array {
+		$table_rows                               = [];
+		$table_rows[ __( 'Date/Time', 'rules' ) ] = $log['datetime'];
+		$table_rows['-']                          = '-';
+
+		$table_rows[ __( 'Conditions', 'rules' ) ] = '';
+		foreach ( $log['conditions'] as $condition_id => $condition ) {
+			$table_rows[ $condition_id ] = ( $condition['status'] ? __( 'Yes', 'rules' ) : __( 'No', 'rules' ) );
+
+			if ( ! empty( $condition['options'] ) ) {
+				foreach ( $condition['options'] as $option_key => $option_value ) {
+					$table_rows[ $option_key ] = $option_value;
+				}
+			}
+			$table_rows['--'] = '--';
+		}
+
+		$table_rows['--------------'] = '--------------';
+
+		$table_rows[ __( 'Actions', 'rules' ) ] = '';
+		foreach ( $log['actions'] as $action_id => $action ) {
+			$table_rows[ $action_id ] = '';
+
+			if ( ! empty( $action['options'] ) ) {
+				foreach ( $action['options'] as $option_key => $option_value ) {
+					$table_rows[ $option_key ] = $option_value;
+				}
+			}
+			$table_rows['---'] = '---';
+		}
+
+		return $table_rows;
 	}
 
 	/**

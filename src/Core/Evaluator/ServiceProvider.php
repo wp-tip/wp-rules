@@ -19,6 +19,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'core_evaluator_variable',
 		'core_evaluator_rule',
 		'core_evaluator_subscriber',
+		'core_evaluator_rule_log',
 	];
 
 	/**
