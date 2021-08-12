@@ -3,7 +3,7 @@ Contributors: engahmeds3ed
 Tags: Business rules, rules, conditions, wp rules, triggers, actions
 Requires at least: 5.2
 Tested up to: 5.8
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 Requires PHP: 7.2
 License: GNU General Public License v2.0 or later
 
