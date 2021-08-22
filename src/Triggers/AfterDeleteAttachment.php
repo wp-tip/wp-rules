@@ -20,6 +20,7 @@ class AfterDeleteAttachment extends AbstractTrigger {
 			'id'                 => 'deleted_post',
 			'wp_action'          => 'deleted_post',
 			'name'               => __( 'After Delete Attachment', 'rules' ),
+			'description'        => __( '', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

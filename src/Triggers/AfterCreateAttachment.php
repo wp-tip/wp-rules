@@ -20,6 +20,7 @@ class AfterCreateAttachment extends AbstractTrigger {
 			'id'                 => 'add_attachment',
 			'wp_action'          => 'add_attachment',
 			'name'               => __( 'After Create Attachment', 'rules' ),
+			'description'        => __( '', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

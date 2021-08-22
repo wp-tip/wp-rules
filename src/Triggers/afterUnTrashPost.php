@@ -20,6 +20,7 @@ class AfterUnTrashPost extends AbstractTrigger {
 			'id'                 => 'untrashed_post',
 			'wp_action'          => 'untrashed_post',
 			'name'               => __( 'After Un Trash Post', 'rules' ),
+			'description'        => __( '', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',
