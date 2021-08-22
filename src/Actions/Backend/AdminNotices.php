@@ -58,6 +58,15 @@ class AdminNotices extends AbstractAction {
 				],
 			],
 			[
+				'type'    => 'select',
+				'label'   => __( 'Use transient', 'rules' ),
+				'name'    => 'use_transient',
+				'options' => [
+					1 => __( 'Yes', 'rules' ),
+					0 => __( 'No', 'rules' ),
+				],
+			],
+			[
 				'type'  => 'textarea',
 				'label' => __( 'Admin notice contents.', 'rules' ),
 				'name'  => 'notice_contents',
@@ -75,10 +84,15 @@ class AdminNotices extends AbstractAction {
 	 */
 	protected function evaluate( $action_options, $trigger_hook_args ) {
 		$this->notice_args = [
-			'status'      => $action_options['notice_type'],
-			'message'     => $action_options['notice_contents'],
-			'dismissable' => $action_options['notice_dismissable'],
+			'status'        => $action_options['notice_type'],
+			'message'       => $action_options['notice_contents'],
+			'dismissable'   => $action_options['notice_dismissable'],
+			'use_transient' => $action_options['use_transient'] ?? 0,
 		];
+
+		if ( ! empty( $action_options['use_transient'] ) ) {
+			set_transient( 'rules_admin_notice', $this->notice_args );
+		}
 
 		add_action( 'admin_notices', [ $this, 'print_notice' ] );
 	}
@@ -87,6 +101,14 @@ class AdminNotices extends AbstractAction {
 	 * Print notice HTML
 	 */
 	public function print_notice() {
+		if ( empty( $this->notice_args ) ) {
+			return;
+		}
+
+		if ( ! empty( $this->notice_args['use_transient'] ) ) {
+			delete_transient( 'rules_admin_notice' );
+		}
+
 		printf(
 				'<div class="notice notice-%s %s"><p>%s</p></div>',
 				esc_attr( $this->notice_args['status'] ),

@@ -87,7 +87,7 @@ class SavePost extends AbstractTrigger {
 			return false;
 		}
 
-		if ( $trigger_hook_args['post']->post_status === 'auto-draft' ) {
+		if ( 'publish' !== $trigger_hook_args['post']->post_status ) {
 			return false;
 		}
 
