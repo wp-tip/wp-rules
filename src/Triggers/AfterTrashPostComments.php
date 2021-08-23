@@ -20,7 +20,7 @@ class AfterTrashPostComments extends AbstractTrigger {
 			'id'                 => 'trashed_post_comments',
 			'wp_action'          => 'trashed_post_comments',
 			'name'               => __( 'After Trash Post Comments', 'rules' ),
-			'description'        => __( '', 'rules' ),
+			'description'        => __( 'Fires after comments are sent to the Trash.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

@@ -20,7 +20,7 @@ class AfterDeletePost extends AbstractTrigger {
 			'id'                 => 'after_delete_post',
 			'wp_action'          => 'after_delete_post',
 			'name'               => __( 'After Delete Post Permanently', 'rules' ),
-			'description'        => __( '', 'rules' ),
+			'description'        => __( 'Fires after a post is deleted.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

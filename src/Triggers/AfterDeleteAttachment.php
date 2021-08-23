@@ -20,7 +20,7 @@ class AfterDeleteAttachment extends AbstractTrigger {
 			'id'                 => 'deleted_post',
 			'wp_action'          => 'deleted_post',
 			'name'               => __( 'After Delete Attachment', 'rules' ),
-			'description'        => __( '', 'rules' ),
+			'description'        => __( 'Fires immediately after a post is deleted from the database.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

@@ -20,6 +20,7 @@ class SavePost extends AbstractTrigger {
 			'id'                 => 'wp_insert_post',
 			'wp_action'          => 'wp_insert_post',
 			'name'               => __( 'Save Post', 'rules' ),
+			'description'        => __( 'Fires once a post has been saved, You may need to choose if u want to use that on update or on create new post.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

@@ -20,6 +20,7 @@ class WPLoaded extends AbstractTrigger {
 			'id'                 => 'wp_loaded',
 			'wp_action'          => 'wp_loaded',
 			'name'               => __( 'WordPress Loaded', 'rules' ),
+			'description'        => __( 'Fires once WP, all plugins, and the theme are fully loaded and instantiated.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [],
 		];
