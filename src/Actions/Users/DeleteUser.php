@@ -19,6 +19,7 @@ class DeleteUser extends AbstractAction {
 		return [
 			'id'    => 'delete_user',
 			'name'  => __( 'Delete User', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Users', 'rules' ),
 		];
 	}

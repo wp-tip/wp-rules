@@ -19,6 +19,7 @@ class ShowAdminBar extends AbstractAction {
 		return [
 			'id'    => 'show_admin_bar',
 			'name'  => __( 'Show admin bar', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

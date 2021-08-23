@@ -19,6 +19,7 @@ class IsFrontPage extends AbstractCondition {
 		return [
 			'id'    => 'is-front-page',
 			'name'  => __( 'Is On Front Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

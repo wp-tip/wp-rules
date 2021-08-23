@@ -19,6 +19,7 @@ class IsMultisite extends AbstractCondition {
 		return [
 			'id'    => 'is-multisite',
 			'name'  => __( 'Is Multisite', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

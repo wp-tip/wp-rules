@@ -19,6 +19,7 @@ class IsCategory extends AbstractCondition {
 		return [
 			'id'    => 'is-category',
 			'name'  => __( 'Is On Category Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

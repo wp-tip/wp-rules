@@ -19,6 +19,7 @@ class AvailableUploadSpace extends AbstractCondition {
 		return [
 			'id'    => 'available-upload-space',
 			'name'  => __( 'Available Upload Space (multisite)', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Backend', 'rules' ),
 		];
 	}

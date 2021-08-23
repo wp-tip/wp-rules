@@ -19,6 +19,7 @@ class PostExcerptReplace extends AbstractAction {
 		return [
 			'id'    => 'post_excerpt_replace',
 			'name'  => __( 'Replace in post excerpt', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

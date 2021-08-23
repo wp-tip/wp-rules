@@ -19,6 +19,7 @@ class TrashPost extends AbstractAction {
 		return [
 			'id'    => 'trash_post',
 			'name'  => __( 'Trash Post', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

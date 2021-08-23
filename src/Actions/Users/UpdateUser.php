@@ -19,6 +19,7 @@ class UpdateUser extends AbstractAction {
 		return [
 			'id'    => 'update_user',
 			'name'  => __( 'Update User', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Users', 'rules' ),
 		];
 	}

@@ -19,6 +19,7 @@ class RemoveMenuPage extends AbstractAction {
 		return [
 			'id'    => 'remove_menu_page',
 			'name'  => __( 'Remove Menu Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Backend', 'rules' ),
 		];
 	}

@@ -19,6 +19,7 @@ class IsFavicon extends AbstractCondition {
 		return [
 			'id'    => 'is-favicon',
 			'name'  => __( 'Is Loading favicon.ico', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

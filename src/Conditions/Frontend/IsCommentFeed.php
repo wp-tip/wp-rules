@@ -19,6 +19,7 @@ class IsCommentFeed extends AbstractCondition {
 		return [
 			'id'    => 'is-comment-feed',
 			'name'  => __( 'Is On Comment Feed Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

@@ -19,6 +19,7 @@ class BodyClassRemove extends AbstractAction {
 		return [
 			'id'    => 'body_class_remove',
 			'name'  => __( 'Remove class from body tag', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

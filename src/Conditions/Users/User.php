@@ -19,6 +19,7 @@ class User extends AbstractCondition {
 		return [
 			'id'    => 'loggedin-user',
 			'name'  => __( 'Current logged-in user', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Users', 'rules' ),
 		];
 	}

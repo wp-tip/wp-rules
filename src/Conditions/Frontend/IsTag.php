@@ -19,6 +19,7 @@ class IsTag extends AbstractCondition {
 		return [
 			'id'    => 'is-tag',
 			'name'  => __( 'Is On Tag Archive Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

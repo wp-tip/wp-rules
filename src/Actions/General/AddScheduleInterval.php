@@ -19,6 +19,7 @@ class AddScheduleInterval extends AbstractAction {
 		return [
 			'id'    => 'add_schedule_interval',
 			'name'  => __( 'Add Schedule Interval', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'General', 'rules' ),
 		];
 	}

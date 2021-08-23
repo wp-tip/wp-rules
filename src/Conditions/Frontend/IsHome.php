@@ -19,6 +19,7 @@ class IsHome extends AbstractCondition {
 		return [
 			'id'    => 'is-home',
 			'name'  => __( 'Is On Blog Home Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

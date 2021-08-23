@@ -19,6 +19,7 @@ class CurrentPageUrl extends AbstractCondition {
 		return [
 			'id'    => 'current-page-url',
 			'name'  => __( 'Current Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'General', 'rules' ),
 		];
 	}

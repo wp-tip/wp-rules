@@ -19,6 +19,7 @@ class VariableCompare extends AbstractCondition {
 		return [
 			'id'    => 'variable-compare',
 			'name'  => __( 'Variable Compare', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'General', 'rules' ),
 		];
 	}

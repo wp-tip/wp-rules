@@ -19,6 +19,7 @@ class CurrentAdminScreen extends AbstractCondition {
 		return [
 			'id'    => 'current-admin-screen',
 			'name'  => __( 'Current Admin Screen', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Backend', 'rules' ),
 		];
 	}

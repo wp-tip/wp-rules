@@ -19,6 +19,7 @@ class AddImageSize extends AbstractAction {
 		return [
 			'id'    => 'add_image_size',
 			'name'  => __( 'Add Image Size', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'General', 'rules' ),
 		];
 	}

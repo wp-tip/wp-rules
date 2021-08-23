@@ -19,6 +19,7 @@ class DeleteOption extends AbstractAction {
 		return [
 			'id'    => 'delete_option',
 			'name'  => __( 'Delete Option', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Backend', 'rules' ),
 		];
 	}

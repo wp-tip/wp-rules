@@ -19,6 +19,7 @@ class AuthRedirect extends AbstractAction {
 		return [
 			'id'    => 'auth_redirect',
 			'name'  => __( 'Require Login', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

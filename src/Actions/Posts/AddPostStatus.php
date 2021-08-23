@@ -26,6 +26,7 @@ class AddPostStatus extends AbstractAction {
 		return [
 			'id'    => 'add_post_status',
 			'name'  => __( 'Add New post status', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

@@ -19,6 +19,7 @@ class SendEmail extends AbstractAction {
 		return [
 			'id'    => 'send_email',
 			'name'  => __( 'Send Email', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'General', 'rules' ),
 		];
 	}

@@ -19,6 +19,7 @@ class IsArchive extends AbstractCondition {
 		return [
 			'id'    => 'is-archive',
 			'name'  => __( 'Is On Archive Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

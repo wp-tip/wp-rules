@@ -19,6 +19,7 @@ class IsPreview extends AbstractCondition {
 		return [
 			'id'    => 'is-preview',
 			'name'  => __( 'Is On Preview post/page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

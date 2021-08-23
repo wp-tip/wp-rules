@@ -19,6 +19,7 @@ class PostContentReplace extends AbstractAction {
 		return [
 			'id'    => 'post_content_replace',
 			'name'  => __( 'Replace in post content', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

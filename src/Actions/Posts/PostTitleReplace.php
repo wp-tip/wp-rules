@@ -19,6 +19,7 @@ class PostTitleReplace extends AbstractAction {
 		return [
 			'id'    => 'post_title_replace',
 			'name'  => __( 'Replace in post title', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

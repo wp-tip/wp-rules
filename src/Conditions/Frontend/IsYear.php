@@ -19,6 +19,7 @@ class IsYear extends AbstractCondition {
 		return [
 			'id'    => 'is-year',
 			'name'  => __( 'Is On Year Archive Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

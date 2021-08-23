@@ -19,6 +19,7 @@ class PostClassRemove extends AbstractAction {
 		return [
 			'id'    => 'post_class_remove',
 			'name'  => __( 'Remove class from post', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

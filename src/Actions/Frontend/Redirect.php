@@ -19,6 +19,7 @@ class Redirect extends AbstractAction {
 		return [
 			'id'    => 'redirect',
 			'name'  => __( 'Redirect to.', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

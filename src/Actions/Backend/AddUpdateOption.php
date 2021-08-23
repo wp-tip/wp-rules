@@ -19,6 +19,7 @@ class AddUpdateOption extends AbstractAction {
 		return [
 			'id'    => 'add_update_option',
 			'name'  => __( 'Add/Update Option', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Backend', 'rules' ),
 		];
 	}

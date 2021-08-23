@@ -19,6 +19,7 @@ class Debug extends AbstractAction {
 		return [
 			'id'    => 'debug',
 			'name'  => __( 'Debug', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'General', 'rules' ),
 		];
 	}

@@ -19,6 +19,7 @@ class ShowLoginPageMessage extends AbstractAction {
 		return [
 			'id'    => 'show_login_page_message',
 			'name'  => __( 'Show login page message.', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

@@ -19,6 +19,7 @@ class Is404 extends AbstractCondition {
 		return [
 			'id'    => 'is-404',
 			'name'  => __( 'Is On 404 Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

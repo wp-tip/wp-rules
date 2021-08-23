@@ -19,6 +19,7 @@ class PostClassAdd extends AbstractAction {
 		return [
 			'id'    => 'post_class_add',
 			'name'  => __( 'Add class to post', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

@@ -19,6 +19,7 @@ class IsSsl extends AbstractCondition {
 		return [
 			'id'    => 'is-ssl',
 			'name'  => __( 'Is SSL', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

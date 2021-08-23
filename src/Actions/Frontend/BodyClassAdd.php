@@ -19,6 +19,7 @@ class BodyClassAdd extends AbstractAction {
 		return [
 			'id'    => 'body_class_add',
 			'name'  => __( 'Add class to body tag', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

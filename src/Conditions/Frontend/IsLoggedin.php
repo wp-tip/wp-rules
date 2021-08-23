@@ -19,6 +19,7 @@ class IsLoggedin extends AbstractCondition {
 		return [
 			'id'    => 'is-loggedin',
 			'name'  => __( 'Is Loggedin', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

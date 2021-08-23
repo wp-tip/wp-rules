@@ -19,6 +19,7 @@ class IsDay extends AbstractCondition {
 		return [
 			'id'    => 'is-day',
 			'name'  => __( 'Is On Day Archive Page', 'rules' ),
+			'description' => __( '', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}
