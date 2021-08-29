@@ -19,7 +19,7 @@ class UpdatePost extends AbstractAction {
 		return [
 			'id'    => 'update_post',
 			'name'  => __( 'Update Post', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Update post details, you may use Post ID as a number or a variable.', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

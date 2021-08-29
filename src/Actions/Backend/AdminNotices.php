@@ -26,7 +26,7 @@ class AdminNotices extends AbstractAction {
 		return [
 			'id'    => 'admin_notices',
 			'name'  => __( 'Show admin notice.', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Prints admin screen notices.', 'rules' ),
 			'group' => __( 'Backend', 'rules' ),
 		];
 	}

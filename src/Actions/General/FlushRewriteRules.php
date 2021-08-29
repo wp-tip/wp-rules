@@ -19,7 +19,7 @@ class FlushRewriteRules extends AbstractAction {
 		return [
 			'id'    => 'flush_rewrite_rules',
 			'name'  => __( 'Flush Rewrite Rules', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( ' Remove rewrite rules and then recreate them again.', 'rules' ),
 			'group' => __( 'General', 'rules' ),
 		];
 	}

@@ -19,7 +19,7 @@ class PostExcerptReplace extends AbstractAction {
 		return [
 			'id'    => 'post_excerpt_replace',
 			'name'  => __( 'Replace in post excerpt', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Replaces a word with another in the post excerpt without changing it on Database, uses the filter `the_excerpt`.', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

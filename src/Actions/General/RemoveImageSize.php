@@ -19,7 +19,7 @@ class RemoveImageSize extends AbstractAction {
 		return [
 			'id'    => 'remove_image_size',
 			'name'  => __( 'Remove Image Size', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Remove registered image size by its name.', 'rules' ),
 			'group' => __( 'General', 'rules' ),
 		];
 	}

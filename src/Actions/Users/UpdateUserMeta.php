@@ -19,7 +19,7 @@ class UpdateUserMeta extends AbstractAction {
 		return [
 			'id'    => 'update_user_meta',
 			'name'  => __( 'Update User Meta', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Update user meta by ID and meta key.', 'rules' ),
 			'group' => __( 'Users', 'rules' ),
 		];
 	}

@@ -19,7 +19,7 @@ class CreateUser extends AbstractAction {
 		return [
 			'id'    => 'create_user',
 			'name'  => __( 'Create User', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Create a new user at the system.', 'rules' ),
 			'group' => __( 'Users', 'rules' ),
 		];
 	}

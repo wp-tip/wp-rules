@@ -19,7 +19,7 @@ class PostClassRemove extends AbstractAction {
 		return [
 			'id'    => 'post_class_remove',
 			'name'  => __( 'Remove class from post', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Remove class from the list of CSS class names for the current post.', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}

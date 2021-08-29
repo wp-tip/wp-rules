@@ -19,7 +19,7 @@ class BodyClassRemove extends AbstractAction {
 		return [
 			'id'    => 'body_class_remove',
 			'name'  => __( 'Remove class from body tag', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Remove class from the list of CSS body class names for the current post or page.', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

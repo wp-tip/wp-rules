@@ -19,7 +19,7 @@ class CreatePost extends AbstractAction {
 		return [
 			'id'    => 'create_post',
 			'name'  => __( 'Create Post', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Create new post.', 'rules' ),
 			'group' => __( 'Posts', 'rules' ),
 		];
 	}
