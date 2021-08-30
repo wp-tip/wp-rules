@@ -17,10 +17,10 @@ class AddScheduleInterval extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'add_schedule_interval',
-			'name'  => __( 'Add Schedule Interval', 'rules' ),
+			'id'          => 'add_schedule_interval',
+			'name'        => __( 'Add Schedule Interval', 'rules' ),
 			'description' => __( 'Add time interval to the schedule trigger.', 'rules' ),
-			'group' => __( 'General', 'rules' ),
+			'group'       => __( 'General', 'rules' ),
 		];
 	}
 

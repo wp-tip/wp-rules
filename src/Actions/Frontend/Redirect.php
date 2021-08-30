@@ -17,10 +17,10 @@ class Redirect extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'redirect',
-			'name'  => __( 'Redirect to', 'rules' ),
+			'id'          => 'redirect',
+			'name'        => __( 'Redirect to', 'rules' ),
 			'description' => __( 'Redirect to internal/external Url.', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

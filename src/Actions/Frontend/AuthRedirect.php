@@ -17,10 +17,10 @@ class AuthRedirect extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'auth_redirect',
-			'name'  => __( 'Require Login', 'rules' ),
+			'id'          => 'auth_redirect',
+			'name'        => __( 'Require Login', 'rules' ),
 			'description' => __( 'Checks if a user is logged in, if not it redirects them to the login page.', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

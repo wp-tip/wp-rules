@@ -17,10 +17,10 @@ class VariableCompare extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'variable-compare',
-			'name'  => __( 'Variable Compare', 'rules' ),
+			'id'          => 'variable-compare',
+			'name'        => __( 'Variable Compare', 'rules' ),
 			'description' => __( 'Compare variable with predefined value.', 'rules' ),
-			'group' => __( 'General', 'rules' ),
+			'group'       => __( 'General', 'rules' ),
 		];
 	}
 

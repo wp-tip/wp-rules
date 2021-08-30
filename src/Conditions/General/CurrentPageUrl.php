@@ -17,10 +17,10 @@ class CurrentPageUrl extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'current-page-url',
-			'name'  => __( 'Current Page', 'rules' ),
+			'id'          => 'current-page-url',
+			'name'        => __( 'Current Page', 'rules' ),
 			'description' => __( 'Compare visitor\'s visited page url with predefined one.', 'rules' ),
-			'group' => __( 'General', 'rules' ),
+			'group'       => __( 'General', 'rules' ),
 		];
 	}
 

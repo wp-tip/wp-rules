@@ -17,10 +17,10 @@ class CreateUser extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'create_user',
-			'name'  => __( 'Create User', 'rules' ),
+			'id'          => 'create_user',
+			'name'        => __( 'Create User', 'rules' ),
 			'description' => __( 'Create a new user at the system.', 'rules' ),
-			'group' => __( 'Users', 'rules' ),
+			'group'       => __( 'Users', 'rules' ),
 		];
 	}
 

@@ -17,10 +17,10 @@ class CurrentPost extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'current-post',
-			'name'  => __( 'Current Post', 'rules' ),
+			'id'          => 'current-post',
+			'name'        => __( 'Current Post', 'rules' ),
 			'description' => __( 'Check if a user is on specific post page (frontend and backend).', 'rules' ),
-			'group' => __( 'Posts', 'rules' ),
+			'group'       => __( 'Posts', 'rules' ),
 		];
 	}
 

@@ -17,10 +17,10 @@ class IsFavicon extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-favicon',
-			'name'  => __( 'Is Loading favicon.ico', 'rules' ),
+			'id'          => 'is-favicon',
+			'name'        => __( 'Is Loading favicon.ico', 'rules' ),
 			'description' => __( 'Check whether the favicon is being loaded.', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

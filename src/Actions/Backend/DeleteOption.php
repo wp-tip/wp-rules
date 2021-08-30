@@ -17,10 +17,10 @@ class DeleteOption extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'delete_option',
-			'name'  => __( 'Delete Option', 'rules' ),
+			'id'          => 'delete_option',
+			'name'        => __( 'Delete Option', 'rules' ),
 			'description' => __( 'Delete site option by key.', 'rules' ),
-			'group' => __( 'Backend', 'rules' ),
+			'group'       => __( 'Backend', 'rules' ),
 		];
 	}
 

@@ -17,10 +17,10 @@ class PostClassAdd extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'post_class_add',
-			'name'  => __( 'Add class to post', 'rules' ),
+			'id'          => 'post_class_add',
+			'name'        => __( 'Add class to post', 'rules' ),
 			'description' => __( 'Add class to the list of CSS class names for the current post.', 'rules' ),
-			'group' => __( 'Posts', 'rules' ),
+			'group'       => __( 'Posts', 'rules' ),
 		];
 	}
 

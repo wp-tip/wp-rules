@@ -17,10 +17,10 @@ class CurrentUserCapability extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'current-user-capability',
-			'name'  => __( 'Current User Has Capability', 'rules' ),
+			'id'          => 'current-user-capability',
+			'name'        => __( 'Current User Has Capability', 'rules' ),
 			'description' => __( 'Check whether the current user has the specified capability.', 'rules' ),
-			'group' => __( 'Users', 'rules' ),
+			'group'       => __( 'Users', 'rules' ),
 		];
 	}
 

@@ -17,10 +17,10 @@ class IsPostTypeArchive extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-post-type-archive',
-			'name'  => __( 'Is On Post Type Archive Page', 'rules' ),
+			'id'          => 'is-post-type-archive',
+			'name'        => __( 'Is On Post Type Archive Page', 'rules' ),
 			'description' => __( 'Determines whether the query is for an existing post type archive page.', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

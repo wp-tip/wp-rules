@@ -17,10 +17,10 @@ class CurrentAdminScreen extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'current-admin-screen',
-			'name'  => __( 'Current Admin Screen', 'rules' ),
+			'id'          => 'current-admin-screen',
+			'name'        => __( 'Current Admin Screen', 'rules' ),
 			'description' => __( 'Check in which admin screen the user is.', 'rules' ),
-			'group' => __( 'Backend', 'rules' ),
+			'group'       => __( 'Backend', 'rules' ),
 		];
 	}
 

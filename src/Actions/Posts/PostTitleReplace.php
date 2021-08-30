@@ -17,10 +17,10 @@ class PostTitleReplace extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'post_title_replace',
-			'name'  => __( 'Replace in post title', 'rules' ),
+			'id'          => 'post_title_replace',
+			'name'        => __( 'Replace in post title', 'rules' ),
 			'description' => __( 'Replaces a word with another in the post title without changing it on Database, uses the filter `the_title`.', 'rules' ),
-			'group' => __( 'Posts', 'rules' ),
+			'group'       => __( 'Posts', 'rules' ),
 		];
 	}
 

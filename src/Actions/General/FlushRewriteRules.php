@@ -17,10 +17,10 @@ class FlushRewriteRules extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'flush_rewrite_rules',
-			'name'  => __( 'Flush Rewrite Rules', 'rules' ),
+			'id'          => 'flush_rewrite_rules',
+			'name'        => __( 'Flush Rewrite Rules', 'rules' ),
 			'description' => __( ' Remove rewrite rules and then recreate them again.', 'rules' ),
-			'group' => __( 'General', 'rules' ),
+			'group'       => __( 'General', 'rules' ),
 		];
 	}
 

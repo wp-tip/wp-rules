@@ -17,10 +17,10 @@ class AvailableUploadSpace extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'available-upload-space',
-			'name'  => __( 'Available Upload Space (multisite)', 'rules' ),
+			'id'          => 'available-upload-space',
+			'name'        => __( 'Available Upload Space (multisite)', 'rules' ),
 			'description' => __( 'Determines if there is any upload space left in the current blog\'s quota.', 'rules' ),
-			'group' => __( 'Backend', 'rules' ),
+			'group'       => __( 'Backend', 'rules' ),
 		];
 	}
 

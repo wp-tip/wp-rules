@@ -17,10 +17,10 @@ class PostContentReplace extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'post_content_replace',
-			'name'  => __( 'Replace in post content', 'rules' ),
+			'id'          => 'post_content_replace',
+			'name'        => __( 'Replace in post content', 'rules' ),
 			'description' => __( 'Replaces a word with another in the post content without changing it on Database, uses the filter `the_content`.', 'rules' ),
-			'group' => __( 'Posts', 'rules' ),
+			'group'       => __( 'Posts', 'rules' ),
 		];
 	}
 

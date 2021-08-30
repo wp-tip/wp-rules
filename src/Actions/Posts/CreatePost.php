@@ -17,10 +17,10 @@ class CreatePost extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'create_post',
-			'name'  => __( 'Create Post', 'rules' ),
+			'id'          => 'create_post',
+			'name'        => __( 'Create Post', 'rules' ),
 			'description' => __( 'Create new post.', 'rules' ),
-			'group' => __( 'Posts', 'rules' ),
+			'group'       => __( 'Posts', 'rules' ),
 		];
 	}
 

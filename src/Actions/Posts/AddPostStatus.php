@@ -24,10 +24,10 @@ class AddPostStatus extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'add_post_status',
-			'name'  => __( 'Add New post status', 'rules' ),
+			'id'          => 'add_post_status',
+			'name'        => __( 'Add New post status', 'rules' ),
 			'description' => __( 'Register a post status. Do not use before init.', 'rules' ),
-			'group' => __( 'Posts', 'rules' ),
+			'group'       => __( 'Posts', 'rules' ),
 		];
 	}
 

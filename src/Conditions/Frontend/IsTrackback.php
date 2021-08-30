@@ -17,10 +17,10 @@ class IsTrackback extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-trackback',
-			'name'  => __( 'Is On Trackback Page', 'rules' ),
+			'id'          => 'is-trackback',
+			'name'        => __( 'Is On Trackback Page', 'rules' ),
 			'description' => __( 'Determines whether the query is for a trackback endpoint call.', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

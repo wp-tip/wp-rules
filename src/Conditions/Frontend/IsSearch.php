@@ -17,10 +17,10 @@ class IsSearch extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-search',
-			'name'  => __( 'Is On Search Page', 'rules' ),
+			'id'          => 'is-search',
+			'name'        => __( 'Is On Search Page', 'rules' ),
 			'description' => __( 'Determines whether the query is for a search.', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 
