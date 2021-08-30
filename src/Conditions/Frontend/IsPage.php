@@ -19,7 +19,7 @@ class IsPage extends AbstractCondition {
 		return [
 			'id'    => 'is-page',
 			'name'  => __( 'Is on Page', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Determines whether the query is for an existing specific single page.', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

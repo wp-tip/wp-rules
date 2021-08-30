@@ -19,7 +19,7 @@ class AvailableUploadSpace extends AbstractCondition {
 		return [
 			'id'    => 'available-upload-space',
 			'name'  => __( 'Available Upload Space (multisite)', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Determines if there is any upload space left in the current blog\'s quota.', 'rules' ),
 			'group' => __( 'Backend', 'rules' ),
 		];
 	}

@@ -20,7 +20,7 @@ class CurrentUserMeta extends AbstractCondition {
 		return [
 			'id'    => 'current-user-meta',
 			'name'  => __( 'Current User Has Meta', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Check if the current user has meta.', 'rules' ),
 			'group' => __( 'Users', 'rules' ),
 		];
 	}

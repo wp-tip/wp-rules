@@ -19,7 +19,7 @@ class IsArchive extends AbstractCondition {
 		return [
 			'id'    => 'is-archive',
 			'name'  => __( 'Is On Archive Page', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Check if the user is on archive page.Archive pages include category, tag, author, date, custom post type, and custom taxonomy based archives.', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

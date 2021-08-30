@@ -19,7 +19,7 @@ class IsFeed extends AbstractCondition {
 		return [
 			'id'    => 'is-feed',
 			'name'  => __( 'Is On Feed Page', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Check whether the user is on a feed page.', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

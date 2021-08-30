@@ -19,7 +19,7 @@ class IsAdminInterface extends AbstractCondition {
 		return [
 			'id'    => 'is-admin-interface',
 			'name'  => __( 'Is On admin Interface', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Check if the user is on any admin page, this can\'t be user with WordPress initialize trigger.', 'rules' ),
 			'group' => __( 'Backend', 'rules' ),
 		];
 	}

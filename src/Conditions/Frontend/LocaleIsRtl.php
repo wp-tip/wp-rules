@@ -19,7 +19,7 @@ class LocaleIsRtl extends AbstractCondition {
 		return [
 			'id'    => 'locale-is-rtl',
 			'name'  => __( 'Current Locale is RTL', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Determines whether the current locale is right-to-left (RTL).', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}

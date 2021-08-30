@@ -19,7 +19,7 @@ class IsSingular extends AbstractCondition {
 		return [
 			'id'    => 'is-singular',
 			'name'  => __( 'Is On Single Post Type Page', 'rules' ),
-			'description' => __( '', 'rules' ),
+			'description' => __( 'Determines whether the query is for an existing single post of any post type (post, attachment, page, custom post types).', 'rules' ),
 			'group' => __( 'Frontend', 'rules' ),
 		];
 	}
