@@ -12,9 +12,10 @@ class SkipMail extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'cf7_skip_mail',
-			'name'  => __( 'Contact form 7 Skip sending mail', 'rules' ),
-			'group' => __( 'ThirdParty', 'rules' ),
+			'id'          => 'cf7_skip_mail',
+			'name'        => __( 'Contact form 7 Skip sending mail', 'rules' ),
+			'description' => __( 'Skip sending the email when submitting Contact Form 7 form.', 'rules' ),
+			'group'       => __( 'ThirdParty', 'rules' ),
 		];
 	}
 

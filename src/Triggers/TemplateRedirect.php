@@ -20,6 +20,7 @@ class TemplateRedirect extends AbstractTrigger {
 			'id'                 => 'template_redirect',
 			'wp_action'          => 'template_redirect',
 			'name'               => __( 'Template Redirect', 'rules' ),
+			'description'        => __( 'Fires before determining which template to load, It is a good trigger to use if you need to do a redirect with full knowledge of the content that has been queried.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [],
 		];

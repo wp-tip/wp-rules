@@ -20,6 +20,7 @@ class AfterSetupTheme extends AbstractTrigger {
 			'id'                 => 'after_setup_theme',
 			'wp_action'          => 'after_setup_theme',
 			'name'               => __( 'After Theme Setup', 'rules' ),
+			'description'        => __( 'Fires after the theme is loaded.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [],
 		];

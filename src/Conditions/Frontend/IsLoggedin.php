@@ -17,9 +17,10 @@ class IsLoggedin extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-loggedin',
-			'name'  => __( 'Is Loggedin', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'id'          => 'is-loggedin',
+			'name'        => __( 'Is Loggedin', 'rules' ),
+			'description' => __( 'Determines whether the current visitor is a logged in user.', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

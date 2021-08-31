@@ -17,9 +17,16 @@ class IsHome extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-home',
-			'name'  => __( 'Is On Blog Home Page', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'id'          => 'is-home',
+			'name'        => __( 'Is On Blog Home Page', 'rules' ),
+			'description' => __(
+				'Check whether the user is on blog homepage.
+			The blog homepage is the page that shows the time-based blog content of the site.
+			It is dependent on the site\'s "Front page displays" Reading Settings \'show_on_front\' and \'page_for_posts\'.
+			If a static page is set for the front page of the site, this condition will be triggered only on the page you set as the "Posts page".',
+				'rules'
+			),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

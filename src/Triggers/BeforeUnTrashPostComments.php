@@ -20,6 +20,7 @@ class BeforeUnTrashPostComments extends AbstractTrigger {
 			'id'                 => 'untrash_post_comments',
 			'wp_action'          => 'untrash_post_comments',
 			'name'               => __( 'Before Un Trash Post Comments', 'rules' ),
+			'description'        => __( 'Fires before comments are restored for a post from the Trash.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

@@ -38,6 +38,7 @@ class Subscriber implements SubscriberInterface {
 			'admin_enqueue_scripts'          => 'enqueue_action_script',
 			'wp_ajax_rules_action_new'       => 'rules_action_add_new',
 			'wp_ajax_refresh_action_options' => 'refresh_action_options',
+			'admin_notices'                  => 'show_admin_notice_for_transient',
 		];
 	}
 
@@ -209,6 +210,26 @@ class Subscriber implements SubscriberInterface {
 
 		update_post_meta( $post_ID, 'rule_actions', $rule_actions );
 
+	}
+
+	/**
+	 * Show delayed admin notices.
+	 */
+	public function show_admin_notice_for_transient() {
+		$notice = get_transient( 'rules_admin_notice' );
+
+		if ( empty( $notice ) ) {
+			return;
+		}
+
+		delete_transient( 'rules_admin_notice' );
+
+		printf(
+			'<div class="notice notice-%s %s"><p>%s</p></div>',
+			esc_attr( $notice['status'] ),
+			( $notice['dismissable'] ? 'is-dismissible' : '' ),
+			nl2br( esc_textarea( $notice['message'] ) )
+		);
 	}
 
 }

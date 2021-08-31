@@ -17,9 +17,10 @@ class ShowAdminBar extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'show_admin_bar',
-			'name'  => __( 'Show admin bar', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'id'          => 'show_admin_bar',
+			'name'        => __( 'Show admin bar', 'rules' ),
+			'description' => __( 'Show/Hide the Toolbar for the front side of your website (you cannot turn off the toolbar on the WordPress dashboard anymore).', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

@@ -17,9 +17,10 @@ class BodyClassAdd extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'body_class_add',
-			'name'  => __( 'Add class to body tag', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'id'          => 'body_class_add',
+			'name'        => __( 'Add class to body tag', 'rules' ),
+			'description' => __( 'Add class to the list of CSS body class names for the current post or page.', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

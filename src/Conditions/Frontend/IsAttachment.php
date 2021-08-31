@@ -17,9 +17,10 @@ class IsAttachment extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-attachment',
-			'name'  => __( 'Is On Front Attachment Page', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'id'          => 'is-attachment',
+			'name'        => __( 'Is On Front Attachment Page', 'rules' ),
+			'description' => __( 'Check whether the user is on an existing attachment page.', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

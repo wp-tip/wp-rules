@@ -20,6 +20,7 @@ class AdminHeader extends AbstractTrigger {
 			'id'                 => 'in_admin_header',
 			'wp_action'          => 'in_admin_header',
 			'name'               => __( 'Admin Header', 'rules' ),
+			'description'        => __( 'It fires between <code>&lt;div id="wpcontent"&gt;</code> and <code>&lt;div id="wpbody"&gt;</code> tags.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [],
 		];

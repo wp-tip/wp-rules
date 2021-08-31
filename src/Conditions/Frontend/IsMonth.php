@@ -17,9 +17,10 @@ class IsMonth extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-month',
-			'name'  => __( 'Is On Month Archive Page', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'id'          => 'is-month',
+			'name'        => __( 'Is On Month Archive Page', 'rules' ),
+			'description' => __( 'Check whether the user is on a month archive page.', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

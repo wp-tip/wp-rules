@@ -17,9 +17,10 @@ class SendEmail extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'send_email',
-			'name'  => __( 'Send Email', 'rules' ),
-			'group' => __( 'General', 'rules' ),
+			'id'          => 'send_email',
+			'name'        => __( 'Send Email', 'rules' ),
+			'description' => __( 'Send a customized email from WordPress.', 'rules' ),
+			'group'       => __( 'General', 'rules' ),
 		];
 	}
 

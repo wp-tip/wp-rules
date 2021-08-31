@@ -21,6 +21,7 @@ class MailFailed extends AbstractTrigger {
 			'id'                 => 'wpcf7_mail_failed',
 			'wp_action'          => 'wpcf7_mail_failed',
 			'name'               => __( 'Contact Form 7 - Mail failed', 'rules' ),
+			'description'        => __( 'When a failure happens during sending the email.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'cf7form',

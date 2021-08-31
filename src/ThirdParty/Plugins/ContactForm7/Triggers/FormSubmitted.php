@@ -20,7 +20,7 @@ class FormSubmitted extends AbstractTrigger {
 		return [
 			'id'                 => 'wpcf7_contact_form',
 			'wp_action'          => 'wpcf7_contact_form',
-			'name'               => __( 'Contact Form 7 - Form submitted', 'rules' ),
+			'description'        => __( 'When the ajax request is sent with the submission data.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'cf7form',

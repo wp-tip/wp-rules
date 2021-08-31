@@ -20,6 +20,7 @@ class StickPost extends AbstractTrigger {
 			'id'                 => 'post_stuck',
 			'wp_action'          => 'post_stuck',
 			'name'               => __( 'Sticking Post', 'rules' ),
+			'description'        => __( 'Fires once a post has been added to the sticky list.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

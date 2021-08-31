@@ -17,9 +17,10 @@ class IsDate extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-date',
-			'name'  => __( 'Is On Date Archive Page', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'id'          => 'is-date',
+			'name'        => __( 'Is On Date Archive Page', 'rules' ),
+			'description' => __( 'Check whether the user is on a date archive page.', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 
