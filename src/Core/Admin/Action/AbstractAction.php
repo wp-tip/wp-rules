@@ -26,6 +26,13 @@ abstract class AbstractAction implements SubscriberInterface {
 	protected $name = '';
 
 	/**
+	 * Action description.
+	 *
+	 * @var string
+	 */
+	protected $description = '';
+
+	/**
 	 * Action group name.
 	 *
 	 * @var string
@@ -130,6 +137,9 @@ abstract class AbstractAction implements SubscriberInterface {
 		}
 
 		$admin_fields = $this->admin_fields();
+		$html .= ! empty( $this->description ) ?
+			$this->render_field->render_field( 'helper', ['name' => "rule_action_{$action_id}_helper", 'content' => $this->description], false ) : '';
+
 		if ( empty( $admin_fields ) ) {
 			if ( $with_container ) {
 				return $this->render_field->container( $html, [ 'class' => 'rule-action-options-container' ], false );

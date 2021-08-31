@@ -28,6 +28,13 @@ abstract class AbstractCondition implements SubscriberInterface {
 	protected $name = '';
 
 	/**
+	 * Condition description.
+	 *
+	 * @var string
+	 */
+	protected $description = '';
+
+	/**
 	 * Condition group name.
 	 *
 	 * @var string
@@ -122,6 +129,9 @@ abstract class AbstractCondition implements SubscriberInterface {
 		}
 
 		$admin_fields = apply_filters( 'rules_condition_admin_fields', $this->admin_fields(), $condition_id );
+		$html .= ! empty( $this->description ) ?
+			$this->render_field->render_field( 'helper', ['name' => "rule_condition_{$condition_id}_helper", 'content' => $this->description], false ) : '';
+
 		if ( empty( $admin_fields ) ) {
 			return $this->enclose_html( $html, $with_container );
 		}

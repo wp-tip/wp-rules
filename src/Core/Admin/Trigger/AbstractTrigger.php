@@ -27,6 +27,13 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	protected $name = '';
 
 	/**
+	 * Trigger description.
+	 *
+	 * @var string
+	 */
+	protected $description = '';
+
+	/**
 	 * Trigger WordPress action name.
 	 *
 	 * @var string
@@ -118,7 +125,10 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 * @param bool $with_container Enclose options fields into container div.
 	 */
 	private function print_trigger_options_for_rule( $post_id, $with_container = true ) {
-		$options_html = '';
+
+		$options_html = $this->render_field->render_field( 'helper',
+			[ 'name' => "rule_trigger_{$this->id}_helper", 'content' => $this->description ],
+			! $with_container );
 
 		$admin_fields = $this->admin_fields();
 		if ( empty( $admin_fields ) ) {
@@ -126,8 +136,7 @@ abstract class AbstractTrigger implements SubscriberInterface {
 				return;
 			}
 
-			$this->render_field->container( '', [ 'id' => 'rule_trigger_options_container' ] );
-			return;
+			$this->render_field->container( $options_html, [ 'id' => 'rule_trigger_options_container' ] );
 		}
 
 		$admin_fields_values = ! is_null( $post_id ) ? get_post_meta( $post_id, 'rule_trigger_options', true ) : [];
@@ -172,6 +181,7 @@ abstract class AbstractTrigger implements SubscriberInterface {
 		}
 
 		$this->print_trigger_options_for_rule( $post_id, false );
+		exit();
 	}
 
 	/**

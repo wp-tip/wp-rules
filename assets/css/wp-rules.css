@@ -49,3 +49,11 @@
 #rules_logs .rules-field-tablekeyvalue th{
 	text-align: left;
 }
+.rules-field-helper{
+	padding: 1em;
+	background-color: #ffffba;
+	color: green;
+	margin-bottom: 1em;
+	font-weight: bold;
+	max-width: fit-content;
+}
