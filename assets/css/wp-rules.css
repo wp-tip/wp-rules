@@ -35,7 +35,7 @@
 	border-top: 1px solid #f3f3f3;
 }
 #rules_variables .inside{
-	height: 20rem;
+	max-height: 20rem;
 	overflow: scroll;
 }
 #rules_logs .inside {

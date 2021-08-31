@@ -20,6 +20,7 @@ class AfterSubmission extends AbstractTrigger {
 			'id'                 => 'ninja_forms_after_submission',
 			'wp_action'          => 'ninja_forms_after_submission',
 			'name'               => __( 'Ninja Forms after submission', 'rules' ),
+			'description'        => __( 'After visitor submits the form.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'form_data',

@@ -19,7 +19,8 @@ class BeforeResponse extends AbstractTrigger {
 		return [
 			'id'                 => 'ninja_forms_before_response',
 			'wp_action'          => 'ninja_forms_before_response',
-			'name'               => __( 'Ninja Forms Before sending response', 'rules' ),
+			'name'               => __( 'Fires Before sending response to the form page.', 'rules' ),
+			'description'        => __( '.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'response_data',

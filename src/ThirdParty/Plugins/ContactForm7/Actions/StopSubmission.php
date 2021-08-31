@@ -12,9 +12,10 @@ class StopSubmission extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'cf7_stop_submission',
-			'name'  => __( 'Contact form 7 stop form submission', 'rules' ),
-			'group' => __( 'ThirdParty', 'rules' ),
+			'id'          => 'cf7_stop_submission',
+			'name'        => __( 'Contact form 7 stop form submission', 'rules' ),
+			'description' => __( 'Stop Contact Form 7 form submission when clicking on submit button.', 'rules' ),
+			'group'       => __( 'ThirdParty', 'rules' ),
 		];
 	}
 
