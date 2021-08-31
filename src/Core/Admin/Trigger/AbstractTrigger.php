@@ -126,9 +126,14 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 */
 	private function print_trigger_options_for_rule( $post_id, $with_container = true ) {
 
-		$options_html = $this->render_field->render_field( 'helper',
-			[ 'name' => "rule_trigger_{$this->id}_helper", 'content' => $this->description ],
-			! $with_container );
+		$options_html = $this->render_field->render_field(
+			'helper',
+			[
+				'name'    => "rule_trigger_{$this->id}_helper",
+				'content' => $this->description,
+			],
+			! $with_container
+		);
 
 		$admin_fields = $this->admin_fields();
 		if ( empty( $admin_fields ) ) {

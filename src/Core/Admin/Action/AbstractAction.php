@@ -137,8 +137,15 @@ abstract class AbstractAction implements SubscriberInterface {
 		}
 
 		$admin_fields = $this->admin_fields();
-		$html .= ! empty( $this->description ) ?
-			$this->render_field->render_field( 'helper', ['name' => "rule_action_{$action_id}_helper", 'content' => $this->description], false ) : '';
+		$html        .= ! empty( $this->description ) ?
+			$this->render_field->render_field(
+				'helper',
+				[
+					'name'    => "rule_action_{$action_id}_helper",
+					'content' => $this->description,
+				],
+				false
+			) : '';
 
 		if ( empty( $admin_fields ) ) {
 			if ( $with_container ) {
