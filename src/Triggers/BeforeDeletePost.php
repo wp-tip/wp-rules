@@ -20,6 +20,7 @@ class BeforeDeletePost extends AbstractTrigger {
 			'id'                 => 'before_delete_post',
 			'wp_action'          => 'before_delete_post',
 			'name'               => __( 'Before Delete Post Permanently', 'rules' ),
+			'description'        => __( 'Fires before a post is deleted.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

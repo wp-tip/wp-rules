@@ -20,6 +20,7 @@ class Scheduler extends AbstractTrigger {
 			'id'                 => 'rules_scheduler',
 			'wp_action'          => 'rules_scheduler',
 			'name'               => __( 'Scheduler', 'rules' ),
+			'description'        => __( 'Cron Job schedule at different intervals.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'recurrence',

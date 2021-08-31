@@ -20,6 +20,7 @@ class AfterUpdateAttachment extends AbstractTrigger {
 			'id'                 => 'attachment_updated',
 			'wp_action'          => 'attachment_updated',
 			'name'               => __( 'After Update Attachment', 'rules' ),
+			'description'        => __( 'Fires once an existing attachment has been updated.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

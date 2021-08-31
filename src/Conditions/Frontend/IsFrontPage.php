@@ -17,9 +17,15 @@ class IsFrontPage extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-front-page',
-			'name'  => __( 'Is On Front Page', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'id'          => 'is-front-page',
+			'name'        => __( 'Is On Front Page', 'rules' ),
+			'description' => __(
+				'Check whether the user is on front page.
+				This is for what is displayed at your site\'s main URL.Depends on the site\'s "Front page displays" Reading Settings \'show_on_front\' and \'page_on_front\'.
+				If you set a static page for the front page of your site, this condition will be triggered when viewing that page.',
+				'rules'
+			),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

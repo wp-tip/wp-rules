@@ -17,9 +17,10 @@ class CurrentAdminScreen extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'current-admin-screen',
-			'name'  => __( 'Current Admin Screen', 'rules' ),
-			'group' => __( 'Backend', 'rules' ),
+			'id'          => 'current-admin-screen',
+			'name'        => __( 'Current Admin Screen', 'rules' ),
+			'description' => __( 'Check in which admin screen the user is.', 'rules' ),
+			'group'       => __( 'Backend', 'rules' ),
 		];
 	}
 
@@ -115,6 +116,10 @@ class CurrentAdminScreen extends AbstractCondition {
 	 * @return bool If it passes or not.
 	 */
 	protected function evaluate( $condition_options, $trigger_hook_args ) {
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			return false;
+		}
+
 		return get_current_screen()->id === $condition_options['screen_id'];
 	}
 }

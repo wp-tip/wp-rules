@@ -17,9 +17,10 @@ class IsTag extends AbstractCondition {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'is-tag',
-			'name'  => __( 'Is On Tag Archive Page', 'rules' ),
-			'group' => __( 'Frontend', 'rules' ),
+			'id'          => 'is-tag',
+			'name'        => __( 'Is On Tag Archive Page', 'rules' ),
+			'description' => __( 'Determines whether the query is for an existing tag archive page.', 'rules' ),
+			'group'       => __( 'Frontend', 'rules' ),
 		];
 	}
 

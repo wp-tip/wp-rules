@@ -20,6 +20,7 @@ class UnStickPost extends AbstractTrigger {
 			'id'                 => 'post_unstuck',
 			'wp_action'          => 'post_unstuck',
 			'name'               => __( 'Un Sticking Post', 'rules' ),
+			'description'        => __( 'Fires once a post has been removed from the sticky list.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

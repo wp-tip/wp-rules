@@ -17,9 +17,10 @@ class AddUpdateOption extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'add_update_option',
-			'name'  => __( 'Add/Update Option', 'rules' ),
-			'group' => __( 'Backend', 'rules' ),
+			'id'          => 'add_update_option',
+			'name'        => __( 'Add/Update Option', 'rules' ),
+			'description' => __( 'Add/Update site option, saved into wp_options database table. This option maybe an option at WordPress settings page or option related to a specific plugin. ', 'rules' ),
+			'group'       => __( 'Backend', 'rules' ),
 		];
 	}
 

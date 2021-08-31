@@ -20,6 +20,7 @@ class BeforeDeleteAttachment extends AbstractTrigger {
 			'id'                 => 'delete_attachment',
 			'wp_action'          => 'delete_attachment',
 			'name'               => __( 'Before Delete Attachment', 'rules' ),
+			'description'        => __( 'Fires before an attachment is deleted.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

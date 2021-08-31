@@ -17,9 +17,10 @@ class TrashPost extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'trash_post',
-			'name'  => __( 'Trash Post', 'rules' ),
-			'group' => __( 'Posts', 'rules' ),
+			'id'          => 'trash_post',
+			'name'        => __( 'Trash Post', 'rules' ),
+			'description' => __( 'Send a post to the trash, you may use post ID as a number or a variable.', 'rules' ),
+			'group'       => __( 'Posts', 'rules' ),
 		];
 	}
 

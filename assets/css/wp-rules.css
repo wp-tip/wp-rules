@@ -35,7 +35,7 @@
 	border-top: 1px solid #f3f3f3;
 }
 #rules_variables .inside{
-	height: 20rem;
+	max-height: 20rem;
 	overflow: scroll;
 }
 #rules_logs .inside {
@@ -48,4 +48,12 @@
 }
 #rules_logs .rules-field-tablekeyvalue th{
 	text-align: left;
+}
+.rules-field-helper{
+	padding: 1em;
+	background-color: #ffffba;
+	color: green;
+	margin-bottom: 1em;
+	font-weight: bold;
+	max-width: fit-content;
 }

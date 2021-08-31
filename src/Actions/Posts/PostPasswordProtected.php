@@ -17,9 +17,10 @@ class PostPasswordProtected extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'post_password_protected',
-			'name'  => __( 'Make post password protected', 'rules' ),
-			'group' => __( 'Posts', 'rules' ),
+			'id'          => 'post_password_protected',
+			'name'        => __( 'Make post password protected', 'rules' ),
+			'description' => __( 'Protect the post with password, you may add dynamic password using variables.', 'rules' ),
+			'group'       => __( 'Posts', 'rules' ),
 		];
 	}
 

@@ -20,6 +20,7 @@ class BeforeTrashPostComments extends AbstractTrigger {
 			'id'                 => 'trash_post_comments',
 			'wp_action'          => 'trash_post_comments',
 			'name'               => __( 'Before Trash Post Comments', 'rules' ),
+			'description'        => __( 'Fires before comments are sent to the Trash.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

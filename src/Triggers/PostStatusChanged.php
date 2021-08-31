@@ -20,6 +20,7 @@ class PostStatusChanged extends AbstractTrigger {
 			'id'                 => 'transition_post_status',
 			'wp_action'          => 'transition_post_status',
 			'name'               => __( 'Post Status Changed', 'rules' ),
+			'description'        => __( 'Fires when a post is transitioned from one status to another.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'new_status',

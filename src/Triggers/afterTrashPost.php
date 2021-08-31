@@ -20,6 +20,7 @@ class AfterTrashPost extends AbstractTrigger {
 			'id'                 => 'trashed_post',
 			'wp_action'          => 'trashed_post',
 			'name'               => __( 'After Trash Post', 'rules' ),
+			'description'        => __( 'Fires after a post is sent to the Trash.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

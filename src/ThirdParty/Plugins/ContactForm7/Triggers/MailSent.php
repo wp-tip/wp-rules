@@ -21,6 +21,7 @@ class MailSent extends AbstractTrigger {
 			'id'                 => 'wpcf7_mail_sent',
 			'wp_action'          => 'wpcf7_mail_sent',
 			'name'               => __( 'Contact Form 7 - Mail sent', 'rules' ),
+			'description'        => __( 'Email sent successfully.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'cf7form',

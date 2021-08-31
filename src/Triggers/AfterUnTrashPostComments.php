@@ -20,6 +20,7 @@ class AfterUnTrashPostComments extends AbstractTrigger {
 			'id'                 => 'untrashed_post_comments',
 			'wp_action'          => 'untrashed_post_comments',
 			'name'               => __( 'After Un Trash Post Comments', 'rules' ),
+			'description'        => __( 'Fires after comments are restored for a post from the Trash.', 'rules' ),
 			'wp_action_priority' => 10,
 			'wp_action_args'     => [
 				'post_id',

@@ -17,9 +17,10 @@ class DeleteUserMeta extends AbstractAction {
 	 */
 	protected function init() {
 		return [
-			'id'    => 'delete_user_meta',
-			'name'  => __( 'Delete User Meta', 'rules' ),
-			'group' => __( 'Users', 'rules' ),
+			'id'          => 'delete_user_meta',
+			'name'        => __( 'Delete User Meta', 'rules' ),
+			'description' => __( 'Delete user meta by user ID and meta key.', 'rules' ),
+			'group'       => __( 'Users', 'rules' ),
 		];
 	}
 
