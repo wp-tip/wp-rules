@@ -142,6 +142,7 @@ abstract class AbstractTrigger implements SubscriberInterface {
 			}
 
 			$this->render_field->container( $options_html, [ 'id' => 'rule_trigger_options_container' ] );
+			return;
 		}
 
 		$admin_fields_values = ! is_null( $post_id ) ? get_post_meta( $post_id, 'rule_trigger_options', true ) : [];
