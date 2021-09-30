@@ -1,0 +1,49 @@
+.rules-navbar{
+  width: 100%;
+  padding: 10px;
+  background: #ffffff;
+  display: flex;
+  border-bottom: 1px solid $grey;
+  @extend %lato-font;
+
+  &__logo{
+    flex: 1;
+	color: $main_color;
+	font-size: 20px;
+	line-height: 46px;
+
+    img{
+      width: 120px;
+    }
+  }
+
+  &__menu{
+    flex: 4;
+
+    ul{
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      display: inline-flex;
+
+      li{
+        padding: 10px 20px;
+
+        a{
+          text-decoration: none;
+          color: $black;
+
+        }
+
+        &.active,
+        &:hover {
+          border-bottom: 2px solid $main_color;
+
+          a{
+            color: $main_color;
+          }
+        }
+      }
+    }
+  }
+}

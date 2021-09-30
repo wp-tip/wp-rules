@@ -23,6 +23,25 @@ class RenderField extends Render {
 	const FIELDS_DIR = 'fields';
 
 	/**
+	 * Render admin file.
+	 *
+	 * @param string $file Rendered File.
+	 * @param array $data Shared data.
+	 * @param bool $echo Echo the content if true OR return it if false.
+	 *
+	 * @return string|void
+	 */
+	public function render_admin( string $file, array $data = [], bool $echo = true ) {
+		$template_name = self::ADMIN_DIR . DIRECTORY_SEPARATOR . $file;
+
+		$return = $this->render( $template_name, $data );
+		if ( ! $echo ) {
+			return $return;
+		}
+		echo wp_kses_post( $return );
+	}
+
+	/**
 	 * Render field template contents.
 	 *
 	 * @param string $field_name Field name.

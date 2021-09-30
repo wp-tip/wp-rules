@@ -1,13 +1,13 @@
 {
 	"name": "engahmeds3ed/wp-rules",
 	"description": "Wordpress business rules plugin.",
-	"homepage": "https://github.com/engahmeds3ed/wp-rules",
+	"homepage": "https://github.com/wp-tip/wp-rules",
 	"license": "GPL-2.0+",
 	"authors": [
 		{
-			"name": "Ahmed Saeed",
-			"email": "eng.ahmeds3ed@gmail.com",
-			"homepage": "https://github.com/engahmeds3ed"
+			"name": "WP Tip",
+			"email": "info@wp-tip.com",
+			"homepage": "https://github.com/wp-tip"
 		}
 	],
 	"type": "library",
@@ -15,8 +15,8 @@
 		"sort-packages": true
 	},
 	"support": {
-		"issues": "https://github.com/engahmeds3ed/wp-rules/issues",
-		"source": "https://github.com/engahmeds3ed/wp-rules"
+		"issues": "https://github.com/wp-tip/wp-rules/issues",
+		"source": "https://github.com/wp-tip/wp-rules"
 	},
 	"require": {
 	  "php": ">=7.0",

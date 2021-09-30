@@ -68,7 +68,7 @@ class Subscriber implements SubscriberInterface {
 			return;
 		}
 
-		wp_enqueue_style( 'rules_admin_styles', wpbr_get_constant( 'WP_RULES_URL' ) . 'assets/css/wp-rules.css', false, '1.0.0' );
+		wp_enqueue_style( 'rules_admin_styles', wpbr_get_constant( 'WP_RULES_URL' ) . 'assets/css/main.css', false, '1.0.0' );
 	}
 
 	/**
@@ -80,12 +80,13 @@ class Subscriber implements SubscriberInterface {
 	 */
 	public function allow_form_elements( array $allowed = [] ): array {
 		$allowed['input'] = [
-			'class'   => [],
-			'id'      => [],
-			'name'    => [],
-			'value'   => [],
-			'type'    => [],
-			'checked' => [],
+			'class'       => [],
+			'id'          => [],
+			'name'        => [],
+			'value'       => [],
+			'type'        => [],
+			'checked'     => [],
+			'placeholder' => [],
 		];
 
 		$allowed['select'] = [

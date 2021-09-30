@@ -2,3 +2,5 @@
 /Tests/env/local/
 .idea
 composer.lock
+node_modules
+package-lock.json

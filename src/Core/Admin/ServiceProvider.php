@@ -25,6 +25,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'core_admin_condition_subscriber',
 		'core_admin_action_subscriber',
 		'core_admin_rule_postmeta',
+		'core_admin_templates_subscriber',
 	];
 
 	/**
@@ -50,5 +51,7 @@ class ServiceProvider extends AbstractServiceProvider {
 				->addArgument( $container->get( 'core_admin_rule_postmeta' ) );
 		$container->share( 'core_admin_condition_subscriber', '\WP_Rules\Core\Admin\Condition\Subscriber' );
 		$container->share( 'core_admin_action_subscriber', '\WP_Rules\Core\Admin\Action\Subscriber' );
+
+		$container->share( 'core_admin_templates_subscriber', '\WP_Rules\Core\Admin\Templates\Subscriber' );
 	}
 }
