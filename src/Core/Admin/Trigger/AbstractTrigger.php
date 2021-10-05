@@ -90,6 +90,10 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	 */
 	abstract protected function admin_fields();
 
+	public function get_admin_fields() {
+		return $this->admin_fields();
+	}
+
 	/**
 	 * Returns an array of events that this subscriber wants to listen to.
 	 *
@@ -103,6 +107,7 @@ abstract class AbstractTrigger implements SubscriberInterface {
 			self::$wp_action               => [ 'trigger_fired', self::$wp_action_priority, count( self::$wp_action_args ) ],
 			'rules_trigger_validated'      => [ 'validate_trigger', 10, 4 ],
 			'rules_variable_value'         => [ 'maybe_variable_value', 10, 3 ],
+			'admin_init' => 'register_trigger_admin_options',
 		];
 	}
 
@@ -116,6 +121,10 @@ abstract class AbstractTrigger implements SubscriberInterface {
 	public function register_trigger( array $triggers_list ) {
 		$triggers_list[ $this->id ] = $this->name;
 		return $triggers_list;
+	}
+
+	public function register_trigger_admin_options() {
+		add_filter( 'rules_trigger_' . $this->id . '_options', [ $this, 'get_admin_fields' ] );
 	}
 
 	/**
@@ -135,7 +144,7 @@ abstract class AbstractTrigger implements SubscriberInterface {
 			! $with_container
 		);
 
-		$admin_fields = $this->admin_fields();
+		$admin_fields = $this->get_admin_fields();
 		if ( empty( $admin_fields ) ) {
 			if ( ! $with_container ) {
 				return;

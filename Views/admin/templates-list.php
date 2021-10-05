@@ -26,7 +26,9 @@
 		</div>
 	</header>
 
-	<section class="rules-content__templates">
+	<input type="hidden" id="rule_template_nonce" value="<?php echo $data['template_nonce']; ?>">
+
+	<section class="rules-content__templates" id="rules-content__templates">
 		<div class="rules-content__templates_item scratch">
 			<a href="#">
 				<div class="rules-content__templates_item_thumbnail_wrap">
@@ -39,8 +41,8 @@
 		</div>
 
 		<?php foreach ( $data['templates'] as $template_id => $template ){ ?>
-		<div class="rules-content__templates_item">
-			<a href="#" data-template_id="<?php echo $template_id; ?>">
+		<div class="rules-content__templates_item" data-template_id="<?php echo $template_id; ?>">
+			<a href="#">
 				<div class="rules-content__templates_item_thumbnail_wrap">
 					<div class="rules-content__templates_item_thumbnail" style="background-image: url('<?php echo $template['thumbnail']; ?>');"></div>
 				</div>
@@ -50,6 +52,9 @@
 			</a>
 		</div>
 		<?php } ?>
+	</section>
 
+	<section class="rules-content__settings" id="rules-content__settings">
+		test
 	</section>
 </main>

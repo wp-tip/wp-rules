@@ -9,21 +9,25 @@ class SpecificUserNotice extends AbstractTemplate {
 
 	protected $group = 'backend';
 
-	protected $thumbnail = '';
+	protected $thumbnail = 'https://via.placeholder.com/300x300/588aa3/fff?text=Specific+User+Admin+Notice';
 
 	protected $trigger = 'admin_init';
 
-	protected $conditions = [];
+	protected $conditions = [
+		'loggedin-user',
+	];
 
-	protected $actions = [];
+	protected $actions = [
+		'admin_notices',
+	];
 
 	/**
 	 * @inheritDoc
 	 */
 	protected function init() {
 		return [
-			'name' => __( 'Show admin notice to specific user.', 'rules' ),
-			'description' => '',
+			'name'        => __( 'Specific user admin notice.', 'rules' ),
+			'description' => __( 'Show admin notice to specific pre-defined user.', 'rules' ),
 		];
 	}
 }
