@@ -93,9 +93,9 @@ class AdminNotices extends AbstractAction {
 
 		if ( ! empty( $action_options['use_transient'] ) ) {
 			set_transient( 'rules_admin_notice', $this->notice_args );
+		}else {
+			add_action( 'admin_notices', [ $this, 'print_notice' ] );
 		}
-
-		add_action( 'admin_notices', [ $this, 'print_notice' ] );
 	}
 
 	/**

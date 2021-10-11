@@ -70,6 +70,11 @@ abstract class AbstractCondition implements SubscriberInterface {
 	 */
 	abstract protected function admin_fields();
 
+	/**
+	 * Get array of admin fields for this condition.
+	 *
+	 * @return array
+	 */
 	public function get_admin_fields() {
 		return $this->admin_fields();
 	}
@@ -97,7 +102,6 @@ abstract class AbstractCondition implements SubscriberInterface {
 			'rules_conditions_list'        => 'register_condition',
 			'rules_condition_options_html' => [ 'get_condition_options_html', 10, 5 ],
 			'rules_condition_validated'    => [ 'validate_condition', 10, 4 ],
-			'admin_init' => 'register_condition_admin_options'
 		];
 	}
 
@@ -111,10 +115,6 @@ abstract class AbstractCondition implements SubscriberInterface {
 	public function register_condition( array $conditions_list ) {
 		$conditions_list[ $this->id ] = empty( $this->group ) ? $this->name : [ $this->group => $this->name ];
 		return $conditions_list;
-	}
-
-	public function register_condition_admin_options() {
-		add_filter( 'rules_condition_' . $this->id . '_options', [ $this, 'get_admin_fields' ] );
 	}
 
 	/**

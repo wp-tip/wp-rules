@@ -115,6 +115,11 @@ class Subscriber implements SubscriberInterface {
 			'name'  => [],
 		];
 
+		$allowed['form'] = [
+			'class' => [],
+			'id'    => [],
+		];
+
 		return $allowed;
 	}
 }

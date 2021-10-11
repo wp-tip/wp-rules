@@ -6,20 +6,60 @@ use WP_Rules\Core\Template\RenderField;
 
 abstract class AbstractTemplate implements SubscriberInterface {
 
+	/**
+	 * Template ID.
+	 *
+	 * @var string
+	 */
 	protected $id = '';
 
+	/**
+	 * Template visible name.
+	 *
+	 * @var string
+	 */
 	protected $name = '';
 
+	/**
+	 * Template Group.
+	 *
+	 * @var string
+	 */
 	protected $group = '';
 
+	/**
+	 * Template's Description.
+	 *
+	 * @var string
+	 */
 	protected $description = '';
 
+	/**
+	 * Template's thumbnail url.
+	 *
+	 * @var string
+	 */
 	protected $thumbnail = '';
 
+	/**
+	 * Template's trigger ID.
+	 *
+	 * @var string
+	 */
 	protected $trigger = '';
 
+	/**
+	 * Template's list of condition IDs.
+	 *
+	 * @var array
+	 */
 	protected $conditions = [];
 
+	/**
+	 * Template's list of action IDs.
+	 *
+	 * @var array
+	 */
 	protected $actions = [];
 
 	/**
@@ -65,7 +105,6 @@ abstract class AbstractTemplate implements SubscriberInterface {
 	public static function get_subscribed_events() {
 		return [
 			'rules_templates_list' => 'register_template',
-			'wp_ajax_rules_template_details' => 'get_template_details',
 		];
 	}
 
@@ -78,54 +117,48 @@ abstract class AbstractTemplate implements SubscriberInterface {
 	 */
 	public function register_template( array $templates_list ) {
 		$templates_list[ $this->id ] = [
-			'name' => $this->name,
+			'name'        => $this->name,
 			'description' => $this->description,
-			'group' => $this->group,
-			'thumbnail' => $this->thumbnail
+			'group'       => $this->group,
+			'thumbnail'   => $this->thumbnail,
 		];
 		return $templates_list;
 	}
 
-	public function get_template_details() {
-		if ( ! wp_verify_nonce( sanitize_key( $_REQUEST['template_nonce'] ?? null ), 'rule_template_nonce' ) ) {
-			esc_html_e( 'Play fair!', 'rules' );
-			exit();
-		}
+	/**
+	 * Get current template's name.
+	 *
+	 * @return string
+	 */
+	public function get_name() {
+		return $this->name;
+	}
 
-		$template_id = esc_attr( $_POST['template_id'] );
-		if ( $template_id !== $this->id ) {
-			return;
-		}
+	/**
+	 * Get current template's trigger.
+	 *
+	 * @return string
+	 */
+	public function get_trigger() {
+		return $this->trigger;
+	}
 
-		// Get template trigger options.
-		$trigger_fields = apply_filters( 'rules_trigger_' . $this->trigger . '_options', [] );
+	/**
+	 * Get current template's conditions.
+	 *
+	 * @return array
+	 */
+	public function get_conditions() {
+		return $this->conditions;
+	}
 
-		// Get template conditions options.
-		$conditions_fields = [];
-		foreach ( $this->conditions as $condition_id ) {
-			$conditions_fields = apply_filters( 'rules_condition_' . $condition_id . '_options', $conditions_fields );
-		}
-
-		// Get template actions options.
-		$actions_fields = [];
-		foreach ( $this->actions as $action_id ) {
-			$actions_fields = apply_filters( 'rules_action_' . $action_id . '_options', $actions_fields );
-		}
-
-		$admin_fields = array_merge( $trigger_fields, $conditions_fields, $actions_fields );
-
-		$output = [
-			'has_options' => ! empty( $admin_fields ),
-			'options_html' => '',
-		];
-
-		foreach ( $admin_fields as $admin_field ) {
-			$admin_field['value'] = null;
-			$admin_field['name']  = "rule_trigger_options[{$admin_field['name']}]";
-			$output['options_html'] .= $this->render_field->render_field( $admin_field['type'], $admin_field, false );
-		}
-
-		die( wp_json_encode( $output ) );
+	/**
+	 * Get current template's actions.
+	 *
+	 * @return array
+	 */
+	public function get_actions() {
+		return $this->actions;
 	}
 
 }

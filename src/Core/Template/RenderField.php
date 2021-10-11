@@ -26,8 +26,8 @@ class RenderField extends Render {
 	 * Render admin file.
 	 *
 	 * @param string $file Rendered File.
-	 * @param array $data Shared data.
-	 * @param bool $echo Echo the content if true OR return it if false.
+	 * @param array  $data Shared data.
+	 * @param bool   $echo Echo the content if true OR return it if false.
 	 *
 	 * @return string|void
 	 */
@@ -53,11 +53,17 @@ class RenderField extends Render {
 	public function render_field( string $field_name, array $data = [], bool $echo = true ) {
 		$template_name = self::ADMIN_DIR . DIRECTORY_SEPARATOR . self::FIELDS_DIR . DIRECTORY_SEPARATOR . $field_name;
 
-		if ( ! empty( $data['attributes'] ) ) {
-			$data['attributes_html'] = '';
-			foreach ( $data['attributes'] as $attribute_key => $attribute_value ) {
-				$data['attributes_html'] .= " {$attribute_key}='{$attribute_value}' ";
-			}
+		if ( empty( $data['attributes'] ) ) {
+			$data['attributes'] = [];
+		}
+
+		if ( ! isset( $data['attributes']['id'] ) ) {
+			$data['attributes']['id'] = wp_unique_id( 'rule_id' );
+		}
+
+		$data['attributes_html'] = '';
+		foreach ( $data['attributes'] as $attribute_key => $attribute_value ) {
+			$data['attributes_html'] .= " {$attribute_key}='{$attribute_value}' ";
 		}
 
 		if ( ! empty( $data['attributes']['container_class'] ) ) {

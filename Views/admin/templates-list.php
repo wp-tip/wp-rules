@@ -1,21 +1,3 @@
-<?php /*
-<nav class="rules-navbar">
-	<div class="rules-navbar__logo">
-		WP Business Rules
-	</div>
-	<div class="rules-navbar__menu">
-		<ul>
-			<li class="active">
-				<a href="#">Home</a>
-			</li>
-			<li>
-				<a href="#">Templates</a>
-			</li>
-		</ul>
-	</div>
-</nav>
- */ ?>
-
 <main class="rules-content">
 	<header class="rules-content__header">
 		<div class="rules-content__title">Workflow Templates</div>
@@ -26,7 +8,7 @@
 		</div>
 	</header>
 
-	<input type="hidden" id="rule_template_nonce" value="<?php echo $data['template_nonce']; ?>">
+	<input type="hidden" id="rule_template_nonce" value="<?php echo esc_attr( $data['template_nonce'] ); ?>">
 
 	<section class="rules-content__templates" id="rules-content__templates">
 		<div class="rules-content__templates_item scratch">
@@ -40,14 +22,14 @@
 			</a>
 		</div>
 
-		<?php foreach ( $data['templates'] as $template_id => $template ){ ?>
-		<div class="rules-content__templates_item" data-template_id="<?php echo $template_id; ?>">
+		<?php foreach ( $data['templates'] as $wpbr_template_id => $wpbr_template ) { ?>
+		<div class="rules-content__templates_item" data-template_id="<?php echo esc_attr( $wpbr_template_id ); ?>">
 			<a href="#">
 				<div class="rules-content__templates_item_thumbnail_wrap">
-					<div class="rules-content__templates_item_thumbnail" style="background-image: url('<?php echo $template['thumbnail']; ?>');"></div>
+					<div class="rules-content__templates_item_thumbnail" data-bg="<?php echo esc_url( $wpbr_template['thumbnail'] ); ?>"></div>
 				</div>
 				<footer class="rules-content__templates_item_title">
-					<?php echo $template['name']; ?>
+					<?php echo esc_html( $wpbr_template['name'] ); ?>
 				</footer>
 			</a>
 		</div>
@@ -55,6 +37,18 @@
 	</section>
 
 	<section class="rules-content__settings" id="rules-content__settings">
-		test
+		<div class="rules-settings__template_details">
+			<div class="rules-settings__template_thumbnail">
+				<img src="" id="rules-settings__template_thumbnail_img" alt="" title="" />
+			</div>
+			<h3 class="rules-settings__template_title" id="rules-settings__template_title"></h3>
+		</div>
+		<form class="rules-settings__fields" id="rules-settings__fields">
+
+		</form>
 	</section>
+
+	<footer class="rules-footer" id="rules-footer">
+		<a href="#" class="button button-primary" id="rules_template_save"><?php esc_html_e( 'Save Rule', 'rules' ); ?></a>
+	</footer>
 </main>

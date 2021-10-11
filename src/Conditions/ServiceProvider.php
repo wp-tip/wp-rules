@@ -16,7 +16,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	 * @var string[]
 	 */
 	public $provides = [
-		'condition_user',
+		'condition_loggedin-user',
 		'condition_role',
 		'condition_current_page_url',
 		'condition_current_post',
@@ -62,7 +62,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	public function register() {
 		$container = $this->getContainer();
 
-		$container->share( 'condition_user', '\WP_Rules\Conditions\Users\User' );
+		$container->share( 'condition_loggedin-user', '\WP_Rules\Conditions\Users\User' );
 		$container->share( 'condition_role', '\WP_Rules\Conditions\Users\Role' );
 		$container->share( 'condition_current_page_url', '\WP_Rules\Conditions\General\CurrentPageUrl' );
 		$container->share( 'condition_current_post', '\WP_Rules\Conditions\Posts\CurrentPost' );

@@ -75,6 +75,11 @@ abstract class AbstractAction implements SubscriberInterface {
 	 */
 	abstract protected function admin_fields();
 
+	/**
+	 * Get array of admin fields.
+	 *
+	 * @return array
+	 */
 	public function get_admin_fields() {
 		return $this->admin_fields();
 	}
@@ -102,7 +107,6 @@ abstract class AbstractAction implements SubscriberInterface {
 			'rules_actions_list'        => 'register_action',
 			'rules_action_options_html' => [ 'get_action_options_html', 10, 5 ],
 			'rules_action_fired'        => [ 'fire_action', 10, 4 ],
-			'admin_init'        => 'register_action_admin_options',
 		];
 	}
 
@@ -116,10 +120,6 @@ abstract class AbstractAction implements SubscriberInterface {
 	public function register_action( array $actions_list ) {
 		$actions_list[ $this->id ] = empty( $this->group ) ? $this->name : [ $this->group => $this->name ];
 		return $actions_list;
-	}
-
-	public function register_action_admin_options() {
-		add_filter( 'rules_action_' . $this->id . '_options', [ $this, 'get_admin_fields' ] );
 	}
 
 	/**
