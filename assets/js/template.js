@@ -8,6 +8,13 @@ jQuery(document).ready(function () {
 	});
 
 	jQuery('.rules-content__templates_item').click( function(){
+		if ( jQuery(this).hasClass('scratch') ){
+			jQuery('.rules-content').slideUp('slow', function () {
+				jQuery('#wpbody').slideDown('slow');
+			});
+
+			return;
+		}
 		let template_id = jQuery(this).data( 'template_id' );
 		let templates_section = jQuery( '#rules-content__templates' );
 

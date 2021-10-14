@@ -17,6 +17,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	 */
 	public $provides = [
 		'template_specific_user_notice',
+		'template_specific_role_notice',
 	];
 
 	/**
@@ -26,6 +27,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container = $this->getContainer();
 
 		$container->share( 'template_specific_user_notice', '\WP_Rules\Templates\Backend\SpecificUserNotice' );
+		$container->share( 'template_specific_role_notice', '\WP_Rules\Templates\Backend\SpecificRoleNotice' );
 
 	}
 }
