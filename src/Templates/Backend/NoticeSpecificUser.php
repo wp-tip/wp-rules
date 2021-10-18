@@ -3,7 +3,7 @@ namespace WP_Rules\Templates\Backend;
 
 use WP_Rules\Core\Admin\Templates\AbstractTemplate;
 
-class SpecificUserNotice extends AbstractTemplate {
+class NoticeSpecificUser extends AbstractTemplate {
 
 	/**
 	 * Template unique ID, also used when initiate inside service provider.
@@ -56,7 +56,7 @@ class SpecificUserNotice extends AbstractTemplate {
 	 */
 	protected function init() {
 		return [
-			'name'        => __( 'Specific user admin notice.', 'rules' ),
+			'name'        => __( 'Specific user admin notice', 'rules' ),
 			'description' => __( 'Show admin notice to specific pre-defined user.', 'rules' ),
 		];
 	}

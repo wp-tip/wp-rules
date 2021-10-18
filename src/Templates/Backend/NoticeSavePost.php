@@ -3,14 +3,14 @@ namespace WP_Rules\Templates\Backend;
 
 use WP_Rules\Core\Admin\Templates\AbstractTemplate;
 
-class SpecificRoleNotice extends AbstractTemplate {
+class NoticeSavePost extends AbstractTemplate {
 
 	/**
 	 * Template unique ID, also used when initiate inside service provider.
 	 *
 	 * @var string
 	 */
-	protected $id = 'specific_role_notice';
+	protected $id = 'save_post_notice';
 
 	/**
 	 * Template's group.
@@ -24,23 +24,21 @@ class SpecificRoleNotice extends AbstractTemplate {
 	 *
 	 * @var string
 	 */
-	protected $thumbnail = 'https://via.placeholder.com/300x300/588aa3/fff?text=Specific+Role+Admin+Notice';
+	protected $thumbnail = 'https://via.placeholder.com/300x300/588aa3/fff?text=Save+Post+Notice';
 
 	/**
 	 * Template's trigger.
 	 *
 	 * @var string
 	 */
-	protected $trigger = 'admin_init';
+	protected $trigger = 'wp_insert_post';
 
 	/**
 	 * Template's list of condition IDs.
 	 *
 	 * @var string[]
 	 */
-	protected $conditions = [
-		'role',
-	];
+	protected $conditions = [];
 
 	/**
 	 * Template's list of action IDs.
@@ -56,8 +54,8 @@ class SpecificRoleNotice extends AbstractTemplate {
 	 */
 	protected function init() {
 		return [
-			'name'        => __( 'Specific role admin notice.', 'rules' ),
-			'description' => __( 'Show admin notice to specific pre-defined role.', 'rules' ),
+			'name'        => __( 'Show admin notice when save post (New/Updated)', 'rules' ),
+			'description' => __( 'Show admin notice When saving a new post or updating it.', 'rules' ),
 		];
 	}
 }
